@@ -1,0 +1,49 @@
+{
+  "helloWorld": "Hola Mundo!",
+
+  "ok": "Aceptar",
+  "cancel": "Cancelar",
+  "save": "Guardar",
+  "done": "Hecho",
+  "next": "Siguiente",
+  "back": "Atrás",
+  "close": "Cerrar",
+  "yes": "Sí",
+  "no": "No",
+  "continue_button": "Continuar",
+  "skip": "Omitir",
+  "retry": "Reintentar",
+  "submit": "Enviar",
+  "search": "Buscar",
+
+  "email": "Correo electrónico",
+  "password": "Contraseña",
+
+  "error_unexpected": "Ocurrió un error inesperado. Por favor, inténtalo de nuevo más tarde.",
+  "error_no_internet": "Sin conexión a internet. Por favor, revisa tu conexión e inténtalo de nuevo.",
+  "error_server": "No se pudo conectar con el servidor. Por favor, inténtalo de nuevo más tarde.",
+  "error_required_field": "Este campo es obligatorio",
+  "error_invalid_email": "Por favor, introduce una dirección de correo válida",
+  "error_password_too_short": "La contraseña debe tener al menos 6 caracteres",
+
+  "loading": "Cargando...",
+  "please_wait": "Por favor, espera...",
+  "success": "Éxito",
+  "error": "Error",
+
+  "settings": "Configuración",
+  "profile": "Perfil",
+  "logout": "Cerrar sesión",
+  "language": "Idioma",
+  "theme": "Tema",
+  "dark_mode": "Modo Oscuro",
+  "light_mode": "Modo Claro",
+
+  "welcome": "Bienvenido",
+  "get_started": "Comenzar",
+
+  "confirm_logout_title": "Confirmar Cierre de Sesión",
+  "confirm_logout_message": "¿Estás seguro de que quieres cerrar sesión?",
+
+  "home": "Inicio"
+}

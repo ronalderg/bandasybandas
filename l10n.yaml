@@ -1,0 +1,4 @@
+# /Users/ronalderg/StudioProjects/bandas_y_bandas/l10n.yaml
+arb-dir: lib/src/app/localization
+template-arb-file: app_es.arb
+output-localization-file: app_localizations.dart

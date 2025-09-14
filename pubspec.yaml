@@ -1,0 +1,86 @@
+name: bandasybandas
+description: "Aplicacion de gestion empresarial de Bandas y Bandas SAS"
+publish_to: "none"
+version: 0.1.0
+
+environment:
+  sdk: ^3.6.1
+
+dependencies:
+  #authentication_repository:
+  #  path: packages/authentication_repository
+  bloc: ^9.0.0
+  cached_network_image: ^3.4.1
+  cloud_firestore: ^6.0.0
+  cupertino_icons: ^1.0.8
+  equatable: ^2.0.7
+  firebase_analytics: ^12.0.0
+  firebase_auth: ^6.0.0
+  firebase_core: ^4.0.0
+  firebase_storage: ^13.0.0
+  flutter:
+    sdk: flutter
+  flutter_bloc: ^9.1.1
+  flutter_localizations:
+    sdk: flutter
+  flutter_svg: ^2.1.0
+  formz: ^0.8.0
+  get_it: ^8.0.3
+  go_router: ^15.1.1
+  image_gallery_saver: ^2.0.3
+  intl: any
+  json_annotation: ^4.8.0
+  permission_handler: ^12.0.0+1
+  qr_flutter: ^4.1.0
+  universal_html: ^2.2.4
+
+dev_dependencies:
+  analyzer: ^8.1.1
+  build_runner: ^2.4.15
+  flutter_gen_runner: ^5.10.0
+  flutter_test:
+    sdk: flutter
+  json_serializable: ^6.8.0
+  project_structure_generator:
+    path: ../project_structure_generator
+  very_good_analysis: ^7.0.0
+
+flutter_gen:
+  output: lib/src/core/theme
+  line_length: 80
+
+  integrations:
+    flutter_svg: true
+
+flutter:
+  uses-material-design: true
+  generate: true
+  assets:
+    - assets/images/
+    - assets/icons/
+
+  fonts:
+    - family: Roboto
+      fonts:
+        - asset: assets/fonts/Roboto/Roboto-Thin.ttf
+          weight: 100 # Thin
+        - asset: assets/fonts/Roboto/Roboto-ThinItalic.ttf
+          weight: 100 # Thin Italic
+          style: italic
+        - asset: assets/fonts/Roboto/Roboto-Regular.ttf
+          weight: 400 # Regular
+        - asset: assets/fonts/Roboto/Roboto-Light.ttf
+          weight: 300 # Light
+        - asset: assets/fonts/Roboto/Roboto-LightItalic.ttf
+          weight: 300 # Light Italic
+          style: italic
+        - asset: assets/fonts/Roboto/Roboto-Italic.ttf
+          weight: 400 # Regular Italic (asumiento que Roboto-Italic.ttf es la versión regular en cursiva)
+          style: italic
+        - asset: assets/fonts/Roboto/Roboto-Bold.ttf
+          weight: 700 # Bold
+        - asset: assets/fonts/Roboto/Roboto-BlackItalic.ttf
+          weight: 900 # Black Italic
+          style: italic
+        - asset: assets/fonts/Roboto/Roboto-Black.ttf
+          weight: 900 # Black
