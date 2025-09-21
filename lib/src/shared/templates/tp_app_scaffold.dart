@@ -1,90 +1,87 @@
+import 'package:bandasybandas/src/app/bloc/auth/auth_bloc.dart';
 import 'package:bandasybandas/src/shared/organisms/org_app_drawer.dart';
-import 'package:departamento_tecnico/src/controllers/user_controller.dart';
-import 'package:departamento_tecnico/src/widgets/navigation_drawer.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+/// Un Scaffold reutilizable que se adapta a diferentes tamaños de pantalla
+/// y gestiona un drawer responsivo.
 ///
-class AppScaffold extends StatelessWidget {
-  AppScaffold({
-    Key? key,
+/// - En **escritorio/web**, muestra un `Drawer` permanente que se puede colapsar.
+/// - En **móvil**, muestra un `Drawer` tradicional que se oculta.
+class TpAppScaffold extends StatefulWidget {
+  const TpAppScaffold({
+    super.key,
     required this.body,
     required this.pageTitle,
-    this.botonAyuda,
-    this.externalScaffoldKey,
-  }) : super(key: key);
+  });
 
   final Widget body;
   final String pageTitle;
-  final Widget? botonAyuda;
-  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
-  GlobalKey<ScaffoldState>? externalScaffoldKey =
-      new GlobalKey<ScaffoldState>();
+
+  @override
+  State<TpAppScaffold> createState() => _TpAppScaffoldState();
+}
+
+class _TpAppScaffoldState extends State<TpAppScaffold> {
+  bool _isDrawerExpanded = true;
+
+  void _toggleDrawer() {
+    setState(() {
+      _isDrawerExpanded = !_isDrawerExpanded;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    final userController = Get.find<UserController>();
-    final bool displayMobileLayout =
-        MediaQuery.of(context).size.width < MediaQuery.of(context).size.height;
-    if (displayMobileLayout) {
-      return Scaffold(
-        //resizeToAvoidBottomInset: false,
+    // Usamos LayoutBuilder para adaptar la UI al tamaño de la pantalla.
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        // Punto de corte para cambiar entre layout móvil y de escritorio.
+        const double breakpoint = 768;
+        final bool isDesktop = constraints.maxWidth >= breakpoint;
 
-        key: externalScaffoldKey == null ? _scaffoldKey : externalScaffoldKey,
-        appBar: AppBar(
-          automaticallyImplyLeading: displayMobileLayout,
-          leading: BackButton(
-            color: Colors.white,
-          ),
-          title: Text(pageTitle),
-          actions: <Widget>[
-            botonAyuda ?? Text(''),
-            if (displayMobileLayout)
-              IconButton(
-                  onPressed: () => _scaffoldKey.currentState?.openEndDrawer(),
-                  icon: Icon(Icons.menu))
-          ],
-        ),
-        endDrawer: displayMobileLayout ? OrgAppDrawer() : null,
-        body: body,
-      );
-    } else {
-      return Row(
-        children: [
-          if (!displayMobileLayout)
-            Obx(() {
-              if (userController.user.value != null) {
-                return OrgAppDrawer();
-              } else
-                return Column();
-            }),
-          Expanded(
-            child: Scaffold(
-              resizeToAvoidBottomInset: false,
-              key: externalScaffoldKey == null
-                  ? _scaffoldKey
-                  : externalScaffoldKey,
-              appBar: AppBar(
-                automaticallyImplyLeading: displayMobileLayout,
-                leading: BackButton(
-                  color: Colors.white,
+        if (isDesktop) {
+          // --- VISTA DE ESCRITORIO / WEB ---
+          return Scaffold(
+            body: Row(
+              children: [
+                // Drawer colapsable/expandible
+                AnimatedContainer(
+                  duration: const Duration(milliseconds: 300),
+                  width: _isDrawerExpanded ? 250 : 80,
+                  child: OrgAppDrawer(
+                    isPermanentlyDisplayed: true,
+                    onToggle: _toggleDrawer,
+                  ),
                 ),
-                title: Text(pageTitle),
-                actions: <Widget>[
-                  botonAyuda ?? Text(''),
-                  if (displayMobileLayout)
-                    IconButton(
-                        onPressed: () =>
-                            _scaffoldKey.currentState?.openEndDrawer(),
-                        icon: Icon(Icons.menu))
-                ],
-              ),
-              endDrawer: displayMobileLayout ? OrgAppDrawer() : null,
-              body: body,
+                // Contenido principal de la página
+                Expanded(
+                  child: Column(
+                    children: [
+                      AppBar(
+                        title: Text(widget.pageTitle),
+                        automaticallyImplyLeading:
+                            false, // No queremos el botón de hamburguesa
+                      ),
+                      Expanded(child: widget.body),
+                    ],
+                  ),
+                ),
+              ],
             ),
-          )
-        ],
-      );
-    }
+          );
+        } else {
+          // --- VISTA MÓVIL ---
+          return Scaffold(
+            appBar: AppBar(
+              title: Text(widget.pageTitle),
+            ),
+            // El OrgAppDrawer ya sabe cómo comportarse en modo móvil
+            drawer: const OrgAppDrawer(),
+            body: widget.body,
+          );
+        }
+      },
+    );
   }
 }

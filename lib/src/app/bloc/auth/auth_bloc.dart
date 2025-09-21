@@ -1,9 +1,10 @@
-// lib/src/app/bloc/auth/auth_bloc.dart
 import 'dart:async';
+
 import 'package:bandasybandas/src/features/authentication/domain/repositories/authentication_repository.dart';
+import 'package:bandasybandas/src/shared/domain/models/user.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
+import 'package:flutter/foundation.dart';
 
 part 'auth_event.dart';
 part 'auth_state.dart';
@@ -11,33 +12,40 @@ part 'auth_state.dart';
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   AuthBloc({required AuthenticationRepository authenticationRepository})
       : _authenticationRepository = authenticationRepository,
-        super(
-          // Estado inicial basado en si hay un usuario logueado al arrancar.
-          authenticationRepository.currentUser != null
-              ? AuthState.authenticated(authenticationRepository.currentUser!)
-              : const AuthState.unauthenticated(),
-        ) {
+        super(const AuthState._()) {
     on<AuthUserChanged>(_onUserChanged);
     on<AuthLogoutRequested>(_onLogoutRequested);
 
-    // Escucha los cambios en el estado de autenticación de Firebase.
+    // Suscribirse al stream de usuarios del repositorio.
     _userSubscription = _authenticationRepository.user.listen(
       (user) => add(AuthUserChanged(user)),
     );
   }
+
   final AuthenticationRepository _authenticationRepository;
-  late final StreamSubscription<firebase_auth.User?> _userSubscription;
+  late final StreamSubscription<AppUser> _userSubscription;
 
   void _onUserChanged(AuthUserChanged event, Emitter<AuthState> emit) {
-    emit(
-      event.user != null
-          ? AuthState.authenticated(event.user!)
-          : const AuthState.unauthenticated(),
-    );
+    // Si el usuario no está vacío, el estado es autenticado.
+    // De lo contrario, es no autenticado.
+    final newState = event.user.isNotEmpty
+        ? AuthState.authenticated(event.user)
+        : const AuthState.unauthenticated();
+
+    // Imprimimos el nuevo estado para depuración.
+    // Esto es útil para ver qué estado se está enviando a la UI.
+    debugPrint('AuthBloc: Emitting new state -> $newState');
+
+    emit(newState);
   }
 
-  void _onLogoutRequested(AuthLogoutRequested event, Emitter<AuthState> emit) {
-    unawaited(_authenticationRepository.logOut());
+  void _onLogoutRequested(
+    AuthLogoutRequested event,
+    Emitter<AuthState> emit,
+  ) {
+    // Simplemente llama al método de logout del repositorio.
+    // El stream `user` se encargará de emitir un `User.empty` y actualizar el estado.
+    _authenticationRepository.logOut();
   }
 
   @override

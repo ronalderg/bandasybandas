@@ -1,14 +1,11 @@
 // lib/src/features/authentication/domain/repositories/authentication_repository.dart
-import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
+import 'package:bandasybandas/src/shared/domain/models/user.dart';
 
 /// Interfaz para el repositorio de autenticación.
 /// Define el contrato que las capas superiores (UI, BLoC) usarán.
 abstract class AuthenticationRepository {
   /// Stream que emite el usuario actual cuando cambia el estado de autenticación.
-  Stream<firebase_auth.User?> get user;
-
-  /// Obtiene el usuario actual de forma síncrona. Puede ser nulo.
-  firebase_auth.User? get currentUser;
+  Stream<AppUser> get user;
 
   /// Inicia sesión con email y contraseña.
   /// Lanza una excepción si falla.

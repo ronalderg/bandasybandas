@@ -11,7 +11,7 @@ abstract class AuthEvent extends Equatable {
 class AuthUserChanged extends AuthEvent {
   const AuthUserChanged(this.user);
 
-  final firebase_auth.User? user;
+  final AppUser user;
 
   @override
   List<Object?> get props => [user];

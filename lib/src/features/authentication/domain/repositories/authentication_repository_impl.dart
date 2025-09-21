@@ -1,19 +1,54 @@
 // lib/src/features/authentication/data/repositories/authentication_repository_impl.dart
 import 'package:bandasybandas/src/features/authentication/domain/repositories/authentication_repository.dart';
+import 'package:bandasybandas/src/shared/domain/models/user.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/foundation.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 
 /// Implementación del [AuthenticationRepository] que usa Firebase Auth.
 class AuthenticationRepositoryImpl implements AuthenticationRepository {
-  AuthenticationRepositoryImpl({firebase_auth.FirebaseAuth? firebaseAuth})
-      : _firebaseAuth = firebaseAuth ?? firebase_auth.FirebaseAuth.instance;
+  AuthenticationRepositoryImpl({
+    firebase_auth.FirebaseAuth? firebaseAuth,
+    FirebaseFirestore? firestore,
+  })  : _firebaseAuth = firebaseAuth ?? firebase_auth.FirebaseAuth.instance,
+        _firestore = firestore ?? FirebaseFirestore.instance;
 
   final firebase_auth.FirebaseAuth _firebaseAuth;
+  final FirebaseFirestore _firestore;
+  static const _usersCollection = 'users';
 
   @override
-  Stream<firebase_auth.User?> get user => _firebaseAuth.userChanges();
+  Stream<AppUser> get user {
+    return _firebaseAuth.authStateChanges().asyncMap((firebaseUser) async {
+      try {
+        if (firebaseUser == null) {
+          // Si no hay usuario de Firebase, emitimos nuestro usuario vacío.
+          return AppUser.empty;
+        }
 
-  @override
-  firebase_auth.User? get currentUser => _firebaseAuth.currentUser;
+        // Si hay usuario, buscamos su documento en Firestore usando su UID.
+        final userDoc = await _firestore
+            .collection(_usersCollection)
+            .doc(firebaseUser.uid)
+            .get();
+
+        if (userDoc.exists) {
+          // Si el documento existe, creamos el modelo User a partir de él.
+          return AppUser.fromFirestore(userDoc);
+        } else {
+          // Si no existe (ej. primer login), creamos un User con los datos
+          // básicos de Firebase Auth. Podrías querer crear el documento aquí.
+          return AppUser.fromFirebaseAuth(firebaseUser);
+        }
+      } catch (e, s) {
+        // Si ocurre un error (ej. sin red), lo registramos y devolvemos
+        // un usuario vacío para mantener la app en un estado estable.
+        debugPrint('Error fetching user data from Firestore: $e');
+        debugPrint(s.toString());
+        return AppUser.empty;
+      }
+    });
+  }
 
   /// Signs in with the provided [email] and [password].
   ///
@@ -41,9 +76,7 @@ class AuthenticationRepositoryImpl implements AuthenticationRepository {
   @override
   Future<void> logOut() async {
     try {
-      await Future.wait([
-        _firebaseAuth.signOut(),
-      ]);
+      await _firebaseAuth.signOut();
     } on Exception {
       throw LogOutFailure();
     }

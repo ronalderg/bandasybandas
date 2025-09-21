@@ -109,5 +109,9 @@ class AppTheme {
       bodyColor: AppColors.textColorInverse,
       displayColor: AppColors.textColorInverse,
     ),
+    // Tema para Iconos
+    iconTheme: lightTheme.iconTheme.copyWith(
+      color: AppColors.white, // Color blanco para íconos en modo oscuro
+    ),
   );
 }

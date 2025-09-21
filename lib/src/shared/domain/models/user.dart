@@ -1,11 +1,23 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
+import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
+
+//TODO:hacer documentacion
+enum UserType {
+  tecnico,
+  asesorIndustrial,
+  pmi,
+  gerenteComercial,
+  gerente,
+  none
+}
 
 /// Modelo para representar un usuario en la aplicación.
 ///
 /// Este modelo es inmutable y se utiliza en toda la aplicación para
 /// representar al usuario autenticado y sus datos asociados.
-class User extends Equatable {
-  const User({
+class AppUser extends Equatable {
+  const AppUser({
     required this.id,
     required this.email,
     this.userType,
@@ -16,6 +28,37 @@ class User extends Equatable {
     this.city,
     this.branch,
   });
+
+  /// Crea una instancia de `User` solo con la información básica de Firebase Auth.
+  /// Útil como fallback si el documento de Firestore no existe.
+  factory AppUser.fromFirebaseAuth(firebase_auth.User firebaseUser) {
+    return AppUser(
+      id: firebaseUser.uid,
+      email: firebaseUser.email ?? '',
+    );
+  }
+
+  /// Constructor factory para crear una instancia de `User` desde un mapa (JSON).
+  /// Ideal para deserializar datos desde Firestore.
+  factory AppUser.fromFirestore(
+    DocumentSnapshot<Map<String, dynamic>> doc,
+  ) {
+    final data = doc.data() ?? {};
+    return AppUser(
+      id: doc.id,
+      email: data['email'] as String? ?? '',
+      userType: data['userType'] as String?,
+      firstName: data['firstName'] as String?,
+      lastName: data['lastName'] as String?,
+      documentId: data['documentId'] as String?,
+      // Manejo seguro para listas que pueden ser nulas o de tipo incorrecto
+      allowedCompanies: (data['allowedCompanies'] as List<dynamic>?)
+          ?.map((e) => e.toString())
+          .toList(),
+      city: data['city'] as String?,
+      branch: data['branch'] as String?,
+    );
+  }
 
   /// El ID único del usuario (ej. de Firebase Auth o de tu base de datos).
   final String id;
@@ -45,13 +88,13 @@ class User extends Equatable {
   final String? branch;
 
   /// Un usuario vacío que representa a un usuario no autenticado.
-  static const empty = User(id: '', email: '');
+  static const empty = AppUser(id: '', email: '');
 
   /// Retorna `true` si el usuario es el usuario vacío (no autenticado).
-  bool get isEmpty => this == User.empty;
+  bool get isEmpty => this == AppUser.empty;
 
   /// Retorna `true` si el usuario no está vacío (autenticado).
-  bool get isNotEmpty => this != User.empty;
+  bool get isNotEmpty => this != AppUser.empty;
 
   /// Propiedad computada para obtener el nombre completo.
   String get fullName {
@@ -71,7 +114,45 @@ class User extends Equatable {
         branch,
       ];
 
-  // También es muy recomendable añadir los métodos `copyWith`, `toJson` y `fromJson`
-  // para facilitar la manipulación del estado y la serialización desde/hacia una API o base de datos.
-  // Por brevedad, no los incluyo aquí, pero son una práctica estándar.
+  /// Crea una copia de la instancia actual con los campos proporcionados.
+  AppUser copyWith({
+    String? id,
+    String? email,
+    String? userType,
+    String? firstName,
+    String? lastName,
+    String? documentId,
+    List<String>? allowedCompanies,
+    String? city,
+    String? branch,
+  }) {
+    return AppUser(
+      id: id ?? this.id,
+      email: email ?? this.email,
+      userType: userType ?? this.userType,
+      firstName: firstName ?? this.firstName,
+      lastName: lastName ?? this.lastName,
+      documentId: documentId ?? this.documentId,
+      allowedCompanies: allowedCompanies ?? this.allowedCompanies,
+      city: city ?? this.city,
+      branch: branch ?? this.branch,
+    );
+  }
+
+  UserType getTipoUsuario() {
+    switch (userType) {
+      case 'Tecnico':
+        return UserType.tecnico;
+      case 'Asesor Industrial':
+        return UserType.asesorIndustrial;
+      case 'PMI':
+        return UserType.pmi;
+      case 'Gerente Comercial':
+        return UserType.gerenteComercial;
+      case 'Gerente':
+        return UserType.gerente;
+      default:
+        return UserType.none;
+    }
+  }
 }
