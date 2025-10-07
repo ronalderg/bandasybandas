@@ -1,4 +1,6 @@
 // lib/src/app/router/app_transitions.dart
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -69,12 +71,14 @@ class AppTransitions {
   static GoRoute fadeRoute({
     required String path,
     required Widget Function(BuildContext, GoRouterState) builder,
+    FutureOr<String?> Function(BuildContext, GoRouterState)? redirect,
     List<GoRoute> routes = const <GoRoute>[],
     String? name,
   }) {
     return GoRoute(
       path: path,
       name: name,
+      redirect: redirect,
       routes: routes,
       pageBuilder: (BuildContext context, GoRouterState state) {
         return fadeTransition(

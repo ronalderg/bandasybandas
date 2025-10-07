@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:bandasybandas/src/features/authentication/domain/repositories/authentication_repository.dart';
-import 'package:bandasybandas/src/shared/domain/models/user.dart';
+import 'package:bandasybandas/src/shared/models/user.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';

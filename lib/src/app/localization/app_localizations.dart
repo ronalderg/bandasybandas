@@ -331,6 +331,552 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'Inicio'**
   String get home;
+
+  /// No description provided for @dashboard.
+  ///
+  /// In es, this message translates to:
+  /// **'Dashboard'**
+  String get dashboard;
+
+  /// No description provided for @inventory.
+  ///
+  /// In es, this message translates to:
+  /// **'Inventario'**
+  String get inventory;
+
+  /// No description provided for @sales.
+  ///
+  /// In es, this message translates to:
+  /// **'Ventas'**
+  String get sales;
+
+  /// No description provided for @product.
+  ///
+  /// In es, this message translates to:
+  /// **'Producto'**
+  String get product;
+
+  /// No description provided for @category.
+  ///
+  /// In es, this message translates to:
+  /// **'Categoría'**
+  String get category;
+
+  /// No description provided for @supplier.
+  ///
+  /// In es, this message translates to:
+  /// **'Proveedor'**
+  String get supplier;
+
+  /// No description provided for @customer.
+  ///
+  /// In es, this message translates to:
+  /// **'Cliente'**
+  String get customer;
+
+  /// No description provided for @customers.
+  ///
+  /// In es, this message translates to:
+  /// **'Clientes'**
+  String get customers;
+
+  /// No description provided for @create_customer.
+  ///
+  /// In es, this message translates to:
+  /// **'Crear Cliente'**
+  String get create_customer;
+
+  /// No description provided for @order.
+  ///
+  /// In es, this message translates to:
+  /// **'Orden'**
+  String get order;
+
+  /// No description provided for @orders.
+  ///
+  /// In es, this message translates to:
+  /// **'Ordenes'**
+  String get orders;
+
+  /// No description provided for @create_order.
+  ///
+  /// In es, this message translates to:
+  /// **'Crear Orden'**
+  String get create_order;
+
+  /// No description provided for @invoice.
+  ///
+  /// In es, this message translates to:
+  /// **'Factura'**
+  String get invoice;
+
+  /// No description provided for @invoices.
+  ///
+  /// In es, this message translates to:
+  /// **'Facturas'**
+  String get invoices;
+
+  /// No description provided for @payment.
+  ///
+  /// In es, this message translates to:
+  /// **'Pago'**
+  String get payment;
+
+  /// No description provided for @payments.
+  ///
+  /// In es, this message translates to:
+  /// **'Pagos'**
+  String get payments;
+
+  /// No description provided for @shipment.
+  ///
+  /// In es, this message translates to:
+  /// **'Envío'**
+  String get shipment;
+
+  /// No description provided for @shipments.
+  ///
+  /// In es, this message translates to:
+  /// **'Envío'**
+  String get shipments;
+
+  /// No description provided for @purchase.
+  ///
+  /// In es, this message translates to:
+  /// **'Compra'**
+  String get purchase;
+
+  /// No description provided for @purchases.
+  ///
+  /// In es, this message translates to:
+  /// **'Compras'**
+  String get purchases;
+
+  /// No description provided for @purchase_order.
+  ///
+  /// In es, this message translates to:
+  /// **'Orden de Compra'**
+  String get purchase_order;
+
+  /// No description provided for @purchase_orders.
+  ///
+  /// In es, this message translates to:
+  /// **'Ordenes de Compra'**
+  String get purchase_orders;
+
+  /// No description provided for @purchase_invoice.
+  ///
+  /// In es, this message translates to:
+  /// **'Factura de Compra'**
+  String get purchase_invoice;
+
+  /// No description provided for @purchase_invoices.
+  ///
+  /// In es, this message translates to:
+  /// **'Facturas de Compra'**
+  String get purchase_invoices;
+
+  /// No description provided for @location.
+  ///
+  /// In es, this message translates to:
+  /// **'Ubicación'**
+  String get location;
+
+  /// No description provided for @locations.
+  ///
+  /// In es, this message translates to:
+  /// **'Ubicaciones'**
+  String get locations;
+
+  /// No description provided for @warehouse.
+  ///
+  /// In es, this message translates to:
+  /// **'Almacen'**
+  String get warehouse;
+
+  /// No description provided for @warehouses.
+  ///
+  /// In es, this message translates to:
+  /// **'Almacenes'**
+  String get warehouses;
+
+  /// No description provided for @employee.
+  ///
+  /// In es, this message translates to:
+  /// **'Empleado'**
+  String get employee;
+
+  /// No description provided for @employees.
+  ///
+  /// In es, this message translates to:
+  /// **'Empleados'**
+  String get employees;
+
+  /// No description provided for @user.
+  ///
+  /// In es, this message translates to:
+  /// **'Usuario'**
+  String get user;
+
+  /// No description provided for @users.
+  ///
+  /// In es, this message translates to:
+  /// **'Usuarios'**
+  String get users;
+
+  /// No description provided for @create_user.
+  ///
+  /// In es, this message translates to:
+  /// **'Crear Usuario'**
+  String get create_user;
+
+  /// No description provided for @role.
+  ///
+  /// In es, this message translates to:
+  /// **'Rol'**
+  String get role;
+
+  /// No description provided for @roles.
+  ///
+  /// In es, this message translates to:
+  /// **'Roles'**
+  String get roles;
+
+  /// No description provided for @permission.
+  ///
+  /// In es, this message translates to:
+  /// **'Permiso'**
+  String get permission;
+
+  /// No description provided for @permissions.
+  ///
+  /// In es, this message translates to:
+  /// **'Permisos'**
+  String get permissions;
+
+  /// No description provided for @menu.
+  ///
+  /// In es, this message translates to:
+  /// **'Menú'**
+  String get menu;
+
+  /// No description provided for @menus.
+  ///
+  /// In es, this message translates to:
+  /// **'Menús'**
+  String get menus;
+
+  /// No description provided for @sub_menu.
+  ///
+  /// In es, this message translates to:
+  /// **'Submenú'**
+  String get sub_menu;
+
+  /// No description provided for @sub_menus.
+  ///
+  /// In es, this message translates to:
+  /// **'Submenús'**
+  String get sub_menus;
+
+  /// No description provided for @action.
+  ///
+  /// In es, this message translates to:
+  /// **'Acción'**
+  String get action;
+
+  /// No description provided for @actions.
+  ///
+  /// In es, this message translates to:
+  /// **'Acciones'**
+  String get actions;
+
+  /// No description provided for @report.
+  ///
+  /// In es, this message translates to:
+  /// **'Reporte'**
+  String get report;
+
+  /// No description provided for @reports.
+  ///
+  /// In es, this message translates to:
+  /// **'Reportes'**
+  String get reports;
+
+  /// No description provided for @items.
+  ///
+  /// In es, this message translates to:
+  /// **'Items'**
+  String get items;
+
+  /// No description provided for @item.
+  ///
+  /// In es, this message translates to:
+  /// **'Item'**
+  String get item;
+
+  /// No description provided for @desing.
+  ///
+  /// In es, this message translates to:
+  /// **'Diseño'**
+  String get desing;
+
+  /// No description provided for @desings.
+  ///
+  /// In es, this message translates to:
+  /// **'Diseños'**
+  String get desings;
+
+  /// No description provided for @recipe.
+  ///
+  /// In es, this message translates to:
+  /// **'Receta'**
+  String get recipe;
+
+  /// No description provided for @recipes.
+  ///
+  /// In es, this message translates to:
+  /// **'Recetas'**
+  String get recipes;
+
+  /// No description provided for @brand.
+  ///
+  /// In es, this message translates to:
+  /// **'Marca'**
+  String get brand;
+
+  /// No description provided for @brands.
+  ///
+  /// In es, this message translates to:
+  /// **'Marcas'**
+  String get brands;
+
+  /// No description provided for @model.
+  ///
+  /// In es, this message translates to:
+  /// **'Modelo'**
+  String get model;
+
+  /// No description provided for @models.
+  ///
+  /// In es, this message translates to:
+  /// **'Modelos'**
+  String get models;
+
+  /// No description provided for @color.
+  ///
+  /// In es, this message translates to:
+  /// **'Color'**
+  String get color;
+
+  /// No description provided for @colors.
+  ///
+  /// In es, this message translates to:
+  /// **'Colores'**
+  String get colors;
+
+  /// No description provided for @size.
+  ///
+  /// In es, this message translates to:
+  /// **'Tamaño'**
+  String get size;
+
+  /// No description provided for @sizes.
+  ///
+  /// In es, this message translates to:
+  /// **'Tamaños'**
+  String get sizes;
+
+  /// No description provided for @material.
+  ///
+  /// In es, this message translates to:
+  /// **'Material'**
+  String get material;
+
+  /// No description provided for @materials.
+  ///
+  /// In es, this message translates to:
+  /// **'Materiales'**
+  String get materials;
+
+  /// No description provided for @status.
+  ///
+  /// In es, this message translates to:
+  /// **'Estado'**
+  String get status;
+
+  /// No description provided for @statuses.
+  ///
+  /// In es, this message translates to:
+  /// **'Estados'**
+  String get statuses;
+
+  /// No description provided for @quantity.
+  ///
+  /// In es, this message translates to:
+  /// **'Cantidad'**
+  String get quantity;
+
+  /// No description provided for @price.
+  ///
+  /// In es, this message translates to:
+  /// **'Precio'**
+  String get price;
+
+  /// No description provided for @discount.
+  ///
+  /// In es, this message translates to:
+  /// **'Descuento'**
+  String get discount;
+
+  /// No description provided for @total.
+  ///
+  /// In es, this message translates to:
+  /// **'Total'**
+  String get total;
+
+  /// No description provided for @subtotal.
+  ///
+  /// In es, this message translates to:
+  /// **'Subtotal'**
+  String get subtotal;
+
+  /// No description provided for @unit.
+  ///
+  /// In es, this message translates to:
+  /// **'Unidad'**
+  String get unit;
+
+  /// No description provided for @units.
+  ///
+  /// In es, this message translates to:
+  /// **'Unidades'**
+  String get units;
+
+  /// No description provided for @date.
+  ///
+  /// In es, this message translates to:
+  /// **'Fecha'**
+  String get date;
+
+  /// No description provided for @time.
+  ///
+  /// In es, this message translates to:
+  /// **'Hora'**
+  String get time;
+
+  /// No description provided for @unit_of_measure.
+  ///
+  /// In es, this message translates to:
+  /// **'Unidad de Medida'**
+  String get unit_of_measure;
+
+  /// No description provided for @unit_of_measures.
+  ///
+  /// In es, this message translates to:
+  /// **'Unidades de Medidas'**
+  String get unit_of_measures;
+
+  /// No description provided for @unit_price.
+  ///
+  /// In es, this message translates to:
+  /// **'Precio Unitario'**
+  String get unit_price;
+
+  /// No description provided for @unit_prices.
+  ///
+  /// In es, this message translates to:
+  /// **'Precios Unitarios'**
+  String get unit_prices;
+
+  /// No description provided for @discount_percentage.
+  ///
+  /// In es, this message translates to:
+  /// **'Porcentaje de Descuento'**
+  String get discount_percentage;
+
+  /// No description provided for @discount_percentages.
+  ///
+  /// In es, this message translates to:
+  /// **'Porcentajes de Descuento'**
+  String get discount_percentages;
+
+  /// No description provided for @discount_amount.
+  ///
+  /// In es, this message translates to:
+  /// **'Monto de Descuento'**
+  String get discount_amount;
+
+  /// No description provided for @discount_amounts.
+  ///
+  /// In es, this message translates to:
+  /// **'Montos de Descuento'**
+  String get discount_amounts;
+
+  /// No description provided for @total_amount.
+  ///
+  /// In es, this message translates to:
+  /// **'Monto Total'**
+  String get total_amount;
+
+  /// No description provided for @total_amounts.
+  ///
+  /// In es, this message translates to:
+  /// **'Montos Totales'**
+  String get total_amounts;
+
+  /// No description provided for @subtotal_amount.
+  ///
+  /// In es, this message translates to:
+  /// **'Monto Subtotal'**
+  String get subtotal_amount;
+
+  /// No description provided for @subtotal_amounts.
+  ///
+  /// In es, this message translates to:
+  /// **'Montos Subtotales'**
+  String get subtotal_amounts;
+
+  /// No description provided for @zone.
+  ///
+  /// In es, this message translates to:
+  /// **'Zona'**
+  String get zone;
+
+  /// No description provided for @zones.
+  ///
+  /// In es, this message translates to:
+  /// **'Zonas'**
+  String get zones;
+
+  /// No description provided for @country.
+  ///
+  /// In es, this message translates to:
+  /// **'País'**
+  String get country;
+
+  /// No description provided for @countries.
+  ///
+  /// In es, this message translates to:
+  /// **'Países'**
+  String get countries;
+
+  /// No description provided for @machine.
+  ///
+  /// In es, this message translates to:
+  /// **'Máquina'**
+  String get machine;
+
+  /// No description provided for @machines.
+  ///
+  /// In es, this message translates to:
+  /// **'Máquinas'**
+  String get machines;
+
+  /// No description provided for @indicators.
+  ///
+  /// In es, this message translates to:
+  /// **'Indicadores'**
+  String get indicators;
 }
 
 class _AppLocalizationsDelegate

@@ -1,13 +1,13 @@
 // lib/src/app/router/app_router.dart
-
+/*
 import 'package:bandasybandas/src/app/bloc/auth/auth_bloc.dart';
 import 'package:bandasybandas/src/app/router/app_routes.dart';
 import 'package:bandasybandas/src/app/router/app_transitions.dart';
 import 'package:bandasybandas/src/app/router/go_router_refresh_stream.dart';
-import 'package:bandasybandas/src/features/authentication/presentation/pages/login/login_page.dart';
-import 'package:bandasybandas/src/presentation/home/home_page.dart';
-import 'package:bandasybandas/src/presentation/not_found/not_found_page.dart';
-import 'package:bandasybandas/src/presentation/splash/splash_page.dart';
+import 'package:bandasybandas/src/features/authentication/ui/pages/login/login_page.dart';
+import 'package:bandasybandas/src/ui/home/home_page.dart';
+import 'package:bandasybandas/src/ui/not_found/not_found_page.dart';
+import 'package:bandasybandas/src/ui/splash/splash_page.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -74,3 +74,4 @@ class AppRouter {
     );
   }
 }
+*/

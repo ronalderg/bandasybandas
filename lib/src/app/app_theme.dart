@@ -29,7 +29,7 @@ class AppTheme {
     ),
 
     // Tema de texto
-    textTheme: AppTypography.textTheme,
+    textTheme: AppTypography.lightTextTheme,
 
     // Tema para AppBar
     appBarTheme: AppBarTheme(
@@ -37,7 +37,7 @@ class AppTheme {
       centerTitle: true,
       backgroundColor: AppColors.primary,
       foregroundColor: AppColors.white, // Color para íconos y título
-      titleTextStyle: AppTypography.textTheme.headlineSmall
+      titleTextStyle: AppTypography.lightTextTheme.headlineSmall
           ?.copyWith(color: AppColors.white),
     ),
 
@@ -53,7 +53,7 @@ class AppTheme {
           vertical: AppSpacing.md,
           horizontal: AppSpacing.lg,
         ),
-        textStyle: AppTypography.textTheme.labelLarge,
+        textStyle: AppTypography.lightTextTheme.labelLarge,
       ),
     ),
 
@@ -67,7 +67,7 @@ class AppTheme {
         borderRadius: BorderRadius.circular(AppSpacing.borderRadius),
         borderSide: const BorderSide(color: AppColors.primary, width: 2),
       ),
-      labelStyle: AppTypography.textTheme.bodyMedium
+      labelStyle: AppTypography.lightTextTheme.bodyMedium
           ?.copyWith(color: AppColors.textColorSecondary),
     ),
 
@@ -98,17 +98,14 @@ class AppTheme {
     appBarTheme: lightTheme.appBarTheme.copyWith(
       backgroundColor: AppColors.surfaceDark,
       foregroundColor: AppColors.textColorInverse,
-      titleTextStyle: AppTypography.textTheme.headlineSmall
+      titleTextStyle: AppTypography.darkTextTheme.headlineSmall
           ?.copyWith(color: AppColors.textColorInverse),
     ),
     inputDecorationTheme: lightTheme.inputDecorationTheme.copyWith(
-      labelStyle: AppTypography.textTheme.bodyMedium
+      labelStyle: AppTypography.darkTextTheme.bodyMedium
           ?.copyWith(color: AppColors.textColorHint),
     ),
-    textTheme: AppTypography.textTheme.apply(
-      bodyColor: AppColors.textColorInverse,
-      displayColor: AppColors.textColorInverse,
-    ),
+    textTheme: AppTypography.darkTextTheme,
     // Tema para Iconos
     iconTheme: lightTheme.iconTheme.copyWith(
       color: AppColors.white, // Color blanco para íconos en modo oscuro

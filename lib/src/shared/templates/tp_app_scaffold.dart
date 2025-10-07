@@ -1,7 +1,5 @@
-import 'package:bandasybandas/src/app/bloc/auth/auth_bloc.dart';
 import 'package:bandasybandas/src/shared/organisms/org_app_drawer.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 /// Un Scaffold reutilizable que se adapta a diferentes tamaños de pantalla
 /// y gestiona un drawer responsivo.
@@ -10,9 +8,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 /// - En **móvil**, muestra un `Drawer` tradicional que se oculta.
 class TpAppScaffold extends StatefulWidget {
   const TpAppScaffold({
-    super.key,
     required this.body,
     required this.pageTitle,
+    super.key,
   });
 
   final Widget body;
@@ -38,7 +36,7 @@ class _TpAppScaffoldState extends State<TpAppScaffold> {
       builder: (context, constraints) {
         // Punto de corte para cambiar entre layout móvil y de escritorio.
         const double breakpoint = 768;
-        final bool isDesktop = constraints.maxWidth >= breakpoint;
+        final isDesktop = constraints.maxWidth >= breakpoint;
 
         if (isDesktop) {
           // --- VISTA DE ESCRITORIO / WEB ---

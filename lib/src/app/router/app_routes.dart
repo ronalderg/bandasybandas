@@ -14,8 +14,13 @@ class AppRoutes {
   static const String home = '/home';
 
   // --- Rutas de Características (Features) ---
+  static const String users = '/users';
   static const String customers = '/customers';
   static const String settings = '/settings';
+
+  // --- Rutas de Inventarios (Features) ---
+  static const String inventory = '/inventory';
+  static const String purchaseOrder = '/purchase-order';
 
   // --- Rutas con Parámetros (ejemplos) ---
   // static const String productDetails = '/product/:productId';

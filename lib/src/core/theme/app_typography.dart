@@ -17,28 +17,38 @@ class AppTypography {
   static const FontWeight _semiBold = FontWeight.w600;
   static const FontWeight _bold = FontWeight.w700;
 
-  /// Define el tema de texto principal de la aplicación.
+  /// Define la base de la tipografía sin colores.
+  /// Contiene solo la configuración de fuentes (tamaño, peso).
+  static const TextTheme _rawTextTheme = TextTheme(
+    displayLarge: TextStyle(fontSize: 57, fontWeight: _bold),
+    displayMedium: TextStyle(fontSize: 45, fontWeight: _bold),
+    displaySmall: TextStyle(fontSize: 36, fontWeight: _bold),
+    headlineLarge: TextStyle(fontSize: 32, fontWeight: _semiBold),
+    headlineMedium: TextStyle(fontSize: 28, fontWeight: _semiBold),
+    headlineSmall: TextStyle(fontSize: 24, fontWeight: _semiBold),
+    titleLarge: TextStyle(fontSize: 22, fontWeight: _medium),
+    titleMedium: TextStyle(fontSize: 16, fontWeight: _medium),
+    titleSmall: TextStyle(fontSize: 14, fontWeight: _medium),
+    bodyLarge: TextStyle(fontSize: 16, fontWeight: _regular),
+    bodyMedium: TextStyle(fontSize: 14, fontWeight: _regular),
+    bodySmall: TextStyle(fontSize: 12, fontWeight: _regular),
+    labelLarge: TextStyle(fontSize: 14, fontWeight: _medium),
+    labelMedium: TextStyle(fontSize: 12, fontWeight: _medium),
+    labelSmall: TextStyle(fontSize: 11, fontWeight: _light),
+  );
+
+  /// Tema de texto para el modo claro.
   ///
   /// Se utiliza `copyWith` para aplicar un color base a todos los estilos de
   /// texto, lo que facilita la adaptación a temas claros y oscuros.
-  static TextTheme get textTheme => const TextTheme(
-        displayLarge: TextStyle(fontSize: 57, fontWeight: _bold),
-        displayMedium: TextStyle(fontSize: 45, fontWeight: _bold),
-        displaySmall: TextStyle(fontSize: 36, fontWeight: _bold),
-        headlineLarge: TextStyle(fontSize: 32, fontWeight: _semiBold),
-        headlineMedium: TextStyle(fontSize: 28, fontWeight: _semiBold),
-        headlineSmall: TextStyle(fontSize: 24, fontWeight: _semiBold),
-        titleLarge: TextStyle(fontSize: 22, fontWeight: _medium),
-        titleMedium: TextStyle(fontSize: 16, fontWeight: _medium),
-        titleSmall: TextStyle(fontSize: 14, fontWeight: _medium),
-        bodyLarge: TextStyle(fontSize: 16, fontWeight: _regular),
-        bodyMedium: TextStyle(fontSize: 14, fontWeight: _regular),
-        bodySmall: TextStyle(fontSize: 12, fontWeight: _regular),
-        labelLarge: TextStyle(fontSize: 14, fontWeight: _medium),
-        labelMedium: TextStyle(fontSize: 12, fontWeight: _medium),
-        labelSmall: TextStyle(fontSize: 11, fontWeight: _light),
-      ).apply(
-        bodyColor: AppColors.textColorPrimary,
-        displayColor: AppColors.textColorPrimary,
-      );
+  static final TextTheme lightTextTheme = _rawTextTheme.apply(
+    bodyColor: AppColors.textColorPrimary,
+    displayColor: AppColors.textColorPrimary,
+  );
+
+  /// Tema de texto para el modo oscuro.
+  static final TextTheme darkTextTheme = _rawTextTheme.apply(
+    bodyColor: AppColors.textColorInverse,
+    displayColor: AppColors.textColorInverse,
+  );
 }

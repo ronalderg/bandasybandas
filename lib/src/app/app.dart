@@ -1,15 +1,14 @@
-import 'package:bandasybandas/src/app/app_router.dart';
 import 'package:bandasybandas/src/app/app_theme.dart';
 import 'package:bandasybandas/src/app/bloc/auth/auth_bloc.dart';
 import 'package:bandasybandas/src/app/bloc/settings/settings_bloc.dart';
 import 'package:bandasybandas/src/app/bloc/settings/settings_state.dart';
 import 'package:bandasybandas/src/app/localization/app_localizations.dart';
+import 'package:bandasybandas/src/app/router/app_router.dart';
 import 'package:bandasybandas/src/features/authentication/domain/repositories/authentication_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get_it/get_it.dart';
-import 'package:go_router/go_router.dart';
 
 /// [App] es el widget raíz de la aplicación.
 ///
@@ -31,6 +30,9 @@ class _AppState extends State<App> {
     _authBloc = AuthBloc(
       authenticationRepository: GetIt.I<AuthenticationRepository>(),
     );
+    // Inicializamos el router y le pasamos el AuthBloc para que pueda
+    // reaccionar a los cambios de estado de autenticación.
+    AppRouter.initialize(_authBloc);
   }
 
   @override
@@ -63,21 +65,13 @@ class AppView extends StatefulWidget {
 }
 
 class _AppViewState extends State<AppView> {
-  late final GoRouter _router;
-
-  @override
-  void initState() {
-    super.initState();
-    _router = AppRouter.createRouter(context.read<AuthBloc>());
-  }
-
   @override
   Widget build(BuildContext context) {
     // `BlocBuilder` se reconstruye cuando el estado de `SettingsBloc` cambia.
     return BlocBuilder<SettingsBloc, SettingsState>(
       builder: (context, state) {
         return MaterialApp.router(
-          routerConfig: _router,
+          routerConfig: AppRouter.router,
 
           // --- Tema ---
           theme: AppTheme.lightTheme,

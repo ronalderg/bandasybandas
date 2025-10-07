@@ -2,22 +2,14 @@ import 'package:bandasybandas/src/app/bloc/auth/auth_bloc.dart';
 import 'package:bandasybandas/src/app/localization/app_localizations.dart';
 import 'package:bandasybandas/src/app/router/app_routes.dart';
 import 'package:bandasybandas/src/core/theme/app_spacing.dart';
-import 'package:bandasybandas/src/shared/domain/models/user.dart';
+import 'package:bandasybandas/src/shared/models/user.dart';
+import 'package:bandasybandas/src/shared/models/vm_drawer_item_data.dart';
+import 'package:bandasybandas/src/shared/molecules/mol_drawer_header.dart';
+import 'package:bandasybandas/src/shared/molecules/mol_drawer_item.dart';
+import 'package:bandasybandas/src/shared/navigation/app_drawer_items.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-
-class _DrawerItem {
-  const _DrawerItem({
-    required this.icon,
-    required this.label,
-    required this.route,
-  });
-
-  final IconData icon;
-  final String label;
-  final String route;
-}
 
 class OrgAppDrawer extends StatefulWidget {
   const OrgAppDrawer({
@@ -49,27 +41,27 @@ class _OrgAppDrawerState extends State<OrgAppDrawer> {
     }
   }
 
-  List<_DrawerItem> _getDrawerItemsForUser(
+  List<VmDrawerItemData> _getDrawerItemsForUser(
     AppUser user,
     AppLocalizations l10n,
   ) {
     final userType = user.getTipoUsuario();
 
     // Items comunes para todos los usuarios autenticados
-    final baseItems = <_DrawerItem>[
-      _DrawerItem(icon: Icons.home, label: l10n.home, route: AppRoutes.home),
+    final baseItems = <VmDrawerItemData>[
+      VmDrawerItemData(
+        icon: Icons.home,
+        label: l10n.home,
+        route: AppRoutes.home,
+      ),
     ];
 
     // Items específicos por rol
     switch (userType) {
       case UserType.gerente:
-        // Añadir items solo para gerentes
-        // baseItems.add(_DrawerItem(icon: Icons.dashboard, label: 'Dashboard', route: '/dashboard'));
-        break;
+        baseItems.addAll(getGerenteDrawerItems(l10n));
       case UserType.tecnico:
-        // Añadir items solo para técnicos
-        // baseItems.add(_DrawerItem(icon: Icons.build, label: 'Órdenes de Trabajo', route: '/work-orders'));
-        break;
+        baseItems.addAll(getTecnicoDrawerItems(l10n));
       // Añadir más casos para otros roles
       case UserType.asesorIndustrial:
       case UserType.pmi:
@@ -84,7 +76,7 @@ class _OrgAppDrawerState extends State<OrgAppDrawer> {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    final theme = Theme.of(context);
+
     // Obtenemos el usuario actual desde el AuthBloc
     final user = context.select((AuthBloc bloc) => bloc.state.user);
 
@@ -103,22 +95,10 @@ class _OrgAppDrawerState extends State<OrgAppDrawer> {
               // Encabezado del Drawer
               SizedBox(
                 height: 120,
-                child: DrawerHeader(
-                  padding: EdgeInsets.zero,
-                  margin: EdgeInsets.zero,
-                  child: Center(
-                    child: isCollapsed
-                        ? Icon(
-                            Icons.ac_unit, // Reemplaza con tu logo
-                            color: theme.colorScheme.primary,
-                            size: 32,
-                          )
-                        : Text(
-                            'SIG',
-                            style: theme.textTheme.headlineMedium
-                                ?.copyWith(color: theme.colorScheme.primary),
-                          ),
-                  ),
+                child: MolDrawerHeader(
+                  isColapsed: isCollapsed,
+                  title: user.fullName.isNotEmpty ? user.fullName : user.email,
+                  subtitle: user.userType ?? '',
                 ),
               ),
               // Lista de items de navegación
@@ -127,21 +107,23 @@ class _OrgAppDrawerState extends State<OrgAppDrawer> {
                   itemCount: drawerItems.length,
                   itemBuilder: (context, index) {
                     final item = drawerItems[index];
-                    return ListTile(
-                      leading: Icon(item.icon),
-                      title: isCollapsed ? null : Text(item.label),
+                    return MolDrawerItem(
+                      icon: item.icon,
+                      text: item.label,
+                      isColapsed: isCollapsed,
+                      onPressed: () => _onItemTapped(index, item.route),
                       selected: _selectedIndex == index,
-                      onTap: () => _onItemTapped(index, item.route),
                     );
                   },
                 ),
               ),
               // Botón de cerrar sesión
               const Divider(height: 1),
-              ListTile(
-                leading: const Icon(Icons.logout),
-                title: isCollapsed ? null : Text(l10n.logout),
-                onTap: () {
+              MolDrawerItem(
+                icon: Icons.logout,
+                text: l10n.logout,
+                isColapsed: isCollapsed,
+                onPressed: () {
                   context.read<AuthBloc>().add(AuthLogoutRequested());
                 },
               ),

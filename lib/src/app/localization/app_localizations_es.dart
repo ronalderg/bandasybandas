@@ -130,4 +130,277 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get home => 'Inicio';
+
+  @override
+  String get dashboard => 'Dashboard';
+
+  @override
+  String get inventory => 'Inventario';
+
+  @override
+  String get sales => 'Ventas';
+
+  @override
+  String get product => 'Producto';
+
+  @override
+  String get category => 'Categoría';
+
+  @override
+  String get supplier => 'Proveedor';
+
+  @override
+  String get customer => 'Cliente';
+
+  @override
+  String get customers => 'Clientes';
+
+  @override
+  String get create_customer => 'Crear Cliente';
+
+  @override
+  String get order => 'Orden';
+
+  @override
+  String get orders => 'Ordenes';
+
+  @override
+  String get create_order => 'Crear Orden';
+
+  @override
+  String get invoice => 'Factura';
+
+  @override
+  String get invoices => 'Facturas';
+
+  @override
+  String get payment => 'Pago';
+
+  @override
+  String get payments => 'Pagos';
+
+  @override
+  String get shipment => 'Envío';
+
+  @override
+  String get shipments => 'Envío';
+
+  @override
+  String get purchase => 'Compra';
+
+  @override
+  String get purchases => 'Compras';
+
+  @override
+  String get purchase_order => 'Orden de Compra';
+
+  @override
+  String get purchase_orders => 'Ordenes de Compra';
+
+  @override
+  String get purchase_invoice => 'Factura de Compra';
+
+  @override
+  String get purchase_invoices => 'Facturas de Compra';
+
+  @override
+  String get location => 'Ubicación';
+
+  @override
+  String get locations => 'Ubicaciones';
+
+  @override
+  String get warehouse => 'Almacen';
+
+  @override
+  String get warehouses => 'Almacenes';
+
+  @override
+  String get employee => 'Empleado';
+
+  @override
+  String get employees => 'Empleados';
+
+  @override
+  String get user => 'Usuario';
+
+  @override
+  String get users => 'Usuarios';
+
+  @override
+  String get create_user => 'Crear Usuario';
+
+  @override
+  String get role => 'Rol';
+
+  @override
+  String get roles => 'Roles';
+
+  @override
+  String get permission => 'Permiso';
+
+  @override
+  String get permissions => 'Permisos';
+
+  @override
+  String get menu => 'Menú';
+
+  @override
+  String get menus => 'Menús';
+
+  @override
+  String get sub_menu => 'Submenú';
+
+  @override
+  String get sub_menus => 'Submenús';
+
+  @override
+  String get action => 'Acción';
+
+  @override
+  String get actions => 'Acciones';
+
+  @override
+  String get report => 'Reporte';
+
+  @override
+  String get reports => 'Reportes';
+
+  @override
+  String get items => 'Items';
+
+  @override
+  String get item => 'Item';
+
+  @override
+  String get desing => 'Diseño';
+
+  @override
+  String get desings => 'Diseños';
+
+  @override
+  String get recipe => 'Receta';
+
+  @override
+  String get recipes => 'Recetas';
+
+  @override
+  String get brand => 'Marca';
+
+  @override
+  String get brands => 'Marcas';
+
+  @override
+  String get model => 'Modelo';
+
+  @override
+  String get models => 'Modelos';
+
+  @override
+  String get color => 'Color';
+
+  @override
+  String get colors => 'Colores';
+
+  @override
+  String get size => 'Tamaño';
+
+  @override
+  String get sizes => 'Tamaños';
+
+  @override
+  String get material => 'Material';
+
+  @override
+  String get materials => 'Materiales';
+
+  @override
+  String get status => 'Estado';
+
+  @override
+  String get statuses => 'Estados';
+
+  @override
+  String get quantity => 'Cantidad';
+
+  @override
+  String get price => 'Precio';
+
+  @override
+  String get discount => 'Descuento';
+
+  @override
+  String get total => 'Total';
+
+  @override
+  String get subtotal => 'Subtotal';
+
+  @override
+  String get unit => 'Unidad';
+
+  @override
+  String get units => 'Unidades';
+
+  @override
+  String get date => 'Fecha';
+
+  @override
+  String get time => 'Hora';
+
+  @override
+  String get unit_of_measure => 'Unidad de Medida';
+
+  @override
+  String get unit_of_measures => 'Unidades de Medidas';
+
+  @override
+  String get unit_price => 'Precio Unitario';
+
+  @override
+  String get unit_prices => 'Precios Unitarios';
+
+  @override
+  String get discount_percentage => 'Porcentaje de Descuento';
+
+  @override
+  String get discount_percentages => 'Porcentajes de Descuento';
+
+  @override
+  String get discount_amount => 'Monto de Descuento';
+
+  @override
+  String get discount_amounts => 'Montos de Descuento';
+
+  @override
+  String get total_amount => 'Monto Total';
+
+  @override
+  String get total_amounts => 'Montos Totales';
+
+  @override
+  String get subtotal_amount => 'Monto Subtotal';
+
+  @override
+  String get subtotal_amounts => 'Montos Subtotales';
+
+  @override
+  String get zone => 'Zona';
+
+  @override
+  String get zones => 'Zonas';
+
+  @override
+  String get country => 'País';
+
+  @override
+  String get countries => 'Países';
+
+  @override
+  String get machine => 'Máquina';
+
+  @override
+  String get machines => 'Máquinas';
+
+  @override
+  String get indicators => 'Indicadores';
 }
