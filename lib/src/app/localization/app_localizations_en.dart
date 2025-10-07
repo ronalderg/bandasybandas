@@ -401,4 +401,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get indicators => 'Indicadores';
+
+  @override
+  String get purchase_requests => 'Purchase requests';
 }

@@ -877,6 +877,12 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'Indicadores'**
   String get indicators;
+
+  /// Etiqueta para el elemento del menú que lleva a la lista de solicitudes de compra.
+  ///
+  /// In es, this message translates to:
+  /// **'Solicitudes de pedidos'**
+  String get purchase_requests;
 }
 
 class _AppLocalizationsDelegate

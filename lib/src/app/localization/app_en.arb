@@ -1,4 +1,5 @@
 {
+  "@@locale": "en",
   "helloWorld": "Hello World!",
   "@helloWorld": {
     "description": "The conventional newborn programmer greeting"
@@ -130,6 +131,13 @@
   "country": "Country",
   "countries": "Countries",
   "machine": "Machine",
+  "@machine": {},
   "machines": "Machines",
-  "indicators": "Indicadores"
+  "@machines": {},
+  "indicators": "Indicadores",
+  "@indicators": {},
+  "purchase_requests": "Purchase requests",
+  "@purchase_requests": {
+    "description": "Label for the menu item that leads to the list of purchase requests."
+  }
 }

@@ -4,6 +4,7 @@ import 'package:bandasybandas/src/app/router/app_routes.dart';
 import 'package:bandasybandas/src/core/theme/app_spacing.dart';
 import 'package:bandasybandas/src/shared/models/user.dart';
 import 'package:bandasybandas/src/shared/models/vm_drawer_item_data.dart';
+import 'package:bandasybandas/src/shared/molecules/mol_drawer_expansion_tile.dart';
 import 'package:bandasybandas/src/shared/molecules/mol_drawer_header.dart';
 import 'package:bandasybandas/src/shared/molecules/mol_drawer_item.dart';
 import 'package:bandasybandas/src/shared/navigation/app_drawer_items.dart';
@@ -107,11 +108,33 @@ class _OrgAppDrawerState extends State<OrgAppDrawer> {
                   itemCount: drawerItems.length,
                   itemBuilder: (context, index) {
                     final item = drawerItems[index];
+
+                    // Si el item es expandible, usa MolDrawerExpansionTile
+                    if (item.isExpandable) {
+                      return MolDrawerExpansionTile(
+                        icon: item.icon,
+                        title: item.label,
+                        onTap: () {}, // El onTap del padre no hace nada
+                        children: item.children.map((child) {
+                          return MolDrawerItem(
+                            icon: child.icon,
+                            text: child.label,
+                            isColapsed: isCollapsed,
+                            onPressed: () => _onItemTapped(index, child.route!),
+                            // La selección podría necesitar una lógica más compleja
+                            // para resaltar el padre cuando un hijo está activo.
+                            //selected: false,
+                          );
+                        }).toList(),
+                      );
+                    }
+
+                    // Si no, usa el MolDrawerItem normal
                     return MolDrawerItem(
                       icon: item.icon,
                       text: item.label,
                       isColapsed: isCollapsed,
-                      onPressed: () => _onItemTapped(index, item.route),
+                      onPressed: () => _onItemTapped(index, item.route!),
                       selected: _selectedIndex == index,
                     );
                   },

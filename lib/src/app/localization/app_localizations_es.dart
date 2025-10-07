@@ -403,4 +403,7 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get indicators => 'Indicadores';
+
+  @override
+  String get purchase_requests => 'Solicitudes de pedidos';
 }

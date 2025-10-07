@@ -20,7 +20,14 @@ class AppRoutes {
 
   // --- Rutas de Inventarios (Features) ---
   static const String inventory = '/inventory';
+  static const String items = '/items';
+  static const String recipes = '/recipes';
+  static const String machines = '/machines';
+
+  // --- Rutas de Compras (Features) ---
+  static const String purchases = '/purchases';
   static const String purchaseOrder = '/purchase-order';
+  static const String purchaseRequests = '/purchase-requests';
 
   // --- Rutas con Parámetros (ejemplos) ---
   // static const String productDetails = '/product/:productId';

@@ -1,4 +1,5 @@
 {
+  "@@locale": "es",
   "helloWorld": "Hola Mundo!",
   "ok": "Aceptar",
   "cancel": "Cancelar",
@@ -128,5 +129,9 @@
   "countries": "Países",
   "machine": "Máquina",
   "machines": "Máquinas",
-  "indicators": "Indicadores"
+  "indicators": "Indicadores",
+  "purchase_requests": "Solicitudes de pedidos",
+  "@purchase_requests": {
+    "description": "Etiqueta para el elemento del menú que lleva a la lista de solicitudes de compra."
+  }
 }
