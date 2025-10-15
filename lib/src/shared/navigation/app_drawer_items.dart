@@ -18,24 +18,31 @@ List<VmDrawerItemData> getGerenteDrawerItems(AppLocalizations l10n) {
       route: AppRoutes.home,
     ),
     VmDrawerItemData(
-      icon:
-          Icons.shopping_bag_outlined, // Icono más representativo para Compras
-      label: l10n.purchases,
-      children: [
-        VmDrawerItemData(
-          icon: Icons.receipt_long, // Icono más claro para órdenes/facturas.
-          label: l10n.purchase_orders,
-          route: AppRoutes.inventory,
-        ),
-        VmDrawerItemData(
-          icon: Icons
-              .playlist_add_check, // Icono para una lista de solicitud/aprobación.
-          label: l10n
-              .purchase_requests, // Asegúrate de tener esta key en tus archivos de localización.
-          route: AppRoutes.home,
-        ),
-      ],
+      icon: Icons
+          .playlist_add_check, // Icono para una lista de solicitud/aprobación.
+      label: l10n
+          .purchase_requests, // Asegúrate de tener esta key en tus archivos de localización.
+      route: AppRoutes.home,
     ),
+    // VmDrawerItemData(
+    //   icon:
+    //       Icons.shopping_bag_outlined, // Icono más representativo para Compras
+    //   label: l10n.purchases,
+    //   children: [
+    //     VmDrawerItemData(
+    //       icon: Icons.receipt_long, // Icono más claro para órdenes/facturas.
+    //       label: l10n.purchase_orders,
+    //       route: AppRoutes.inventory,
+    //     ),
+    //     VmDrawerItemData(
+    //       icon: Icons
+    //           .playlist_add_check, // Icono para una lista de solicitud/aprobación.
+    //       label: l10n
+    //           .purchase_requests, // Asegúrate de tener esta key en tus archivos de localización.
+    //       route: AppRoutes.home,
+    //     ),
+    //   ],
+    // ),
     VmDrawerItemData(
       icon: Icons.inventory_2, // Icono más representativo para Inventario
       label: l10n.inventory,

@@ -1,8 +1,10 @@
 import 'package:bandasybandas/src/core/theme/app_spacing.dart';
 import 'package:bandasybandas/src/features/inventory_management/domain/models/item_model.dart';
+import 'package:bandasybandas/src/features/inventory_management/ui/pages/items/cubit/items_cubit.dart';
 import 'package:bandasybandas/src/features/inventory_management/ui/pages/items/view/create_item_dialog.dart';
 import 'package:bandasybandas/src/shared/molecules/mol_list_tile_item.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ItemsView extends StatelessWidget {
   const ItemsView({required this.items, super.key});
@@ -30,7 +32,12 @@ class ItemsView extends StatelessWidget {
                   showDialog<void>(
                     context: context,
                     builder: (BuildContext dialogContext) {
-                      return const CreateItemDialog();
+                      // Envolvemos el diálogo con BlocProvider.value para pasarle
+                      // la instancia existente de ItemsCubit.
+                      return BlocProvider.value(
+                        value: context.read<ItemsCubit>(),
+                        child: const CreateItemDialog(),
+                      );
                     },
                   );
                 },
@@ -64,7 +71,7 @@ class ItemsView extends StatelessWidget {
                   onMoreTap: () {},
                   onViewTap: () {},
                   price: item.price,
-                  quantity: item.quantity,
+                  description: item.quantity,
                   subtitle: item.description ?? '',
                   title: item.name,
                 );

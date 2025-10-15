@@ -1,10 +1,18 @@
 import 'package:bandasybandas/src/app/injection_container.dart';
 import 'package:bandasybandas/src/features/inventory_management/data/datasources/item_datasource.dart';
 import 'package:bandasybandas/src/features/inventory_management/data/datasources/item_datasource_impl.dart';
+import 'package:bandasybandas/src/features/inventory_management/data/datasources/recipe_datasource.dart';
+import 'package:bandasybandas/src/features/inventory_management/data/datasources/recipe_datasource_impl.dart';
 import 'package:bandasybandas/src/features/inventory_management/data/repositories/item_repository_impl.dart';
+import 'package:bandasybandas/src/features/inventory_management/data/repositories/recipe_repository_impl.dart';
 import 'package:bandasybandas/src/features/inventory_management/domain/repositories/item_repository.dart';
+import 'package:bandasybandas/src/features/inventory_management/domain/repositories/recipe_repository.dart';
 import 'package:bandasybandas/src/features/inventory_management/domain/usecases/items_usecases.dart';
+import 'package:bandasybandas/src/features/inventory_management/domain/usecases/products_usecases.dart';
+import 'package:bandasybandas/src/features/inventory_management/domain/usecases/recipes_usecases.dart';
 import 'package:bandasybandas/src/features/inventory_management/ui/pages/items/cubit/items_cubit.dart';
+import 'package:bandasybandas/src/features/inventory_management/ui/pages/products/cubit/products_page_cubit.dart';
+import 'package:bandasybandas/src/features/inventory_management/ui/pages/recipes/cubit/recipe_page_cubit.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 /// Registra todas las dependencias para el feature de 'Inventory Management'.
@@ -15,7 +23,20 @@ void initInventoryManagementInjections(FirebaseFirestore firestore) {
   sl
     ..registerFactory(
       () => ItemsCubit(
-        getItems: sl(), // sl buscará y proveerá el GetItems registrado.
+        getItems: sl(),
+        addItemUseCase: sl(),
+      ),
+    )
+    ..registerFactory(
+      () => RecipesPageCubit(
+        getRecipes: sl(),
+        addRecipe: sl(),
+        uploadPdfUseCase: sl(),
+      ),
+    )
+    ..registerFactory(
+      () => ProductsPageCubit(
+        getProducts: sl(),
       ),
     )
 
@@ -23,6 +44,10 @@ void initInventoryManagementInjections(FirebaseFirestore firestore) {
     // Los casos de uso no tienen estado, por lo que pueden ser singletons.
     ..registerLazySingleton(() => GetItems(sl()))
     ..registerLazySingleton(() => AddItem(sl()))
+    ..registerLazySingleton(() => GetRecipes(sl()))
+    ..registerLazySingleton(() => GetProducts(sl()))
+    ..registerLazySingleton(() => AddRecipe(sl()))
+    ..registerLazySingleton(() => UploadPdfUseCase(sl()))
 
     // --- Repository (Data Layer) ---
     // Se registra la implementación concreta (ItemRepositoryImpl) pero se expone
@@ -31,11 +56,17 @@ void initInventoryManagementInjections(FirebaseFirestore firestore) {
     ..registerLazySingleton<ItemRepository>(
       () => ItemRepositoryImpl(sl<ItemDatasource>()),
     )
+    ..registerLazySingleton<RecipeRepository>(
+      () => RecipeRepositoryImpl(sl<RecipeDatasource>()),
+    )
 
     // --- Data Source (Data Layer) ---
     // Se registra la implementación concreta (ItemDatasourceImpl) pero se expone
     // la abstracción (ItemDatasource).
     ..registerLazySingleton<ItemDatasource>(
       () => ItemDatasourceImpl(firestore),
+    )
+    ..registerLazySingleton<RecipeDatasource>(
+      () => RecipeDatasourceImpl(firestore),
     );
 }

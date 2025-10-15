@@ -1,13 +1,16 @@
 import 'package:bandasybandas/src/app/localization/app_localizations.dart';
 import 'package:bandasybandas/src/core/theme/app_spacing.dart';
 import 'package:bandasybandas/src/features/inventory_management/domain/models/desing_model.dart';
-import 'package:bandasybandas/src/features/inventory_management/ui/pages/recipes/view/create_desing_dialog.dart';
+import 'package:bandasybandas/src/features/inventory_management/ui/pages/items/cubit/items_cubit.dart';
+import 'package:bandasybandas/src/features/inventory_management/ui/pages/recipes/cubit/recipe_page_cubit.dart';
+import 'package:bandasybandas/src/features/inventory_management/ui/pages/recipes/view/create_recipe_dialog.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class DesingView extends StatelessWidget {
-  const DesingView({required this.desings, super.key});
+class RecipesView extends StatelessWidget {
+  const RecipesView({required this.desings, super.key});
 
-  final List<DesingModel> desings;
+  final List<RecipeModel> desings;
 
   @override
   Widget build(BuildContext context) {
@@ -31,8 +34,19 @@ class DesingView extends StatelessWidget {
                 onPressed: () {
                   showDialog<void>(
                     context: context,
+                    // Usamos el `context` del builder para asegurar que tenemos acceso
+                    // a los providers que están por encima del `SingleChildScrollView`.
                     builder: (BuildContext dialogContext) {
-                      return const CreateDesingDialog();
+                      // Usamos MultiBlocProvider para proveer ambos Cubits al diálogo.
+                      return MultiBlocProvider(
+                        providers: [
+                          BlocProvider.value(
+                            value: context.read<RecipesPageCubit>(),
+                          ),
+                          BlocProvider.value(value: context.read<ItemsCubit>()),
+                        ],
+                        child: const CreateRecipeDialog(),
+                      );
                     },
                   );
                 },

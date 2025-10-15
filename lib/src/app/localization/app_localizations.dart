@@ -356,6 +356,36 @@ abstract class AppLocalizations {
   /// **'Producto'**
   String get product;
 
+  /// No description provided for @products.
+  ///
+  /// In es, this message translates to:
+  /// **'Productos'**
+  String get products;
+
+  /// No description provided for @create_product.
+  ///
+  /// In es, this message translates to:
+  /// **'Crear Producto'**
+  String get create_product;
+
+  /// No description provided for @edit_product.
+  ///
+  /// In es, this message translates to:
+  /// **'Editar Producto'**
+  String get edit_product;
+
+  /// No description provided for @delete_product.
+  ///
+  /// In es, this message translates to:
+  /// **'Eliminar Producto'**
+  String get delete_product;
+
+  /// No description provided for @are_you_sure_delete_product.
+  ///
+  /// In es, this message translates to:
+  /// **'¿Estás seguro de que quieres eliminar este producto?'**
+  String get are_you_sure_delete_product;
+
   /// No description provided for @category.
   ///
   /// In es, this message translates to:
@@ -883,6 +913,126 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'Solicitudes de pedidos'**
   String get purchase_requests;
+
+  /// No description provided for @name.
+  ///
+  /// In es, this message translates to:
+  /// **'Nombre'**
+  String get name;
+
+  /// Descripción del campo de entrada de texto para la descripción.
+  ///
+  /// In es, this message translates to:
+  /// **'Descripción'**
+  String get description;
+
+  /// No description provided for @error_field_required.
+  ///
+  /// In es, this message translates to:
+  /// **'Este campo es obligatorio'**
+  String get error_field_required;
+
+  /// No description provided for @error_invalid_value.
+  ///
+  /// In es, this message translates to:
+  /// **'Valor inválido'**
+  String get error_invalid_value;
+
+  /// No description provided for @error_too_short.
+  ///
+  /// In es, this message translates to:
+  /// **'Demasiado corto'**
+  String get error_too_short;
+
+  /// No description provided for @error_too_long.
+  ///
+  /// In es, this message translates to:
+  /// **'Demasiado largo'**
+  String get error_too_long;
+
+  /// No description provided for @error_invalid_format.
+  ///
+  /// In es, this message translates to:
+  /// **'Formato inválido'**
+  String get error_invalid_format;
+
+  /// No description provided for @loading_data.
+  ///
+  /// In es, this message translates to:
+  /// **'Cargando datos...'**
+  String get loading_data;
+
+  /// No description provided for @no_data_available.
+  ///
+  /// In es, this message translates to:
+  /// **'No hay datos disponibles'**
+  String get no_data_available;
+
+  /// No description provided for @pull_to_refresh.
+  ///
+  /// In es, this message translates to:
+  /// **'Desliza para refrescar'**
+  String get pull_to_refresh;
+
+  /// No description provided for @refreshing.
+  ///
+  /// In es, this message translates to:
+  /// **'Refrescando...'**
+  String get refreshing;
+
+  /// No description provided for @last_updated.
+  ///
+  /// In es, this message translates to:
+  /// **'Última actualización'**
+  String get last_updated;
+
+  /// No description provided for @welcome_back.
+  ///
+  /// In es, this message translates to:
+  /// **'¡Bienvenido de nuevo!'**
+  String get welcome_back;
+
+  /// No description provided for @sign_in_to_continue.
+  ///
+  /// In es, this message translates to:
+  /// **'Inicia sesión para continuar'**
+  String get sign_in_to_continue;
+
+  /// No description provided for @forgot_password.
+  ///
+  /// In es, this message translates to:
+  /// **'¿Olvidaste tu contraseña?'**
+  String get forgot_password;
+
+  /// No description provided for @reset_password.
+  ///
+  /// In es, this message translates to:
+  /// **'Restablecer contraseña'**
+  String get reset_password;
+
+  /// No description provided for @send_reset_link.
+  ///
+  /// In es, this message translates to:
+  /// **'Enviar enlace de restablecimiento'**
+  String get send_reset_link;
+
+  /// No description provided for @create_account.
+  ///
+  /// In es, this message translates to:
+  /// **'Crear una cuenta'**
+  String get create_account;
+
+  /// No description provided for @create_new.
+  ///
+  /// In es, this message translates to:
+  /// **'Crear Nuevo'**
+  String get create_new;
+
+  /// No description provided for @ref.
+  ///
+  /// In es, this message translates to:
+  /// **'Referencia'**
+  String get ref;
 }
 
 class _AppLocalizationsDelegate

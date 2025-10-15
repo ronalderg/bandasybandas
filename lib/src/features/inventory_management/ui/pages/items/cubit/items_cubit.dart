@@ -7,9 +7,13 @@ import 'package:bandasybandas/src/features/inventory_management/ui/pages/items/c
 import 'package:bloc/bloc.dart';
 
 class ItemsCubit extends Cubit<ItemsState> {
-  ItemsCubit({required this.getItems}) : super(ItemsPageInitial());
+  ItemsCubit({
+    required this.getItems,
+    required this.addItemUseCase,
+  }) : super(ItemsPageInitial());
 
   final GetItems getItems;
+  final AddItem addItemUseCase;
   StreamSubscription<List<ItemModel>>? _itemsSubscription;
 
   Future<void> loadItems() async {
@@ -29,6 +33,19 @@ class ItemsCubit extends Cubit<ItemsState> {
           emit(ItemsPageLoaded(items));
         });
       },
+    );
+  }
+
+  Future<void> addItem(ItemModel item) async {
+    // No se emite un estado de carga aquí para no bloquear toda la UI.
+    // La actualización de la lista se manejará por el stream.
+    final result = await addItemUseCase(item);
+
+    result.fold(
+      (failure) => emit(
+        ItemsPageError('Falló al agregar el ítem: ${failure.message}'),
+      ),
+      (_) {}, // En caso de éxito, no hacemos nada, el stream actualizará la UI.
     );
   }
 

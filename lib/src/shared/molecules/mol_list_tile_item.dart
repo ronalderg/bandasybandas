@@ -6,7 +6,7 @@ class MolListtileItem extends StatelessWidget {
     required this.onMoreTap,
     required this.onViewTap,
     required this.price,
-    required this.quantity,
+    required this.description,
     required this.subtitle,
     required this.title,
     super.key,
@@ -17,7 +17,7 @@ class MolListtileItem extends StatelessWidget {
   final String title;
   final String subtitle;
   final double price;
-  final double quantity;
+  final double description;
 
   @override
   Widget build(BuildContext context) {
@@ -30,8 +30,8 @@ class MolListtileItem extends StatelessWidget {
         ],
       ),
       title: Text(title),
-      subtitle: Text('Stock: $quantity'),
-      trailing: Text('\$${price.toStringAsFixed(2)}'),
+      subtitle: Text(subtitle),
+      trailing: Text('Stock: ${description.toStringAsFixed(2)}'),
     );
   }
 }

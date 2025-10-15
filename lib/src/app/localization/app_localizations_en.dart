@@ -142,6 +142,22 @@ class AppLocalizationsEn extends AppLocalizations {
   String get product => 'Product';
 
   @override
+  String get products => 'Products';
+
+  @override
+  String get create_product => 'Create Product';
+
+  @override
+  String get edit_product => 'Edit Product';
+
+  @override
+  String get delete_product => 'Delete Product';
+
+  @override
+  String get are_you_sure_delete_product =>
+      'Are you sure you want to delete this product?';
+
+  @override
   String get category => 'Category';
 
   @override
@@ -404,4 +420,64 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get purchase_requests => 'Purchase requests';
+
+  @override
+  String get name => 'Name';
+
+  @override
+  String get description => 'Description';
+
+  @override
+  String get error_field_required => 'Este campo es obligatorio';
+
+  @override
+  String get error_invalid_value => 'Invalid value';
+
+  @override
+  String get error_too_short => 'Too short';
+
+  @override
+  String get error_too_long => 'Too long';
+
+  @override
+  String get error_invalid_format => 'Invalid format';
+
+  @override
+  String get loading_data => 'Loading data...';
+
+  @override
+  String get no_data_available => 'No data available';
+
+  @override
+  String get pull_to_refresh => 'Pull to refresh';
+
+  @override
+  String get refreshing => 'Refreshing...';
+
+  @override
+  String get last_updated => 'Last updated';
+
+  @override
+  String get welcome_back => 'Welcome back!';
+
+  @override
+  String get sign_in_to_continue => 'Sign in to continue';
+
+  @override
+  String get forgot_password => 'Forgot your password?';
+
+  @override
+  String get reset_password => 'Reset password';
+
+  @override
+  String get send_reset_link => 'Send reset link';
+
+  @override
+  String get create_account => 'Create an account';
+
+  @override
+  String get create_new => 'Create New';
+
+  @override
+  String get ref => 'Reference';
 }

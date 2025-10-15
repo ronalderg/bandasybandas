@@ -1,6 +1,295 @@
 - .dart_tool
+  - chrome-device
+    - Default
+      - Account Web Data
+      - Account Web Data-journal
+      - Affiliation Database
+      - Affiliation Database-journal
+      - AutofillStrikeDatabase
+        - LOCK
+        - LOG
+        - LOG.old
+      - BookmarkMergedSurfaceOrdering
+      - BrowsingTopicsSiteData
+      - BrowsingTopicsSiteData-journal
+      - BrowsingTopicsState
+      - BudgetDatabase
+        - LOCK
+        - LOG
+        - LOG.old
+      - ClientCertificates
+        - LOCK
+        - LOG
+        - LOG.old
+      - Cookies
+      - Cookies-journal
+      - DIPS
+      - DIPS-wal
+      - Download Service
+        - EntryDB
+          - LOCK
+          - LOG
+          - LOG.old
+        - Files
+      - Extension Rules
+        - 000003.log
+        - CURRENT
+        - LOCK
+        - LOG
+        - LOG.old
+        - MANIFEST-000001
+      - Extension Scripts
+        - 000003.log
+        - CURRENT
+        - LOCK
+        - LOG
+        - LOG.old
+        - MANIFEST-000001
+      - Extension State
+        - 000003.log
+        - CURRENT
+        - LOCK
+        - LOG
+        - LOG.old
+        - MANIFEST-000001
+      - Favicons
+      - Favicons-journal
+      - Feature Engagement Tracker
+        - AvailabilityDB
+          - LOCK
+          - LOG
+          - LOG.old
+        - EventDB
+          - LOCK
+          - LOG
+          - LOG.old
+      - GCM Store
+        - 000003.log
+        - CURRENT
+        - Encryption
+          - 000003.log
+          - CURRENT
+          - LOCK
+          - LOG
+          - LOG.old
+          - MANIFEST-000001
+        - LOCK
+        - LOG
+        - LOG.old
+        - MANIFEST-000001
+      - History
+      - History-journal
+      - IndexedDB
+        - http_localhost_52235.indexeddb.leveldb
+          - 000007.log
+          - 000009.ldb
+          - CURRENT
+          - LOCK
+          - LOG
+          - LOG.old
+          - MANIFEST-000001
+        - http_localhost_56046.indexeddb.leveldb
+          - 000003.log
+          - CURRENT
+          - LOCK
+          - LOG
+          - MANIFEST-000001
+        - http_localhost_59028.indexeddb.leveldb
+          - 000004.log
+          - 000005.ldb
+          - CURRENT
+          - LOCK
+          - LOG
+          - MANIFEST-000001
+      - LOCK
+      - LOG
+      - LOG.old
+      - Local Storage
+        - leveldb
+          - 000003.log
+          - CURRENT
+          - LOCK
+          - LOG
+          - LOG.old
+          - MANIFEST-000001
+      - Login Data
+      - Login Data For Account
+      - Login Data For Account-journal
+      - Login Data-journal
+      - Network Action Predictor
+      - Network Action Predictor-journal
+      - Network Persistent State
+      - PersistentOriginTrials
+        - LOCK
+        - LOG
+        - LOG.old
+      - Preferences
+      - PreferredApps
+      - README
+      - Reporting and NEL
+      - Reporting and NEL-journal
+      - Safe Browsing Cookies
+      - Safe Browsing Cookies-journal
+      - Secure Preferences
+      - Segmentation Platform
+        - SegmentInfoDB
+          - LOCK
+          - LOG
+          - LOG.old
+        - SignalDB
+          - LOCK
+          - LOG
+          - LOG.old
+        - SignalStorageConfigDB
+          - LOCK
+          - LOG
+          - LOG.old
+      - ServerCertificate
+      - ServerCertificate-journal
+      - Service Worker
+        - Database
+          - 000003.log
+          - CURRENT
+          - LOCK
+          - LOG
+          - LOG.old
+          - MANIFEST-000001
+        - ScriptCache
+          - 2cc80dabc69f58b6_0
+          - 4cb013792b196a35_0
+          - 4cb013792b196a35_1
+          - index
+          - index-dir
+            - the-real-index
+      - Session Storage
+        - 000003.log
+        - CURRENT
+        - LOCK
+        - LOG
+        - LOG.old
+        - MANIFEST-000001
+      - Sessions
+        - Session_13403935993871410
+        - Session_13404201855842432
+        - Session_13404284016641755
+        - Session_13404287200681673
+        - Tabs_13403941650963286
+        - Tabs_13404201856472514
+        - Tabs_13404275073997043
+      - Shared Dictionary
+        - cache
+          - index
+          - index-dir
+            - the-real-index
+        - db
+        - db-journal
+      - SharedStorage
+      - Shortcuts
+      - Shortcuts-journal
+      - Site Characteristics Database
+        - 000003.log
+        - CURRENT
+        - LOCK
+        - LOG
+        - LOG.old
+        - MANIFEST-000001
+      - Sync Data
+        - LevelDB
+          - 000003.log
+          - CURRENT
+          - LOCK
+          - LOG
+          - LOG.old
+          - MANIFEST-000001
+      - Top Sites
+      - Top Sites-journal
+      - TransportSecurity
+      - Trust Tokens
+      - Trust Tokens-journal
+      - Web Data
+      - Web Data-journal
+      - WebStorage
+        - QuotaManager
+        - QuotaManager-journal
+      - blob_storage
+        - 75efeef6-d823-4ee4-bf69-9d52f8360a8c
+        - 8666cc45-8e56-415b-b6d3-95e950b450f6
+        - 8d4626a4-bfb7-44f2-aa1e-76ee3102f852
+      - chrome_cart_db
+        - LOCK
+        - LOG
+        - LOG.old
+      - commerce_subscription_db
+        - LOCK
+        - LOG
+        - LOG.old
+      - discount_infos_db
+        - LOCK
+        - LOG
+        - LOG.old
+      - discounts_db
+        - LOCK
+        - LOG
+        - LOG.old
+      - heavy_ad_intervention_opt_out.db
+      - heavy_ad_intervention_opt_out.db-journal
+      - optimization_guide_hint_cache_store
+        - LOCK
+        - LOG
+        - LOG.old
+      - parcel_tracking_db
+        - LOCK
+        - LOG
+        - LOG.old
+      - passkey_enclave_state
+      - shared_proto_db
+        - 000003.log
+        - CURRENT
+        - LOCK
+        - LOG
+        - LOG.old
+        - MANIFEST-000001
+        - metadata
+          - 000003.log
+          - CURRENT
+          - LOCK
+          - LOG
+          - LOG.old
+          - MANIFEST-000001
+      - trusted_vault.pb
   - dartpad
     - web_plugin_registrant.dart
+  - extension_discovery
+    - README.md
+    - devtools.json
+    - vs_code.json
+  - flutter_build
+    - 823e185565b3f0e2268447493209a941
+      - .filecache
+      - app.dill
+      - app.dill.deps
+      - dart2js.d
+      - dart2js.stamp
+      - dart2wasm.stamp
+      - dart_build.d
+      - dart_build.stamp
+      - dart_build_result.json
+      - flutter_assets.d
+      - gen_l10n_inputs_and_outputs.json
+      - gen_localizations.d
+      - gen_localizations.stamp
+      - main.dart
+      - main.dart.js
+      - main.dart.js.deps
+      - outputs.json
+      - service_worker.d
+      - web_entrypoint.stamp
+      - web_plugin_registrant.dart
+      - web_release_bundle.stamp
+      - web_resources.d
+      - web_service_worker.stamp
+      - web_static_assets.stamp
+      - web_templated_files.stamp
   - package_config.json
   - package_graph.json
   - version
@@ -99,12 +388,111 @@
 - bandasybandas.iml
 - build
   - .last_build_id
+  - 4c2bd0799d65309d15f86fa5521eb7f1
+    - .filecache
+    - _composite.stamp
+    - dart_build.d
+    - dart_build.stamp
+    - dart_build_result.json
+    - gen_dart_plugin_registrant.stamp
+    - gen_l10n_inputs_and_outputs.json
+    - gen_localizations.d
+    - gen_localizations.stamp
+    - outputs.json
   - b1e19dc076b54782a4effc3c567d54c4
     - .filecache
     - gen_l10n_inputs_and_outputs.json
     - gen_localizations.d
     - gen_localizations.stamp
     - outputs.json
+  - ce387cf068b3dd84bf19be64de7f9740.cache.dill.track.dill
+  - flutter_assets
+    - AssetManifest.bin
+    - AssetManifest.bin.json
+    - FontManifest.json
+    - NOTICES
+    - assets
+      - fonts
+        - Roboto
+          - Roboto-Black.ttf
+          - Roboto-BlackItalic.ttf
+          - Roboto-Bold.ttf
+          - Roboto-Italic.ttf
+          - Roboto-Light.ttf
+          - Roboto-LightItalic.ttf
+          - Roboto-Regular.ttf
+          - Roboto-Thin.ttf
+          - Roboto-ThinItalic.ttf
+      - images
+        - logo.png
+    - fonts
+      - MaterialIcons-Regular.otf
+    - packages
+      - cupertino_icons
+        - assets
+          - CupertinoIcons.ttf
+    - shaders
+      - ink_sparkle.frag
+      - stretch_effect.frag
+  - native_assets
+    - web
+  - web
+    - .last_build_id
+    - assets
+      - AssetManifest.bin
+      - AssetManifest.bin.json
+      - FontManifest.json
+      - NOTICES
+      - assets
+        - fonts
+          - Roboto
+            - Roboto-Black.ttf
+            - Roboto-BlackItalic.ttf
+            - Roboto-Bold.ttf
+            - Roboto-Italic.ttf
+            - Roboto-Light.ttf
+            - Roboto-LightItalic.ttf
+            - Roboto-Regular.ttf
+            - Roboto-Thin.ttf
+            - Roboto-ThinItalic.ttf
+        - images
+          - logo.png
+      - fonts
+        - MaterialIcons-Regular.otf
+      - packages
+        - cupertino_icons
+          - assets
+            - CupertinoIcons.ttf
+      - shaders
+        - ink_sparkle.frag
+        - stretch_effect.frag
+    - canvaskit
+      - canvaskit.js
+      - canvaskit.js.symbols
+      - canvaskit.wasm
+      - chromium
+        - canvaskit.js
+        - canvaskit.js.symbols
+        - canvaskit.wasm
+      - skwasm.js
+      - skwasm.js.symbols
+      - skwasm.wasm
+      - skwasm_heavy.js
+      - skwasm_heavy.js.symbols
+      - skwasm_heavy.wasm
+    - favicon.png
+    - flutter.js
+    - flutter_bootstrap.js
+    - flutter_service_worker.js
+    - icons
+      - Icon-192.png
+      - Icon-512.png
+      - Icon-maskable-192.png
+      - Icon-maskable-512.png
+    - index.html
+    - main.dart.js
+    - manifest.json
+    - version.json
 - devtools_options.yaml
 - firebase.json
 - ios
@@ -204,6 +592,7 @@
         - app_localizations_en.dart
         - app_localizations_es.dart
       - router
+        - app_router.dart
         - app_routes.dart
         - app_transitions.dart
         - go_router_refresh_stream.dart
@@ -249,7 +638,6 @@
               - login_page.dart
               - view
                 - login_form.dart
-          - templates
       - customer_management
         - data
           - datasources
@@ -262,46 +650,51 @@
             - customer_management_repository.dart
           - usecases
         - ui
-          - atoms
           - bloc
             - customer_management_bloc.dart
-          - molecules
-          - organisms
           - pages
             - customer_management_page.dart
-          - templates
       - inventory_management
         - data
           - datasources
             - item_datasource.dart
             - item_datasource_impl.dart
-            - item_model.dart
           - repositories
-            - item_repository.dart
             - item_repository_impl.dart
         - domain
           - models
+            - desing_model.dart
             - item_model.dart
           - repositories
-            - abstract_items_repository.dart
             - item_repository.dart
           - usecases
             - items_usecases.dart
+        - inventory_management_injections.dart
+        - inventory_routes.dart
         - ui
-          - atoms
           - bloc
             - inventory_management_bloc.dart
-          - molecules
-          - organisms
           - pages
-            - desing
             - inventory_management_page.dart
-            - item
+            - items
               - cubit
-              - item_page.dart
+                - items_cubit.dart
+                - items_state.dart
+              - items_page.dart
               - view
+                - create_item_dialog.dart
+                - items_view.dart
             - product
-          - templates
+            - recipes
+              - create_recipe_dialog.dart
+              - cubit
+                - recipe_page_cubit.dart
+                - recipe_page_state.dart
+              - recipes_page.dart
+              - recipes_view.dart
+              - view
+                - create_desing_dialog.dart
+                - desing_view.dart
       - machine
       - reports_analytics
         - data
@@ -347,6 +740,7 @@
         - data
         - ui
     - shared
+      - animations
       - atoms
         - app_button.dart
         - app_icon.dart
@@ -360,9 +754,10 @@
         - user.dart
         - vm_drawer_item_data.dart
       - molecules
-        - form_field_with_label.dart
+        - mol_drawer_expansion_tile.dart
         - mol_drawer_header.dart
         - mol_drawer_item.dart
+        - mol_list_tile_item.dart
       - navigation
         - app_drawer_items.dart
       - organisms

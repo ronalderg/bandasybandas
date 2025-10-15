@@ -144,6 +144,22 @@ class AppLocalizationsEs extends AppLocalizations {
   String get product => 'Producto';
 
   @override
+  String get products => 'Productos';
+
+  @override
+  String get create_product => 'Crear Producto';
+
+  @override
+  String get edit_product => 'Editar Producto';
+
+  @override
+  String get delete_product => 'Eliminar Producto';
+
+  @override
+  String get are_you_sure_delete_product =>
+      '¿Estás seguro de que quieres eliminar este producto?';
+
+  @override
   String get category => 'Categoría';
 
   @override
@@ -406,4 +422,64 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get purchase_requests => 'Solicitudes de pedidos';
+
+  @override
+  String get name => 'Nombre';
+
+  @override
+  String get description => 'Descripción';
+
+  @override
+  String get error_field_required => 'Este campo es obligatorio';
+
+  @override
+  String get error_invalid_value => 'Valor inválido';
+
+  @override
+  String get error_too_short => 'Demasiado corto';
+
+  @override
+  String get error_too_long => 'Demasiado largo';
+
+  @override
+  String get error_invalid_format => 'Formato inválido';
+
+  @override
+  String get loading_data => 'Cargando datos...';
+
+  @override
+  String get no_data_available => 'No hay datos disponibles';
+
+  @override
+  String get pull_to_refresh => 'Desliza para refrescar';
+
+  @override
+  String get refreshing => 'Refrescando...';
+
+  @override
+  String get last_updated => 'Última actualización';
+
+  @override
+  String get welcome_back => '¡Bienvenido de nuevo!';
+
+  @override
+  String get sign_in_to_continue => 'Inicia sesión para continuar';
+
+  @override
+  String get forgot_password => '¿Olvidaste tu contraseña?';
+
+  @override
+  String get reset_password => 'Restablecer contraseña';
+
+  @override
+  String get send_reset_link => 'Enviar enlace de restablecimiento';
+
+  @override
+  String get create_account => 'Crear una cuenta';
+
+  @override
+  String get create_new => 'Crear Nuevo';
+
+  @override
+  String get ref => 'Referencia';
 }

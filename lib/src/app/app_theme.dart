@@ -110,5 +110,10 @@ class AppTheme {
     iconTheme: lightTheme.iconTheme.copyWith(
       color: AppColors.white, // Color blanco para íconos en modo oscuro
     ),
+    textButtonTheme: TextButtonThemeData(
+      style: TextButton.styleFrom(
+        foregroundColor: AppColors.textColorInverse,
+      ),
+    ),
   );
 }

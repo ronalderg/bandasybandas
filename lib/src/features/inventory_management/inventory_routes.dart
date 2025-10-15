@@ -1,7 +1,7 @@
 import 'package:bandasybandas/src/app/router/app_routes.dart';
 import 'package:bandasybandas/src/app/router/app_transitions.dart';
-import 'package:bandasybandas/src/features/inventory_management/ui/pages/recipes/recipes_page.dart';
 import 'package:bandasybandas/src/features/inventory_management/ui/pages/items/items_page.dart';
+import 'package:bandasybandas/src/features/inventory_management/ui/pages/recipes/recipes_page.dart';
 
 class InventoryRoutes {
   static final routes = [
@@ -12,8 +12,8 @@ class InventoryRoutes {
     ),
 
     AppTransitions.fadeRoute(
-      path: AppRoutes.inventory,
-      builder: (_, __) => const DesingPage(),
+      path: AppRoutes.recipes,
+      builder: (_, __) => const RecipesPage(),
     ),
   ];
 }

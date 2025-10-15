@@ -43,6 +43,11 @@
   "inventory": "Inventario",
   "sales": "Ventas",
   "product": "Producto",
+  "products": "Productos",
+  "create_product": "Crear Producto",
+  "edit_product": "Editar Producto",
+  "delete_product": "Eliminar Producto",
+  "are_you_sure_delete_product": "¿Estás seguro de que quieres eliminar este producto?",
   "category": "Categoría",
   "supplier": "Proveedor",
   "customer": "Cliente",
@@ -133,5 +138,28 @@
   "purchase_requests": "Solicitudes de pedidos",
   "@purchase_requests": {
     "description": "Etiqueta para el elemento del menú que lleva a la lista de solicitudes de compra."
-  }
+  },
+  "name": "Nombre",
+  "description": "Descripción",
+  "@description": {
+    "description": "Descripción del campo de entrada de texto para la descripción."
+  },
+  "error_field_required": "Este campo es obligatorio",
+  "error_invalid_value": "Valor inválido",
+  "error_too_short": "Demasiado corto",
+  "error_too_long": "Demasiado largo",
+  "error_invalid_format": "Formato inválido",
+  "loading_data": "Cargando datos...",
+  "no_data_available": "No hay datos disponibles",
+  "pull_to_refresh": "Desliza para refrescar",
+  "refreshing": "Refrescando...",
+  "last_updated": "Última actualización",
+  "welcome_back": "¡Bienvenido de nuevo!",
+  "sign_in_to_continue": "Inicia sesión para continuar",
+  "forgot_password": "¿Olvidaste tu contraseña?",
+  "reset_password": "Restablecer contraseña",
+  "send_reset_link": "Enviar enlace de restablecimiento",
+  "create_account": "Crear una cuenta",
+  "create_new": "Crear Nuevo",
+  "ref": "Referencia"
 }
