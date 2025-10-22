@@ -10,28 +10,33 @@
       "request": "launch",
       "program": "lib/main.dart"
     },
-    
     {
-          "name": "Flutter web Chrome",
-          "type": "dart",
-          "request": "launch",
-          "program": "lib/main.dart",
-          "args": [
-              "-d",
-              "chrome"
-          ]
+      "name": "Flutter web Chrome",
+      "type": "dart",
+      "request": "launch",
+      "program": "lib/main.dart",
+      "args": ["-d", "chrome"]
     },
     {
-        "name": "Flutter web Chrome (Beta)",
-        "type": "dart",
-        "request": "launch",
-        "program": "lib/main.dart",
-        "args": [
-            "run",
-            "-d",
-            "chrome",
-            "--web-experimental-hot-reload"
-        ]
+      "name": "Flutter web Chrome DEV",
+      "type": "dart",
+      "request": "launch",
+      "program": "lib/main.dart",
+      "args": ["run", "-d", "chrome", "--dart-define=FLAVOR=development"]
     },
+    {
+      "name": "Flutter web Chrome STG",
+      "type": "dart",
+      "request": "launch",
+      "program": "lib/main.dart",
+      "args": ["run", "-d", "chrome", "--dart-define=FLAVOR=staging"]
+    },
+    {
+      "name": "Flutter web Chrome PROD",
+      "type": "dart",
+      "request": "launch",
+      "program": "lib/main.dart",
+      "args": ["run", "-d", "chrome", "--dart-define=FLAVOR=production"]
+    }
   ]
 }

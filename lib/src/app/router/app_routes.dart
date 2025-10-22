@@ -22,7 +22,11 @@ class AppRoutes {
   static const String inventory = '/inventory';
   static const String items = '/items';
   static const String recipes = '/recipes';
-  static const String machines = '/machines';
+  static const String products = '/products';
+  static const String productDetails = '/product/:id';
+
+  // --- Rutas de Clientes (Features) ---
+  static const String customerManagement = '/customers/management';
 
   // --- Rutas de Compras (Features) ---
   static const String purchases = '/purchases';

@@ -2,8 +2,8 @@ import 'package:bandasybandas/src/app/localization/app_localizations.dart';
 import 'package:bandasybandas/src/core/theme/app_spacing.dart';
 import 'package:bandasybandas/src/features/inventory_management/domain/models/desing_model.dart';
 import 'package:bandasybandas/src/features/inventory_management/domain/models/item_model.dart';
-import 'package:bandasybandas/src/features/inventory_management/ui/pages/items/cubit/items_cubit.dart';
-import 'package:bandasybandas/src/features/inventory_management/ui/pages/items/cubit/items_state.dart';
+import 'package:bandasybandas/src/features/inventory_management/ui/pages/items/cubit/items_page_cubit.dart';
+import 'package:bandasybandas/src/features/inventory_management/ui/pages/items/cubit/items_page_state.dart';
 import 'package:bandasybandas/src/features/inventory_management/ui/pages/recipes/cubit/recipe_page_cubit.dart';
 import 'package:bandasybandas/src/shared/atoms/at_textfield_text.dart';
 import 'package:flutter/material.dart';
@@ -140,7 +140,7 @@ class _CreateRecipeDialogState extends State<CreateRecipeDialog> {
                   Text('Items', style: Theme.of(context).textTheme.titleMedium),
                   // Usamos un BlocBuilder para obtener el estado de ItemsCubit
                   // y así tener acceso a la lista de items disponibles.
-                  BlocBuilder<ItemsCubit, ItemsState>(
+                  BlocBuilder<ItemsCubit, ItemsPageState>(
                     builder: (context, state) {
                       if (state is ItemsPageLoaded) {
                         return ElevatedButton.icon(
@@ -166,7 +166,7 @@ class _CreateRecipeDialogState extends State<CreateRecipeDialog> {
               // de layout con viewports anidados dentro de un AlertDialog scrollable.
               Column(
                 children: _items.map((recipeItem) {
-                  return BlocBuilder<ItemsCubit, ItemsState>(
+                  return BlocBuilder<ItemsCubit, ItemsPageState>(
                     builder: (context, state) {
                       var itemName = 'Item no encontrado';
                       if (state is ItemsPageLoaded) {
@@ -199,9 +199,11 @@ class _CreateRecipeDialogState extends State<CreateRecipeDialog> {
                   Icons.picture_as_pdf,
                   color: _pdfUrl != null ? Colors.green : Colors.grey,
                 ),
-                title: Text(_pdfUrl != null
-                    ? 'Ficha técnica adjunta'
-                    : 'Adjuntar ficha técnica (PDF)'),
+                title: Text(
+                  _pdfUrl != null
+                      ? 'Ficha técnica adjunta'
+                      : 'Adjuntar ficha técnica (PDF)',
+                ),
                 subtitle: _pdfUrl != null
                     ? const Text('El archivo se ha subido correctamente.')
                     : null,
@@ -252,16 +254,22 @@ class _PdfDropzoneDialogState extends State<_PdfDropzoneDialog> {
       final fileName = await _controller.getFilename(event);
       final fileData = await _controller.getFileData(event);
 
-      final url =
-          await context.read<RecipesPageCubit>().uploadPdf(fileData, fileName);
-
       if (mounted) {
-        Navigator.of(context).pop(url);
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Subiendo archivo: $fileName')),
+        );
+        final url = await context
+            .read<RecipesPageCubit>()
+            .uploadPdf(fileData, fileName);
+        if (mounted) {
+          Navigator.of(context).pop(url);
+        }
       }
-    } catch (e) {
+    } on Exception catch (e) {
       setState(() {
         _isLoading = false;
-        _errorMessage = 'Error al subir el archivo. Inténtalo de nuevo.';
+        _errorMessage =
+            'Error al subir el archivo. Inténtalo de nuevo. error: $e';
       });
     }
   }
@@ -287,13 +295,13 @@ class _PdfDropzoneDialogState extends State<_PdfDropzoneDialog> {
                     border: Border.all(
                       color: _isHovering
                           ? colorScheme.primary
-                          : colorScheme.onSurface.withOpacity(0.3),
+                          : colorScheme.onSurface.withAlpha(75),
                       width: 2,
                     ),
                     borderRadius: BorderRadius.circular(AppSpacing.sm),
                     color: _isHovering
-                        ? colorScheme.primaryContainer.withOpacity(0.5)
-                        : colorScheme.surfaceVariant.withOpacity(0.5),
+                        ? colorScheme.primaryContainer.withAlpha(128)
+                        : colorScheme.surfaceContainerHighest.withAlpha(128),
                   ),
                   child: Stack(
                     children: [

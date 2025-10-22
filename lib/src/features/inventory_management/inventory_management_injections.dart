@@ -1,16 +1,20 @@
 import 'package:bandasybandas/src/app/injection_container.dart';
 import 'package:bandasybandas/src/features/inventory_management/data/datasources/item_datasource.dart';
 import 'package:bandasybandas/src/features/inventory_management/data/datasources/item_datasource_impl.dart';
+import 'package:bandasybandas/src/features/inventory_management/data/datasources/product_datasource.dart';
+import 'package:bandasybandas/src/features/inventory_management/data/datasources/product_datasource_impl.dart';
 import 'package:bandasybandas/src/features/inventory_management/data/datasources/recipe_datasource.dart';
 import 'package:bandasybandas/src/features/inventory_management/data/datasources/recipe_datasource_impl.dart';
 import 'package:bandasybandas/src/features/inventory_management/data/repositories/item_repository_impl.dart';
+import 'package:bandasybandas/src/features/inventory_management/data/repositories/product_repository_impl.dart';
 import 'package:bandasybandas/src/features/inventory_management/data/repositories/recipe_repository_impl.dart';
 import 'package:bandasybandas/src/features/inventory_management/domain/repositories/item_repository.dart';
+import 'package:bandasybandas/src/features/inventory_management/domain/repositories/product_repository.dart';
 import 'package:bandasybandas/src/features/inventory_management/domain/repositories/recipe_repository.dart';
 import 'package:bandasybandas/src/features/inventory_management/domain/usecases/items_usecases.dart';
 import 'package:bandasybandas/src/features/inventory_management/domain/usecases/products_usecases.dart';
 import 'package:bandasybandas/src/features/inventory_management/domain/usecases/recipes_usecases.dart';
-import 'package:bandasybandas/src/features/inventory_management/ui/pages/items/cubit/items_cubit.dart';
+import 'package:bandasybandas/src/features/inventory_management/ui/pages/items/cubit/items_page_cubit.dart';
 import 'package:bandasybandas/src/features/inventory_management/ui/pages/products/cubit/products_page_cubit.dart';
 import 'package:bandasybandas/src/features/inventory_management/ui/pages/recipes/cubit/recipe_page_cubit.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -37,36 +41,44 @@ void initInventoryManagementInjections(FirebaseFirestore firestore) {
     ..registerFactory(
       () => ProductsPageCubit(
         getProducts: sl(),
+        addProduct: sl(),
       ),
     )
 
-    // --- Use Cases (Domain Layer) ---
-    // Los casos de uso no tienen estado, por lo que pueden ser singletons.
+    // ----- Use Cases (Domain Layer) ---
+    // Items
     ..registerLazySingleton(() => GetItems(sl()))
     ..registerLazySingleton(() => AddItem(sl()))
+    // Recetas
     ..registerLazySingleton(() => GetRecipes(sl()))
-    ..registerLazySingleton(() => GetProducts(sl()))
     ..registerLazySingleton(() => AddRecipe(sl()))
     ..registerLazySingleton(() => UploadPdfUseCase(sl()))
+    // Productos
+    ..registerLazySingleton(() => GetProducts(sl()))
+    ..registerLazySingleton(() => AddProduct(sl()))
 
-    // --- Repository (Data Layer) ---
-    // Se registra la implementación concreta (ItemRepositoryImpl) pero se expone
-    // la abstracción (ItemRepository). Así, los casos de uso solo conocen la
-    // interfaz del dominio.
+    // --- Repository (Data Layer) --- interfaz del dominio
+    // ItemRepository
     ..registerLazySingleton<ItemRepository>(
       () => ItemRepositoryImpl(sl<ItemDatasource>()),
     )
+    // RecipeRepository
     ..registerLazySingleton<RecipeRepository>(
       () => RecipeRepositoryImpl(sl<RecipeDatasource>()),
     )
+    // ProductRepository
+    ..registerLazySingleton<ProductRepository>(
+      () => ProductRepositoryImpl(sl<ProductDatasource>()),
+    )
 
     // --- Data Source (Data Layer) ---
-    // Se registra la implementación concreta (ItemDatasourceImpl) pero se expone
-    // la abstracción (ItemDatasource).
     ..registerLazySingleton<ItemDatasource>(
       () => ItemDatasourceImpl(firestore),
     )
     ..registerLazySingleton<RecipeDatasource>(
       () => RecipeDatasourceImpl(firestore),
+    )
+    ..registerLazySingleton<ProductDatasource>(
+      () => ProductDatasourceImpl(firestore),
     );
 }

@@ -148,6 +148,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get create_product => 'Create Product';
 
   @override
+  String get create_new_product => 'Create new product';
+
+  @override
   String get edit_product => 'Edit Product';
 
   @override
@@ -171,6 +174,25 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get create_customer => 'Create Customer';
+
+  @override
+  String get create_new_customer => 'Create new customer';
+
+  @override
+  String get edit_customer => 'Edit Customer';
+
+  @override
+  String get delete_customer => 'Delete Customer';
+
+  @override
+  String get are_you_sure_delete_customer =>
+      'Are you sure you want to delete this customer?';
+
+  @override
+  String get no_customers_found => 'No customers found.';
+
+  @override
+  String get loading_customers => 'Loading customers...';
 
   @override
   String get order => 'Order';
@@ -291,6 +313,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get desings => 'Designs';
+
+  @override
+  String get search_desing => 'Search desing';
 
   @override
   String get recipe => 'Recipe';

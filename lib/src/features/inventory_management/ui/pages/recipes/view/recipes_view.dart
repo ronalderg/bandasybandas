@@ -1,7 +1,7 @@
 import 'package:bandasybandas/src/app/localization/app_localizations.dart';
 import 'package:bandasybandas/src/core/theme/app_spacing.dart';
 import 'package:bandasybandas/src/features/inventory_management/domain/models/desing_model.dart';
-import 'package:bandasybandas/src/features/inventory_management/ui/pages/items/cubit/items_cubit.dart';
+import 'package:bandasybandas/src/features/inventory_management/ui/pages/items/cubit/items_page_cubit.dart';
 import 'package:bandasybandas/src/features/inventory_management/ui/pages/recipes/cubit/recipe_page_cubit.dart';
 import 'package:bandasybandas/src/features/inventory_management/ui/pages/recipes/view/create_recipe_dialog.dart';
 import 'package:flutter/material.dart';

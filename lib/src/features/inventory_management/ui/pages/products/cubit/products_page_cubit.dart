@@ -7,9 +7,13 @@ import 'package:bandasybandas/src/features/inventory_management/ui/pages/product
 import 'package:bloc/bloc.dart';
 
 class ProductsPageCubit extends Cubit<ProductsPageState> {
-  ProductsPageCubit({required this.getProducts}) : super(ProductsPageInitial());
+  ProductsPageCubit({
+    required this.getProducts,
+    required this.addProduct,
+  }) : super(ProductsPageInitial());
 
   final GetProducts getProducts;
+  final AddProduct addProduct;
   StreamSubscription<List<ProductModel>>? _productsSubscription;
 
   Future<void> loadProducts() async {
@@ -24,6 +28,18 @@ class ProductsPageCubit extends Cubit<ProductsPageState> {
         _productsSubscription = stream.listen((products) {
           emit(ProductsPageLoaded(products));
         });
+      },
+    );
+  }
+
+  Future<void> createProduct(ProductModel product) async {
+    final result = await addProduct(product);
+    result.fold(
+      (failure) => emit(
+        ProductsPageError('Error al crear producto: ${failure.message}'),
+      ),
+      (_) {
+        // El stream se encargará de actualizar la lista, no es necesario emitir aquí.
       },
     );
   }

@@ -1,4 +1,4 @@
-import 'package:bandasybandas/src/shared/domain/models/entity_metadata.dart';
+import 'package:bandasybandas/src/shared/models/entity_metadata.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
 
@@ -7,8 +7,6 @@ import 'package:equatable/equatable.dart';
 /// Este modelo es inmutable y utiliza [Equatable] para facilitar las comparaciones.
 class ItemModel extends Equatable with EntityMetadata {
   /// Constructor para crear una instancia de [ItemModel].
-  ///
-  //TODO: Agregar referencia cliente
   const ItemModel({
     required this.id,
     required this.name,

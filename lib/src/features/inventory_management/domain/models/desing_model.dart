@@ -1,4 +1,4 @@
-import 'package:bandasybandas/src/shared/domain/models/entity_metadata.dart';
+import 'package:bandasybandas/src/shared/models/entity_metadata.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
 

@@ -1,6 +1,6 @@
 import 'package:bandasybandas/src/core/theme/app_spacing.dart';
 import 'package:bandasybandas/src/features/inventory_management/domain/models/item_model.dart';
-import 'package:bandasybandas/src/features/inventory_management/ui/pages/items/cubit/items_cubit.dart';
+import 'package:bandasybandas/src/features/inventory_management/ui/pages/items/cubit/items_page_cubit.dart';
 import 'package:bandasybandas/src/shared/atoms/at_textfield_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

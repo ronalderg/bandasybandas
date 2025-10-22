@@ -368,6 +368,12 @@ abstract class AppLocalizations {
   /// **'Crear Producto'**
   String get create_product;
 
+  /// No description provided for @create_new_product.
+  ///
+  /// In es, this message translates to:
+  /// **'Crear nuevo producto'**
+  String get create_new_product;
+
   /// No description provided for @edit_product.
   ///
   /// In es, this message translates to:
@@ -415,6 +421,42 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'Crear Cliente'**
   String get create_customer;
+
+  /// No description provided for @create_new_customer.
+  ///
+  /// In es, this message translates to:
+  /// **'Crear nuevo cliente'**
+  String get create_new_customer;
+
+  /// No description provided for @edit_customer.
+  ///
+  /// In es, this message translates to:
+  /// **'Editar Cliente'**
+  String get edit_customer;
+
+  /// No description provided for @delete_customer.
+  ///
+  /// In es, this message translates to:
+  /// **'Eliminar Cliente'**
+  String get delete_customer;
+
+  /// No description provided for @are_you_sure_delete_customer.
+  ///
+  /// In es, this message translates to:
+  /// **'¿Estás seguro de que quieres eliminar este cliente?'**
+  String get are_you_sure_delete_customer;
+
+  /// No description provided for @no_customers_found.
+  ///
+  /// In es, this message translates to:
+  /// **'No se encontraron clientes.'**
+  String get no_customers_found;
+
+  /// No description provided for @loading_customers.
+  ///
+  /// In es, this message translates to:
+  /// **'Cargando clientes...'**
+  String get loading_customers;
 
   /// No description provided for @order.
   ///
@@ -655,6 +697,12 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'Diseños'**
   String get desings;
+
+  /// No description provided for @search_desing.
+  ///
+  /// In es, this message translates to:
+  /// **'Buscar diseño'**
+  String get search_desing;
 
   /// No description provided for @recipe.
   ///

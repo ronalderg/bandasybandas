@@ -1,6 +1,6 @@
 import 'package:bandasybandas/src/core/theme/app_spacing.dart';
 import 'package:bandasybandas/src/features/inventory_management/domain/models/item_model.dart';
-import 'package:bandasybandas/src/features/inventory_management/ui/pages/items/cubit/items_cubit.dart';
+import 'package:bandasybandas/src/features/inventory_management/ui/pages/items/cubit/items_page_cubit.dart';
 import 'package:bandasybandas/src/features/inventory_management/ui/pages/items/view/create_item_dialog.dart';
 import 'package:bandasybandas/src/shared/molecules/mol_list_tile_item.dart';
 import 'package:flutter/material.dart';
@@ -68,10 +68,10 @@ class ItemsView extends StatelessWidget {
                 final item = items[index];
                 return MolListtileItem(
                   onEditTap: () {},
-                  onMoreTap: () {},
+                  menuItems: const [],
                   onViewTap: () {},
                   price: item.price,
-                  description: item.quantity,
+                  quantity: item.quantity,
                   subtitle: item.description ?? '',
                   title: item.name,
                 );

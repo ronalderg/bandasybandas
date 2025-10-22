@@ -1,6 +1,6 @@
 import 'package:bandasybandas/src/app/injection_container.dart';
 import 'package:bandasybandas/src/app/localization/app_localizations.dart';
-import 'package:bandasybandas/src/features/inventory_management/ui/pages/items/cubit/items_cubit.dart';
+import 'package:bandasybandas/src/features/inventory_management/ui/pages/items/cubit/items_page_cubit.dart';
 import 'package:bandasybandas/src/features/inventory_management/ui/pages/recipes/cubit/recipe_page_cubit.dart';
 import 'package:bandasybandas/src/features/inventory_management/ui/pages/recipes/cubit/recipe_page_state.dart';
 import 'package:bandasybandas/src/features/inventory_management/ui/pages/recipes/view/recipes_view.dart';

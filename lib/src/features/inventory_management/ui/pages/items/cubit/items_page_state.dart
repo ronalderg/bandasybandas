@@ -1,18 +1,18 @@
 import 'package:bandasybandas/src/features/inventory_management/domain/models/item_model.dart';
 import 'package:equatable/equatable.dart';
 
-abstract class ItemsState extends Equatable {
-  const ItemsState();
+abstract class ItemsPageState extends Equatable {
+  const ItemsPageState();
 
   @override
   List<Object> get props => [];
 }
 
-class ItemsPageInitial extends ItemsState {}
+class ItemsPageInitial extends ItemsPageState {}
 
-class ItemsPageLoading extends ItemsState {}
+class ItemsPageLoading extends ItemsPageState {}
 
-class ItemsPageLoaded extends ItemsState {
+class ItemsPageLoaded extends ItemsPageState {
   const ItemsPageLoaded(this.items);
   final List<ItemModel> items;
 
@@ -20,7 +20,7 @@ class ItemsPageLoaded extends ItemsState {
   List<Object> get props => [items];
 }
 
-class ItemsPageError extends ItemsState {
+class ItemsPageError extends ItemsPageState {
   const ItemsPageError(this.message);
 
   final String message;

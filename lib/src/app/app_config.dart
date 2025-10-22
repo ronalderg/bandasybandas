@@ -24,11 +24,11 @@ class AppConfig {
   static String get baseUrl {
     switch (appFlavor) {
       case AppFlavor.development:
-        return 'https://dev-api.your_pos_app.com/v1'; // Cambia esta URL por la de tu API de desarrollo
+        return 'https://bandasybandassg.web.app'; // Cambia esta URL por la de tu API de desarrollo
       case AppFlavor.staging:
-        return 'https://staging-api.your_pos_app.com/v1'; // Cambia esta URL por la de tu API de staging
+        return 'https://bandasybandassg.web.app'; // Cambia esta URL por la de tu API de staging
       case AppFlavor.production:
-        return 'https://api.your_pos_app.com/v1'; // Cambia esta URL por la de tu API de producción
+        return 'https://bandasybandassg.web.app'; // Cambia esta URL por la de tu API de producción
       default:
         // Fallback robusto si appFlavor no ha sido inicializado o es un valor inesperado.
         throw Exception(
@@ -74,6 +74,23 @@ class AppConfig {
         return const Duration(seconds: 15); // Más estricto para mejor UX
       default:
         return const Duration(seconds: 20);
+    }
+  }
+
+  /// Retorna la URL base del sitio web público según el entorno.
+  static String get webBaseUrl {
+    switch (appFlavor) {
+      case AppFlavor.development:
+        return 'https://dev.bandasybandas.com'; // URL web para desarrollo
+      case AppFlavor.staging:
+        return 'https://stg.bandasybandas.com'; // URL web para staging/pruebas
+      case AppFlavor.production:
+        return 'https://bandasybandas.com'; // URL web para producción
+      default:
+        // Fallback robusto si appFlavor no ha sido inicializado.
+        throw Exception(
+          'AppConfig.appFlavor no ha sido inicializado. Por favor, asegúrate de llamarlo en main.dart',
+        );
     }
   }
 

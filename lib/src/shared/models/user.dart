@@ -40,12 +40,9 @@ class AppUser extends Equatable {
 
   /// Constructor factory para crear una instancia de `User` desde un mapa (JSON).
   /// Ideal para deserializar datos desde Firestore.
-  factory AppUser.fromFirestore(
-    DocumentSnapshot<Map<String, dynamic>> doc,
-  ) {
-    final data = doc.data() ?? {};
+  factory AppUser.fromJson(String id, Map<String, dynamic> data) {
     return AppUser(
-      id: doc.id,
+      id: id,
       email: data[keyEmail] as String? ?? '',
       userType: data[keyUserType] as String?,
       firstName: data[keyFirstName] as String?,
@@ -58,6 +55,14 @@ class AppUser extends Equatable {
       city: data[keyCity] as String?,
       branch: data[keyBranch] as String?,
     );
+  }
+
+  /// Constructor factory para crear una instancia de `User` desde un mapa (JSON).
+  /// Ideal para deserializar datos desde Firestore.
+  factory AppUser.fromFirestore(
+    DocumentSnapshot<Map<String, dynamic>> doc,
+  ) {
+    return AppUser.fromJson(doc.id, doc.data() ?? {});
   }
 
   /// Llaves constantes
@@ -109,6 +114,21 @@ class AppUser extends Equatable {
   /// Propiedad computada para obtener el nombre completo.
   String get fullName {
     return '${firstName ?? ''} ${lastName ?? ''}'.trim();
+  }
+
+  /// Convierte la instancia de `AppUser` a un mapa JSON.
+  /// El `id` no se incluye porque es el ID del documento en Firestore.
+  Map<String, dynamic> toJson() {
+    return {
+      keyEmail: email,
+      keyUserType: userType,
+      keyFirstName: firstName,
+      keyLastName: lastName,
+      keyDocumentId: documentId,
+      keyAllowedCompanies: allowedCompanies,
+      keyCity: city,
+      keyBranch: branch,
+    };
   }
 
   @override

@@ -15,7 +15,7 @@ List<VmDrawerItemData> getGerenteDrawerItems(AppLocalizations l10n) {
     VmDrawerItemData(
       icon: Icons.person,
       label: l10n.users,
-      route: AppRoutes.home,
+      route: AppRoutes.users,
     ),
     VmDrawerItemData(
       icon: Icons
@@ -60,14 +60,14 @@ List<VmDrawerItemData> getGerenteDrawerItems(AppLocalizations l10n) {
         VmDrawerItemData(
           icon: Icons.precision_manufacturing,
           label: l10n.machines,
-          route: AppRoutes.home,
+          route: AppRoutes.products,
         ),
       ],
     ),
     VmDrawerItemData(
       icon: Icons.business,
       label: l10n.customers,
-      route: AppRoutes.home,
+      route: AppRoutes.customerManagement,
     ),
     VmDrawerItemData(
       icon: Icons.insights,
@@ -83,7 +83,7 @@ List<VmDrawerItemData> getTecnicoDrawerItems(AppLocalizations l10n) {
     VmDrawerItemData(
       icon: Icons.build,
       label: 'Órdenes de Trabajo',
-      route: AppRoutes.home, // TODO(Ronder): Cambiar a la ruta correcta
+      route: AppRoutes.home,
     ),
   ];
 }

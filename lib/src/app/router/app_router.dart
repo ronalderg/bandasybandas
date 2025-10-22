@@ -3,7 +3,9 @@ import 'package:bandasybandas/src/app/router/app_routes.dart';
 import 'package:bandasybandas/src/app/router/app_transitions.dart';
 import 'package:bandasybandas/src/app/router/go_router_refresh_stream.dart';
 import 'package:bandasybandas/src/features/authentication/ui/pages/login/login_page.dart';
+import 'package:bandasybandas/src/features/customers/customers_routes.dart';
 import 'package:bandasybandas/src/features/inventory_management/inventory_routes.dart';
+import 'package:bandasybandas/src/features/users/users_routes.dart';
 import 'package:bandasybandas/src/ui/home/home_page.dart';
 
 import 'package:bandasybandas/src/ui/not_found/not_found_page.dart';
@@ -53,6 +55,8 @@ class AppRouter {
               const HomePage(),
         ),
         ...InventoryRoutes.routes,
+        ...CustomersRoutes.routes,
+        ...UsersRoutes.routes,
       ],
       errorBuilder: (context, state) => const NotFoundPage(),
     );

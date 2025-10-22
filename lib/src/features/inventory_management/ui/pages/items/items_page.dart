@@ -1,6 +1,6 @@
 import 'package:bandasybandas/src/app/injection_container.dart';
-import 'package:bandasybandas/src/features/inventory_management/ui/pages/items/cubit/items_cubit.dart';
-import 'package:bandasybandas/src/features/inventory_management/ui/pages/items/cubit/items_state.dart';
+import 'package:bandasybandas/src/features/inventory_management/ui/pages/items/cubit/items_page_cubit.dart';
+import 'package:bandasybandas/src/features/inventory_management/ui/pages/items/cubit/items_page_state.dart';
 import 'package:bandasybandas/src/features/inventory_management/ui/pages/items/view/items_view.dart';
 import 'package:bandasybandas/src/shared/templates/tp_app_scaffold.dart';
 import 'package:flutter/material.dart';
@@ -18,7 +18,7 @@ class ItemsPage extends StatelessWidget {
       child: TpAppScaffold(
         pageTitle: 'Items',
         body: SafeArea(
-          child: BlocBuilder<ItemsCubit, ItemsState>(
+          child: BlocBuilder<ItemsCubit, ItemsPageState>(
             builder: (context, state) {
               if (state is ItemsPageInitial || state is ItemsPageLoading) {
                 return const Center(child: CircularProgressIndicator());

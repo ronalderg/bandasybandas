@@ -3,10 +3,10 @@ import 'dart:async';
 import 'package:bandasybandas/src/core/usecases/usecase.dart';
 import 'package:bandasybandas/src/features/inventory_management/domain/models/item_model.dart';
 import 'package:bandasybandas/src/features/inventory_management/domain/usecases/items_usecases.dart';
-import 'package:bandasybandas/src/features/inventory_management/ui/pages/items/cubit/items_state.dart';
+import 'package:bandasybandas/src/features/inventory_management/ui/pages/items/cubit/items_page_state.dart';
 import 'package:bloc/bloc.dart';
 
-class ItemsCubit extends Cubit<ItemsState> {
+class ItemsCubit extends Cubit<ItemsPageState> {
   ItemsCubit({
     required this.getItems,
     required this.addItemUseCase,
