@@ -1,4 +1,5 @@
 import 'package:bandasybandas/src/app/injection_container.dart';
+import 'package:bandasybandas/src/app/localization/app_localizations.dart';
 import 'package:bandasybandas/src/features/users/ui/pages/users/cubit/users_page_cubit.dart';
 import 'package:bandasybandas/src/features/users/ui/pages/users/cubit/users_page_state.dart';
 import 'package:bandasybandas/src/features/users/ui/pages/users/view/users_view.dart';
@@ -11,12 +12,13 @@ class UsersPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     return BlocProvider(
       // La vista solo pide el Cubit al service locator.
       // No sabe (ni le importa) cómo se construye.
       create: (_) => sl<UsersPageCubit>()..loadUsers(),
       child: TpAppScaffold(
-        pageTitle: 'Users',
+        pageTitle: l10n?.users ?? 'Users',
         body: SafeArea(
           child: BlocBuilder<UsersPageCubit, UsersPageState>(
             builder: (context, state) {

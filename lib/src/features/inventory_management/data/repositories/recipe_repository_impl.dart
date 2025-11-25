@@ -2,7 +2,7 @@ import 'dart:typed_data' show Uint8List;
 
 import 'package:bandasybandas/src/core/error/failures.dart';
 import 'package:bandasybandas/src/features/inventory_management/data/datasources/recipe_datasource.dart';
-import 'package:bandasybandas/src/features/inventory_management/domain/models/desing_model.dart';
+import 'package:bandasybandas/src/features/inventory_management/domain/models/recipe_model.dart';
 import 'package:bandasybandas/src/features/inventory_management/domain/repositories/recipe_repository.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
@@ -36,6 +36,30 @@ class RecipeRepositoryImpl implements RecipeRepository {
   Future<Either<Failure, void>> addRecipe(RecipeModel recipe) async {
     try {
       final result = await datasource.createRecipe(recipe);
+      return Right(result);
+    } on FirebaseException catch (e) {
+      return Left(
+        FirestoreFailure(e.message ?? 'Error de Firestore desconocido'),
+      );
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> updateRecipe(RecipeModel recipe) async {
+    try {
+      final result = await datasource.updateRecipe(recipe);
+      return Right(result);
+    } on FirebaseException catch (e) {
+      return Left(
+        FirestoreFailure(e.message ?? 'Error de Firestore desconocido'),
+      );
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> deleteRecipe(String id) async {
+    try {
+      final result = await datasource.deleteRecipe(id);
       return Right(result);
     } on FirebaseException catch (e) {
       return Left(

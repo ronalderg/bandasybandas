@@ -1,7 +1,7 @@
 import 'package:bandasybandas/src/app/localization/app_localizations.dart';
 import 'package:bandasybandas/src/core/theme/app_spacing.dart';
-import 'package:bandasybandas/src/features/inventory_management/domain/models/desing_model.dart';
 import 'package:bandasybandas/src/features/inventory_management/domain/models/item_model.dart';
+import 'package:bandasybandas/src/features/inventory_management/domain/models/recipe_model.dart';
 import 'package:bandasybandas/src/features/inventory_management/ui/pages/items/cubit/items_page_cubit.dart';
 import 'package:bandasybandas/src/features/inventory_management/ui/pages/items/cubit/items_page_state.dart';
 import 'package:bandasybandas/src/features/inventory_management/ui/pages/recipes/cubit/recipe_page_cubit.dart';
@@ -106,7 +106,7 @@ class _CreateRecipeDialogState extends State<CreateRecipeDialog> {
 
     return AlertDialog(
       scrollable: true,
-      title: Text('${l10n?.create_new ?? ''} ${l10n?.desing ?? ''}'),
+      title: Text('${l10n?.create_new ?? ''} ${l10n?.design ?? ''}'),
       content: Form(
         key: _formKey,
         // Envolvemos el contenido en un SizedBox para darle un tamaño definido al diálogo.

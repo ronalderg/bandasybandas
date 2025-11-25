@@ -6,6 +6,8 @@ enum EntityStatus {
   active, // Activo y listo para ser usado.
   archived, // Archivado, no se usa pero se mantiene en el historial.
   deleted, // Marcado como eliminado (soft delete).
+  pending, // Pendiente de revisión o aprobación.
+  sold, // Vendido o trasladado.
 }
 
 /// Mixin para añadir campos de metadatos comunes a los modelos.

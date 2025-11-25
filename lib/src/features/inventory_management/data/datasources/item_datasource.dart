@@ -10,4 +10,8 @@ abstract class ItemDatasource {
 
   /// Agrega un nuevo item a la fuente de datos.
   Future<void> addItem(ItemModel item);
+
+  /// Actualiza un item existente en la fuente de datos.
+  /// @param item El [ItemModel] con los datos actualizados.
+  Future<void> updateItem(ItemModel item);
 }

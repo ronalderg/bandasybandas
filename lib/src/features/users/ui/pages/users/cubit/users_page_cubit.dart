@@ -3,17 +3,19 @@ import 'dart:async';
 import 'package:bandasybandas/src/core/usecases/usecase.dart';
 import 'package:bandasybandas/src/features/users/domain/usecases/users_usecases.dart';
 import 'package:bandasybandas/src/features/users/ui/pages/users/cubit/users_page_state.dart';
-import 'package:bandasybandas/src/shared/models/user.dart';
+import 'package:bandasybandas/src/shared/models/user_model.dart';
 import 'package:bloc/bloc.dart';
 
 class UsersPageCubit extends Cubit<UsersPageState> {
   UsersPageCubit({
     required this.getUsers,
     required this.addUserUseCase,
+    required this.updateUserUseCase,
   }) : super(UsersPageInitial());
 
   final GetUsers getUsers;
   final AddUser addUserUseCase;
+  final UpdateUser updateUserUseCase;
   StreamSubscription<List<AppUser>>? _usersSubscription;
 
   Future<void> loadUsers() async {
@@ -36,14 +38,29 @@ class UsersPageCubit extends Cubit<UsersPageState> {
     );
   }
 
-  Future<void> addUser(AppUser user) async {
+  Future<void> addUser(AppUser user, String password) async {
     // No se emite un estado de carga aquí para no bloquear toda la UI.
     // La actualización de la lista se manejará por el stream.
-    final result = await addUserUseCase(user);
+    final result = await addUserUseCase(
+      AddUserParams(user: user, password: password),
+    );
 
     result.fold(
       (failure) => emit(
         UsersPageError('Falló al agregar el usuario: ${failure.message}'),
+      ),
+      (_) {}, // En caso de éxito, no hacemos nada, el stream actualizará la UI.
+    );
+  }
+
+  Future<void> updateUser(AppUser user) async {
+    // Similar a addUser, no emitimos un estado de carga.
+    // La actualización de la lista se manejará por el stream.
+    final result = await updateUserUseCase(user);
+
+    result.fold(
+      (failure) => emit(
+        UsersPageError('Falló al actualizar el usuario: ${failure.message}'),
       ),
       (_) {}, // En caso de éxito, no hacemos nada, el stream actualizará la UI.
     );

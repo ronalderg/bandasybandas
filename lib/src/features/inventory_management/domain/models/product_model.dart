@@ -1,3 +1,4 @@
+import 'package:bandasybandas/src/features/inventory_management/domain/models/recipe_model.dart';
 import 'package:bandasybandas/src/shared/models/entity_metadata.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
@@ -19,6 +20,8 @@ class ProductModel extends Equatable with EntityMetadata {
     this.status = EntityStatus.active,
     this.createdAt,
     this.updatedAt,
+    this.items = const [],
+    this.recipeId,
   });
 
   /// Factory constructor para crear una instancia de [ProductModel] desde un [DocumentSnapshot].
@@ -29,6 +32,11 @@ class ProductModel extends Equatable with EntityMetadata {
     if (data == null) {
       throw StateError('¡El snapshot de Firestore no tiene datos!');
     }
+
+    final itemsList = (data[keyItems] as List<dynamic>?) ?? [];
+    final items = itemsList
+        .map((item) => RecipeItem.fromMap(item as Map<String, dynamic>))
+        .toList();
 
     final statusString = data[EntityMetadata.statusKey] as String? ?? 'active';
     final status = EntityStatus.values.firstWhere(
@@ -48,6 +56,8 @@ class ProductModel extends Equatable with EntityMetadata {
       status: status,
       createdAt: data[EntityMetadata.createdAtKey] as Timestamp?,
       updatedAt: data[EntityMetadata.updatedAtKey] as Timestamp?,
+      items: items,
+      recipeId: data[keyRecipeId] as String?,
     );
   }
 
@@ -59,6 +69,12 @@ class ProductModel extends Equatable with EntityMetadata {
   final double quantity;
   final String? description;
   final double? price;
+
+  /// Lista de items (componentes) que conforman este producto.
+  final List<RecipeItem> items;
+
+  /// ID de la receta ([RecipeModel]) asociada a este producto.
+  final String? recipeId;
 
   @override
   final EntityStatus status;
@@ -74,6 +90,8 @@ class ProductModel extends Equatable with EntityMetadata {
   static const keySerial = 'serial';
   static const keyCategory = 'category';
   static const keyQuantity = 'quantity';
+  static const keyItems = 'items';
+  static const keyRecipeId = 'recipeId';
 
   /// Convierte un objeto [ProductModel] en un mapa JSON.
   Map<String, dynamic> toJson() {
@@ -85,6 +103,8 @@ class ProductModel extends Equatable with EntityMetadata {
       keyQuantity: quantity,
       keyDescription: description,
       keyPrice: price,
+      keyItems: items.map((item) => item.toMap()).toList(),
+      keyRecipeId: recipeId,
       ...metadataToJson(),
     };
   }
@@ -101,6 +121,8 @@ class ProductModel extends Equatable with EntityMetadata {
     EntityStatus? status,
     Timestamp? createdAt,
     Timestamp? updatedAt,
+    List<RecipeItem>? items,
+    String? recipeId,
   }) {
     return ProductModel(
       id: id ?? this.id,
@@ -114,6 +136,8 @@ class ProductModel extends Equatable with EntityMetadata {
       status: status ?? this.status,
       createdAt: createdAt ?? this.createdAt,
       updatedAt: updatedAt ?? this.updatedAt,
+      items: items ?? this.items,
+      recipeId: recipeId ?? this.recipeId,
     );
   }
 
@@ -130,5 +154,7 @@ class ProductModel extends Equatable with EntityMetadata {
         status,
         createdAt,
         updatedAt,
+        items,
+        recipeId,
       ];
 }

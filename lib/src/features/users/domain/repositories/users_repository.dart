@@ -1,5 +1,5 @@
 import 'package:bandasybandas/src/core/error/failures.dart';
-import 'package:bandasybandas/src/shared/models/user.dart';
+import 'package:bandasybandas/src/shared/models/user_model.dart';
 import 'package:dartz/dartz.dart';
 
 /// Interfaz abstracta para el repositorio de usuarios.
@@ -13,5 +13,12 @@ abstract class UsersRepository {
   Stream<Either<Failure, List<AppUser>>> getUsers();
 
   /// Agrega un nuevo usuario.
-  Future<Either<Failure, void>> addUser(AppUser user);
+  /// Crea el usuario en Firebase Auth con [password] y luego guarda los datos.
+  Future<Either<Failure, void>> addUser(AppUser user, String password);
+
+  /// Actualiza un usuario existente.
+  Future<Either<Failure, void>> updateUser(AppUser user);
+
+  /// Elimina un usuario por su ID.
+  Future<Either<Failure, void>> deleteUser(String userId);
 }

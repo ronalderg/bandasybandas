@@ -1,6 +1,6 @@
 import 'package:bandasybandas/src/app/localization/app_localizations.dart';
 import 'package:bandasybandas/src/app/router/app_routes.dart';
-import 'package:bandasybandas/src/shared/models/user.dart';
+import 'package:bandasybandas/src/shared/models/user_model.dart';
 import 'package:bandasybandas/src/shared/models/vm_drawer_item_data.dart';
 import 'package:flutter/material.dart';
 
@@ -21,8 +21,8 @@ List<VmDrawerItemData> getGerenteDrawerItems(AppLocalizations l10n) {
       icon: Icons
           .playlist_add_check, // Icono para una lista de solicitud/aprobación.
       label: l10n
-          .purchase_requests, // Asegúrate de tener esta key en tus archivos de localización.
-      route: AppRoutes.home,
+          .orders_requests, // Asegúrate de tener esta key en tus archivos de localización.
+      route: AppRoutes.ordersRequests,
     ),
     // VmDrawerItemData(
     //   icon:
@@ -74,16 +74,48 @@ List<VmDrawerItemData> getGerenteDrawerItems(AppLocalizations l10n) {
       label: l10n.indicators,
       route: AppRoutes.home,
     ),
+    VmDrawerItemData(
+      icon: Icons.build,
+      label: l10n.technical_visits,
+      route: AppRoutes.technicalServices,
+    ),
   ];
 }
 
-/// Items del drawer para el rol [UserType.tecnico].
-List<VmDrawerItemData> getTecnicoDrawerItems(AppLocalizations l10n) {
+/// Items del drawer para el rol [UserType.técnico].
+List<VmDrawerItemData> getTechnicalDrawerItems(AppLocalizations l10n) {
   return [
     VmDrawerItemData(
       icon: Icons.build,
       label: 'Órdenes de Trabajo',
       route: AppRoutes.home,
+    ),
+  ];
+}
+
+/// Items del drawer para el rol [UserType.clienteAdministrador].
+List<VmDrawerItemData> getClienteAdminDrawerItems(AppLocalizations l10n) {
+  return [
+    VmDrawerItemData(
+      icon: Icons.business,
+      label: l10n.customers,
+      route: AppRoutes.customerManagement,
+    ),
+  ];
+}
+
+/// Items del drawer para el rol [UserType.cliente].
+List<VmDrawerItemData> getClienteDrawerItems(AppLocalizations l10n) {
+  return [
+    VmDrawerItemData(
+      icon: Icons.precision_manufacturing,
+      label: l10n.machines,
+      route: AppRoutes.customerMachines,
+    ),
+    VmDrawerItemData(
+      icon: Icons.inventory_2,
+      label: l10n.inventory,
+      route: AppRoutes.customerInventory,
     ),
   ];
 }

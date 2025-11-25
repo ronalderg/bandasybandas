@@ -26,6 +26,35 @@ class GetProducts extends UseCase<Stream<List<ProductModel>>, NoParams> {
   }
 }
 
+/// {@template get_product_by_id_usecase}
+/// Caso de uso para obtener un producto específico por su ID.
+///
+/// Este caso de uso actúa como un intermediario entre la capa de presentación
+/// (Cubit/Bloc) y la capa de datos (Repositorio), encapsulando la lógica
+/// para recuperar un solo producto.
+///
+/// Parámetros:
+///   - `params`: El ID (`String`) del producto que se desea obtener.
+///
+/// Retorna:
+///   - `Future<Either<Failure, Stream<ProductModel?>>>`: Un `Future` que resuelve a:
+///     - `Right(Stream<ProductModel?>)`: En caso de éxito, devuelve un Stream
+///       que emite el `ProductModel` cada vez que cambia en la base de datos.
+///       El stream emitirá `null` si el producto con el ID especificado no se
+///       encuentra.
+///     - `Left(Failure)`: Si ocurre un error al intentar establecer la
+///       conexión con la fuente de datos (p.ej., un error de red o permisos).
+/// {@endtemplate}
+class GetProductById extends UseCase<Stream<ProductModel?>, String> {
+  GetProductById(this.repository);
+  final ProductRepository repository;
+
+  @override
+  Future<Either<Failure, Stream<ProductModel?>>> call(String params) {
+    return repository.getProductById(params);
+  }
+}
+
 /// Caso de uso para agregar un nuevo producto.
 ///
 /// Extiende de [UseCase] y requiere un [ProductModel] como parámetro.
@@ -36,5 +65,46 @@ class AddProduct extends UseCase<void, ProductModel> {
   @override
   Future<Either<Failure, void>> call(ProductModel params) {
     return repository.addProduct(params);
+  }
+}
+
+/// Caso de uso para actualizar un producto existente.
+///
+class UpdateProduct extends UseCase<bool, ProductModel> {
+  UpdateProduct(this.repository);
+  final ProductRepository repository;
+
+  @override
+  Future<Either<Failure, bool>> call(ProductModel params) async {
+    try {
+      final result = await repository.updateProduct(params);
+      return result.fold(
+        Left.new,
+        (_) => const Right(true),
+      );
+    } on Exception catch (e) {
+      return Left(FirestoreFailure(e.toString()));
+    }
+  }
+}
+
+/// Caso de uso para eliminar un producto por su ID.
+///
+class DeleteProduct extends UseCase<bool, String> {
+  DeleteProduct(this.repository);
+  final ProductRepository repository;
+
+  @override
+  Future<Either<Failure, bool>> call(String params) async {
+    try {
+      final result = await repository
+          .deleteProduct(params); // params is already a String (id)
+      return result.fold(
+        Left.new,
+        (_) => const Right(true),
+      );
+    } on Exception catch (e) {
+      return Left(FirestoreFailure(e.toString()));
+    }
   }
 }

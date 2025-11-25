@@ -6,10 +6,10 @@
 /// tipográficos, facilita la refactorización y mejora la legibilidad del código
 /// de navegación.
 class AppRoutes {
-  AppRoutes._(); // Constructor privado para evitar instanciación
+  AppRoutes._(); // Constructor privado para evitar la creación de instancias
 
   // --- Rutas de Nivel Superior ---
-  static const String splash = '/';
+  static const String splash = '/splash';
   static const String login = '/login';
   static const String home = '/home';
 
@@ -33,10 +33,15 @@ class AppRoutes {
   static const String purchaseOrder = '/purchase-order';
   static const String purchaseRequests = '/purchase-requests';
 
-  // --- Rutas con Parámetros (ejemplos) ---
-  // static const String productDetails = '/product/:productId';
-  // static String productDetailsPath(String productId) => '/product/$productId';
-  //
-  // static const String saleDetails = '/sale/:saleId';
-  // static String saleDetailsPath(String saleId) => '/sale/$saleId';
+  // --- Rutas de Órdenes (Features) ---
+  static const String ordersRequests = '/order-requests';
+  static const String ordersRequestsDetails = '/order-requests/:id';
+
+  // --- Rutas de servicio técnico (Features) ---
+  static const String technicalServices = '/technical-services';
+  static const String technicalServicesDetails = '/technical-services/:id';
+
+  // --- Rutas de perfil de cliente (Features) ---
+  static const String customerMachines = '/customer/machines';
+  static const String customerInventory = '/customer/inventory';
 }

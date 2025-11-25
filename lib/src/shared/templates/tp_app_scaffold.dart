@@ -43,7 +43,7 @@ class _TpAppScaffoldState extends State<TpAppScaffold> {
           return Scaffold(
             body: Row(
               children: [
-                // Drawer colapsable/expandible
+                // Drawer expandible
                 AnimatedContainer(
                   duration: const Duration(milliseconds: 300),
                   width: _isDrawerExpanded ? 250 : 80,

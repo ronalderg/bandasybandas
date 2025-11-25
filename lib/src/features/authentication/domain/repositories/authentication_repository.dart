@@ -1,5 +1,5 @@
 // lib/src/features/authentication/domain/repositories/authentication_repository.dart
-import 'package:bandasybandas/src/shared/models/user.dart';
+import 'package:bandasybandas/src/shared/models/user_model.dart';
 
 /// Interfaz para el repositorio de autenticación.
 /// Define el contrato que las capas superiores (UI, BLoC) usarán.

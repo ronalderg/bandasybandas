@@ -2,9 +2,11 @@ import 'package:bandasybandas/src/app/app_theme.dart';
 import 'package:bandasybandas/src/app/bloc/auth/auth_bloc.dart';
 import 'package:bandasybandas/src/app/bloc/settings/settings_bloc.dart';
 import 'package:bandasybandas/src/app/bloc/settings/settings_state.dart';
+import 'package:bandasybandas/src/app/injection_container.dart';
 import 'package:bandasybandas/src/app/localization/app_localizations.dart';
 import 'package:bandasybandas/src/app/router/app_router.dart';
 import 'package:bandasybandas/src/features/authentication/domain/repositories/authentication_repository.dart';
+import 'package:bandasybandas/src/shared/bloc/branches/branches_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -13,7 +15,7 @@ import 'package:get_it/get_it.dart';
 /// [App] es el widget raíz de la aplicación.
 ///
 /// Configura el `BlocProvider` para el estado global de la UI (como el tema y el idioma)
-/// y establece el `MaterialApp` con el enrutador, temas y configuración de localización.
+/// y establece el `MaterialApp` con el router, temas y configuración de localización.
 class App extends StatefulWidget {
   const App({super.key});
 
@@ -49,6 +51,10 @@ class _AppState extends State<App> {
           value: _authBloc,
         ),
         BlocProvider(create: (_) => SettingsBloc()),
+        // 3. Proveemos el BranchesCubit y cargamos los datos inmediatamente.
+        BlocProvider(
+          create: (_) => sl<BranchesCubit>()..loadBranches(),
+        ),
       ],
       child: const AppView(),
     );

@@ -12,6 +12,12 @@ abstract class ProductDatasource {
   /// en la fuente de datos (creación, actualización o eliminación).
   Stream<List<ProductModel>> getProducts();
 
+  /// Obtiene un stream que emite un único producto basado en su [id].
+  ///
+  /// El stream se actualiza si el producto cambia. Si el producto no se
+  /// encuentra, el stream puede emitir `null`.
+  Stream<ProductModel?> getProductById(String id);
+
   /// Crea un nuevo producto en la fuente de datos.
   ///
   /// Lanza una excepción si la operación falla.

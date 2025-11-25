@@ -2,6 +2,7 @@ import 'package:bandasybandas/src/app/injection_container.dart';
 import 'package:bandasybandas/src/features/inventory_management/ui/pages/items/cubit/items_page_cubit.dart';
 import 'package:bandasybandas/src/features/inventory_management/ui/pages/items/cubit/items_page_state.dart';
 import 'package:bandasybandas/src/features/inventory_management/ui/pages/items/view/items_view.dart';
+import 'package:bandasybandas/src/features/inventory_management/ui/pages/products/cubit/products_page_cubit.dart';
 import 'package:bandasybandas/src/shared/templates/tp_app_scaffold.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -11,10 +12,18 @@ class ItemsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      // La vista solo pide el Cubit al service locator.
-      // No sabe (ni le importa) cómo se construye.
-      create: (_) => sl<ItemsCubit>()..loadItems(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          // La vista solo pide el Cubit al service locator.
+          // No sabe (ni le importa) cómo se construye.
+          create: (_) => sl<ItemsCubit>()..loadItems(),
+        ),
+        // Añadimos el provider para ProductsPageCubit y cargamos los productos.
+        BlocProvider(
+          create: (_) => sl<ProductsPageCubit>()..loadProducts(),
+        ),
+      ],
       child: TpAppScaffold(
         pageTitle: 'Items',
         body: SafeArea(

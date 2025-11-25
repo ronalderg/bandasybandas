@@ -80,7 +80,68 @@
       - History
       - History-journal
       - IndexedDB
+        - http_localhost_49653.indexeddb.leveldb
+          - 000004.log
+          - 000005.ldb
+          - CURRENT
+          - LOCK
+          - LOG
+          - MANIFEST-000001
         - http_localhost_52235.indexeddb.leveldb
+          - 000007.log
+          - 000009.ldb
+          - CURRENT
+          - LOCK
+          - LOG
+          - LOG.old
+          - MANIFEST-000001
+        - http_localhost_53120.indexeddb.leveldb
+          - 000004.log
+          - 000005.ldb
+          - CURRENT
+          - LOCK
+          - LOG
+          - MANIFEST-000001
+        - http_localhost_53675.indexeddb.leveldb
+          - 000007.log
+          - 000009.ldb
+          - CURRENT
+          - LOCK
+          - LOG
+          - LOG.old
+          - MANIFEST-000001
+        - http_localhost_53942.indexeddb.leveldb
+          - 000008.ldb
+          - 000011.ldb
+          - 000012.log
+          - 000014.ldb
+          - CURRENT
+          - LOCK
+          - LOG
+          - LOG.old
+          - MANIFEST-000001
+        - http_localhost_54261.indexeddb.leveldb
+          - 000004.log
+          - 000005.ldb
+          - CURRENT
+          - LOCK
+          - LOG
+          - MANIFEST-000001
+        - http_localhost_55137.indexeddb.leveldb
+          - 000004.log
+          - 000005.ldb
+          - CURRENT
+          - LOCK
+          - LOG
+          - MANIFEST-000001
+        - http_localhost_55415.indexeddb.leveldb
+          - 000004.log
+          - 000005.ldb
+          - CURRENT
+          - LOCK
+          - LOG
+          - MANIFEST-000001
+        - http_localhost_55506.indexeddb.leveldb
           - 000007.log
           - 000009.ldb
           - CURRENT
@@ -94,7 +155,49 @@
           - LOCK
           - LOG
           - MANIFEST-000001
+        - http_localhost_57914.indexeddb.leveldb
+          - 000003.log
+          - CURRENT
+          - LOCK
+          - LOG
+          - MANIFEST-000001
         - http_localhost_59028.indexeddb.leveldb
+          - 000004.log
+          - 000005.ldb
+          - CURRENT
+          - LOCK
+          - LOG
+          - MANIFEST-000001
+        - http_localhost_59218.indexeddb.leveldb
+          - 000004.log
+          - 000005.ldb
+          - CURRENT
+          - LOCK
+          - LOG
+          - MANIFEST-000001
+        - http_localhost_59332.indexeddb.leveldb
+          - 000007.log
+          - 000009.ldb
+          - CURRENT
+          - LOCK
+          - LOG
+          - LOG.old
+          - MANIFEST-000001
+        - http_localhost_63289.indexeddb.leveldb
+          - 000004.log
+          - 000005.ldb
+          - CURRENT
+          - LOCK
+          - LOG
+          - MANIFEST-000001
+        - http_localhost_64548.indexeddb.leveldb
+          - 000004.log
+          - 000005.ldb
+          - CURRENT
+          - LOCK
+          - LOG
+          - MANIFEST-000001
+        - http_localhost_64696.indexeddb.leveldb
           - 000004.log
           - 000005.ldb
           - CURRENT
@@ -173,9 +276,38 @@
         - Session_13404201855842432
         - Session_13404284016641755
         - Session_13404287200681673
+        - Session_13404321591621657
+        - Session_13404365279313393
+        - Session_13404432109216547
+        - Session_13404537899938560
+        - Session_13404636049010330
+        - Session_13404716829271473
+        - Session_13404970616660251
+        - Session_13404979763366795
+        - Session_13405019233032060
+        - Session_13405022549823634
+        - Session_13405030135108902
+        - Session_13405065957243147
+        - Session_13405492190501095
+        - Session_13406090158310001
+        - Session_13406328523419766
         - Tabs_13403941650963286
         - Tabs_13404201856472514
         - Tabs_13404275073997043
+        - Tabs_13404321592126884
+        - Tabs_13404365280451511
+        - Tabs_13404432109955893
+        - Tabs_13404537900830230
+        - Tabs_13404636049905499
+        - Tabs_13404716829806349
+        - Tabs_13404970617983890
+        - Tabs_13405019233720906
+        - Tabs_13405022550459477
+        - Tabs_13405030135698433
+        - Tabs_13405065958022166
+        - Tabs_13405492190811621
+        - Tabs_13406090159764400
+        - Tabs_13406328524086897
       - Shared Dictionary
         - cache
           - index
@@ -212,9 +344,24 @@
         - QuotaManager
         - QuotaManager-journal
       - blob_storage
+        - 06561168-4816-426f-92e7-3fa5c18c545b
+        - 0cb4be87-dfae-48d1-bb51-ae627509d99e
+        - 0d61fac8-d270-4783-8252-fda7ac53e143
+        - 2b5da5aa-9bdd-4cf2-b40d-6870debb4a57
+        - 3c7c5b13-70f1-454b-955a-a5e06b9daaf8
+        - 4ed04519-ba59-472a-a45b-2ea71477d1bb
+        - 621979ab-764a-4d28-acc0-216b1a4eb8ca
         - 75efeef6-d823-4ee4-bf69-9d52f8360a8c
+        - 7e0cc7fa-1c2e-4408-a2a9-67aa19034b44
         - 8666cc45-8e56-415b-b6d3-95e950b450f6
         - 8d4626a4-bfb7-44f2-aa1e-76ee3102f852
+        - 9b8cd652-9d61-4b3f-815b-5b8233df1ddb
+        - b057d110-4454-435a-8e33-e2c95f98ba8b
+        - cee24f98-b085-4f02-863d-bbfd248562db
+        - d78c48c6-9026-4a63-b57a-612f1ead74e3
+        - dbcf54ab-5a66-4c8c-a012-0be03ac37cd3
+        - dec53666-cf90-4262-9bd7-1d128f928c73
+        - eaa72cd2-76d9-43f4-a408-0ac8b8347abb
       - chrome_cart_db
         - LOCK
         - LOG
@@ -244,6 +391,10 @@
       - passkey_enclave_state
       - shared_proto_db
         - 000003.log
+        - 000004.log
+        - 000005.ldb
+        - 000007.log
+        - 000008.ldb
         - CURRENT
         - LOCK
         - LOG
@@ -431,6 +582,9 @@
       - cupertino_icons
         - assets
           - CupertinoIcons.ttf
+      - flutter_dropzone_web
+        - assets
+          - flutter_dropzone.js
     - shaders
       - ink_sparkle.frag
       - stretch_effect.frag
@@ -463,6 +617,9 @@
         - cupertino_icons
           - assets
             - CupertinoIcons.ttf
+        - flutter_dropzone_web
+          - assets
+            - flutter_dropzone.js
       - shaders
         - ink_sparkle.frag
         - stretch_effect.frag
@@ -599,6 +756,7 @@
         - router.dart
       - utils
     - core
+      - db_collections.dart
       - error
         - failures.dart
       - theme
@@ -638,37 +796,60 @@
               - login_page.dart
               - view
                 - login_form.dart
-      - customer_management
+      - customers
+        - customers_management_injections.dart
+        - customers_routes.dart
         - data
           - datasources
-            - customer_management_remote_data_source.dart
+            - customers_datasource.dart
+            - customers_datasource_impl.dart
           - repositories
-            - customer_management_repository_impl.dart
+            - customers_repository_impl.dart
         - domain
-          - entities
+          - models
+            - customer_model.dart
           - repositories
-            - customer_management_repository.dart
+            - customers_repository.dart
           - usecases
+            - customers_usecases.dart
         - ui
           - bloc
             - customer_management_bloc.dart
           - pages
-            - customer_management_page.dart
+            - customer_management
+              - cubit
+                - customer_management_cubit.dart
+                - customer_management_state.dart
+              - customer_management_page.dart
+              - view
+                - create_customer_dialog.dart
+                - customer_management_view.dart
       - inventory_management
         - data
           - datasources
             - item_datasource.dart
             - item_datasource_impl.dart
+            - product_datasource.dart
+            - product_datasource_impl.dart
+            - recipe_datasource.dart
+            - recipe_datasource_impl.dart
           - repositories
             - item_repository_impl.dart
+            - product_repository_impl.dart
+            - recipe_repository_impl.dart
         - domain
           - models
             - desing_model.dart
             - item_model.dart
+            - product_model.dart
           - repositories
             - item_repository.dart
+            - product_repository.dart
+            - recipe_repository.dart
           - usecases
             - items_usecases.dart
+            - products_usecases.dart
+            - recipes_usecases.dart
         - inventory_management_injections.dart
         - inventory_routes.dart
         - ui
@@ -678,24 +859,31 @@
             - inventory_management_page.dart
             - items
               - cubit
-                - items_cubit.dart
-                - items_state.dart
+                - items_page_cubit.dart
+                - items_page_state.dart
               - items_page.dart
               - view
                 - create_item_dialog.dart
                 - items_view.dart
-            - product
+            - products
+              - cubit
+                - products_page_cubit.dart
+                - products_page_state.dart
+              - products_page.dart
+              - view
+                - create_product_dialog.dart
+                - products_view.dart
+                - qr_display_dialog.dart
+                - select_recipe_dialog.dart
             - recipes
-              - create_recipe_dialog.dart
               - cubit
                 - recipe_page_cubit.dart
                 - recipe_page_state.dart
               - recipes_page.dart
-              - recipes_view.dart
               - view
-                - create_desing_dialog.dart
-                - desing_view.dart
-      - machine
+                - create_recipe_dialog.dart
+                - create_recipe_view.dart
+                - recipes_view.dart
       - reports_analytics
         - data
           - datasources
@@ -738,30 +926,75 @@
           - templates
       - users
         - data
+          - .DS_Store
+          - datasources
+            - branches_datasource.dart
+            - users_datasource.dart
+            - users_datasource_impl.dart
+          - repositories
+            - users_repository_impl.dart
+        - domain
+          - .DS_Store
+          - models
+          - repositories
+            - branches_repository.dart
+            - users_repository.dart
+          - usecases
+            - users_usecases.dart
         - ui
+          - pages
+            - users
+              - cubit
+                - users_page_cubit.dart
+                - users_page_state.dart
+              - users_page.dart
+              - view
+                - create_user_dialog.dart
+                - edit_user_dialog.dart
+                - users_view.dart
+        - users_management_injections.dart
+        - users_routes.dart
     - shared
       - animations
       - atoms
         - app_button.dart
         - app_icon.dart
         - app_text_field.dart
+        - at_textfield_text.dart
+      - bloc
+        - branches
+          - branches_cubit.dart
+          - branches_state.dart
+        - remote_config
       - data
-        - repository
+        - datasources
+          - branches_datasource.dart
+          - branches_datasource_impl.dart
+        - repositories
+          - branches_repository_impl.dart
       - domain
-        - models
+        - repositories
+          - branches_repository.dart
+        - usecases
+          - branches_usecases.dart
       - mixins_and_helpers
       - models
-        - user.dart
+        - branch_model.dart
+        - entity_metadata.dart
+        - user_model.dart
         - vm_drawer_item_data.dart
+        - vm_popup_menu_item_data.dart
       - molecules
         - mol_drawer_expansion_tile.dart
         - mol_drawer_header.dart
         - mol_drawer_item.dart
         - mol_list_tile_item.dart
+        - mol_popup_menu.dart
       - navigation
         - app_drawer_items.dart
       - organisms
         - org_app_drawer.dart
+      - shared_management_injections.dart
       - templates
         - tp_app_scaffold.dart
     - ui
@@ -769,6 +1002,8 @@
         - home_page.dart
         - view
           - home_pm_view.dart
+      - loading
+        - loading_page.dart
       - not_found
         - not_found_page.dart
       - splash

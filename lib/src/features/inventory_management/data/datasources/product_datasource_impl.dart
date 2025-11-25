@@ -29,6 +29,17 @@ class ProductDatasourceImpl implements ProductDatasource {
   }
 
   @override
+  Stream<ProductModel?> getProductById(String id) {
+    // Escucha los cambios en un documento específico por su ID.
+    return _collection.doc(id).snapshots().map((snapshot) {
+      if (snapshot.exists && snapshot.data() != null) {
+        return ProductModel.fromFirestore(snapshot);
+      }
+      return null; // Retorna null si el documento no existe.
+    });
+  }
+
+  @override
   Future<void> createProduct(ProductModel product) {
     final now = Timestamp.now();
     // Crea una copia de la receta con las fechas de creación y actualización.

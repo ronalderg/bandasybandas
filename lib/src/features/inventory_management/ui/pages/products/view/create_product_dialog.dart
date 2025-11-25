@@ -1,7 +1,7 @@
 import 'package:bandasybandas/src/app/localization/app_localizations.dart';
 import 'package:bandasybandas/src/core/theme/app_spacing.dart';
-import 'package:bandasybandas/src/features/inventory_management/domain/models/desing_model.dart';
 import 'package:bandasybandas/src/features/inventory_management/domain/models/product_model.dart';
+import 'package:bandasybandas/src/features/inventory_management/domain/models/recipe_model.dart';
 import 'package:bandasybandas/src/features/inventory_management/ui/pages/products/cubit/products_page_cubit.dart';
 import 'package:bandasybandas/src/shared/atoms/at_textfield_text.dart';
 import 'package:flutter/material.dart';
@@ -25,8 +25,9 @@ class _CreateProductDialogState extends State<CreateProductDialog> {
   final _serialController = TextEditingController();
   final _categoryController = TextEditingController();
   final _quantityController = TextEditingController(text: '1');
-  final _priceController = TextEditingController();
   final _descriptionController = TextEditingController();
+  String? _selectedRecipeId;
+  List<RecipeItem> _selectedRecipeItems = [];
 
   @override
   void dispose() {
@@ -35,7 +36,6 @@ class _CreateProductDialogState extends State<CreateProductDialog> {
     _serialController.dispose();
     _categoryController.dispose();
     _quantityController.dispose();
-    _priceController.dispose();
     _descriptionController.dispose();
     super.dispose();
   }
@@ -49,8 +49,9 @@ class _CreateProductDialogState extends State<CreateProductDialog> {
         serial: _serialController.text,
         category: _categoryController.text,
         quantity: double.tryParse(_quantityController.text) ?? 1.0,
-        price: double.tryParse(_priceController.text),
         description: _descriptionController.text,
+        recipeId: _selectedRecipeId,
+        items: _selectedRecipeItems,
       );
 
       context.read<ProductsPageCubit>().createProduct(newProduct);
@@ -61,12 +62,11 @@ class _CreateProductDialogState extends State<CreateProductDialog> {
 
   void _onRecipeSelected(RecipeModel recipe) {
     setState(() {
+      _selectedRecipeId = recipe.id;
+      _selectedRecipeItems = recipe.items;
       _nameController.text = recipe.name;
       _skuController.text = recipe.sku;
       _descriptionController.text = recipe.description ?? '';
-      if (recipe.salePrice != null) {
-        _priceController.text = recipe.salePrice.toString();
-      }
     });
   }
 
@@ -111,8 +111,37 @@ class _CreateProductDialogState extends State<CreateProductDialog> {
                     controller: controller,
                     focusNode: focusNode,
                     onEditingComplete: onEditingComplete,
-                    label: l10n?.search_desing ?? 'Buscar diseño...',
+                    label: l10n?.search_design ?? 'Buscar diseño...',
                     prefixIcon: const Icon(Icons.search),
+                  );
+                },
+                optionsViewBuilder: (
+                  BuildContext context,
+                  AutocompleteOnSelected<RecipeModel> onSelected,
+                  Iterable<RecipeModel> options,
+                ) {
+                  return Align(
+                    alignment: Alignment.topLeft,
+                    child: Material(
+                      color: Theme.of(context).colorScheme.surface,
+                      elevation: 4,
+                      child: SizedBox(
+                        width: MediaQuery.of(context).size.width * 0.75,
+                        child: ListView.builder(
+                          padding: EdgeInsets.zero,
+                          itemCount: options.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            final option = options.elementAt(index);
+                            return ListTile(
+                              title: Text(
+                                '${option.name} (SKU: ${option.sku})',
+                              ),
+                              onTap: () => onSelected(option),
+                            );
+                          },
+                        ),
+                      ),
+                    ),
                   );
                 },
               ),
@@ -169,16 +198,6 @@ class _CreateProductDialogState extends State<CreateProductDialog> {
                       validator: FormValidators.notEmpty(),
                     ),
                   ),
-                ],
-              ),
-              AppSpacing.verticalGapSm,
-              AtTextfieldText(
-                label: 'Precio de Venta',
-                controller: _priceController,
-                keyboardType:
-                    const TextInputType.numberWithOptions(decimal: true),
-                inputFormatters: [
-                  FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d{0,2}')),
                 ],
               ),
               AppSpacing.verticalGapSm,

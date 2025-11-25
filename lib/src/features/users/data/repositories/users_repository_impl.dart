@@ -1,7 +1,7 @@
 import 'package:bandasybandas/src/core/error/failures.dart';
 import 'package:bandasybandas/src/features/users/data/datasources/users_datasource.dart';
 import 'package:bandasybandas/src/features/users/domain/repositories/users_repository.dart';
-import 'package:bandasybandas/src/shared/models/user.dart';
+import 'package:bandasybandas/src/shared/models/user_model.dart';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
@@ -32,9 +32,33 @@ class UsersRepositoryImpl implements UsersRepository {
   }
 
   @override
-  Future<Either<Failure, void>> addUser(AppUser user) async {
+  Future<Either<Failure, void>> addUser(AppUser user, String password) async {
     try {
-      final result = await datasource.addUser(user);
+      final result = await datasource.addUser(user, password);
+      return Right(result);
+    } on Exception catch (e) {
+      return Left(
+        FirestoreFailure(e.toString()),
+      );
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> updateUser(AppUser user) async {
+    try {
+      final result = await datasource.updateUser(user);
+      return Right(result);
+    } on FirebaseException catch (e) {
+      return Left(
+        FirestoreFailure(e.message ?? 'Error de Firestore desconocido'),
+      );
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> deleteUser(String userId) async {
+    try {
+      final result = await datasource.deleteUser(userId);
       return Right(result);
     } on FirebaseException catch (e) {
       return Left(

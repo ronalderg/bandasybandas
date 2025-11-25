@@ -2,7 +2,7 @@ import 'dart:typed_data' show Uint8List;
 
 import 'package:bandasybandas/src/core/error/failures.dart';
 import 'package:bandasybandas/src/core/usecases/usecase.dart';
-import 'package:bandasybandas/src/features/inventory_management/domain/models/desing_model.dart';
+import 'package:bandasybandas/src/features/inventory_management/domain/models/recipe_model.dart';
 import 'package:bandasybandas/src/features/inventory_management/domain/repositories/recipe_repository.dart';
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
@@ -59,4 +59,42 @@ class UploadPdfParams extends Equatable {
 
   @override
   List<Object?> get props => [fileData, fileName];
+}
+
+/// Caso de uso para actualizar una receta existente.
+class UpdateRecipe extends UseCase<bool, RecipeModel> {
+  UpdateRecipe(this.repository);
+  final RecipeRepository repository;
+
+  @override
+  Future<Either<Failure, bool>> call(RecipeModel params) async {
+    try {
+      final result = await repository.updateRecipe(params);
+      return result.fold(
+        Left.new,
+        (_) => const Right(true),
+      );
+    } on Exception catch (e) {
+      return Left(FirestoreFailure(e.toString()));
+    }
+  }
+}
+
+/// Caso de uso para eliminar una receta por su ID (soft delete).
+class DeleteRecipe extends UseCase<bool, String> {
+  DeleteRecipe(this.repository);
+  final RecipeRepository repository;
+
+  @override
+  Future<Either<Failure, bool>> call(String params) async {
+    try {
+      final result = await repository.deleteRecipe(params);
+      return result.fold(
+        Left.new,
+        (_) => const Right(true),
+      );
+    } on Exception catch (e) {
+      return Left(FirestoreFailure(e.toString()));
+    }
+  }
 }

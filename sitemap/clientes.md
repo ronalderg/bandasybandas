@@ -1,0 +1,1 @@
+La idea en la interfaz de clientes es que el usuario pueda ver su inventario de productos que han salido finales con serial. 

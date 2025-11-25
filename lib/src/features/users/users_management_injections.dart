@@ -20,6 +20,7 @@ void initUserManagementInjections(FirebaseFirestore firestore) {
       () => UsersPageCubit(
         getUsers: sl(),
         addUserUseCase: sl(),
+        updateUserUseCase: sl(),
       ),
     )
 
@@ -29,6 +30,8 @@ void initUserManagementInjections(FirebaseFirestore firestore) {
 
     ..registerLazySingleton(() => GetUsers(sl()))
     ..registerLazySingleton(() => AddUser(sl()))
+    ..registerLazySingleton(() => UpdateUser(sl()))
+    ..registerLazySingleton(() => DeleteUser(sl()))
 
     // --- Repository (Domain/Data Layer) ---
     // Se registra la implementación (`UserRepositoryImpl`) para la abstracción
@@ -44,6 +47,7 @@ void initUserManagementInjections(FirebaseFirestore firestore) {
     ..registerLazySingleton<UsersDatasource>(
       () => UsersDatasourceImpl(
         firestore,
+        sl(), // FirebaseAuth
       ),
     );
 }

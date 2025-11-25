@@ -38,3 +38,16 @@ class AddItem extends UseCase<void, ItemModel> {
     return repository.addItem(params);
   }
 }
+
+/// Caso de uso para actualizar un item existente.
+///
+/// Extiende de [UseCase] y requiere un [ItemModel] como parámetro.
+class UpdateItem extends UseCase<void, ItemModel> {
+  UpdateItem(this.repository);
+  final ItemRepository repository;
+
+  @override
+  Future<Either<Failure, void>> call(ItemModel params) {
+    return repository.updateItem(params);
+  }
+}

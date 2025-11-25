@@ -48,6 +48,7 @@
   "product": "Product",
   "products": "Products",
   "create_product": "Create Product",
+  "new_product": "New Product",
   "create_new_product": "Create new product",
   "edit_product": "Edit Product",
   "delete_product": "Delete Product",
@@ -87,6 +88,9 @@
   "user": "User",
   "users": "Users",
   "create_user": "Create User",
+  "create_new_user": "Create new user",
+  "new_user": "New User",
+  "there_are_no_users_registered": "There are no users registered",
   "role": "Role",
   "roles": "Roles",
   "permission": "Permission",
@@ -101,9 +105,12 @@
   "reports": "Reports",
   "items": "Items",
   "item": "Item",
-  "desing": "Design",
-  "desings": "Designs",
-  "search_desing": "Search desing",
+  "edit_item": "Editar Item",
+  "delete_item": "Eliminar Item",
+  "are_you_sure_delete_item": "¿Estás seguro de que quieres eliminar este item?",
+  "design": "Design",
+  "designs": "Designs",
+  "search_design": "Search design",
   "recipe": "Recipe",
   "recipes": "Recipes",
   "brand": "Brand",
@@ -149,6 +156,10 @@
   "@machines": {},
   "indicators": "Indicadores",
   "@indicators": {},
+  "orders_requests": "Orders requests",
+  "@orders_requests": {
+    "description": "Label for the menu item that leads to the list of orders requests."
+  },
   "purchase_requests": "Purchase requests",
   "@purchase_requests": {
     "description": "Label for the menu item that leads to the list of purchase requests."
@@ -174,5 +185,15 @@
   "send_reset_link": "Send reset link",
   "create_account": "Create an account",
   "create_new": "Create New",
-  "ref": "Reference"
+  "ref": "Reference",
+  "creation_date": "Creation Date",
+  "edit": "Edit",
+  "delete": "Delete",
+  "create": "Create",
+  "generate_qr": "Generate QR",
+  "scan_qr": "Scan QR",
+  "view_details": "View Details",
+  "edit_details": "Edit Details",
+  "technical_visit": "Technical Visit",
+  "technical_visits": "Technical Visits"
 }

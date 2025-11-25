@@ -1,19 +1,25 @@
 import 'package:bandasybandas/src/app/localization/app_localizations.dart';
+import 'package:bandasybandas/src/app/router/app_routes.dart';
 import 'package:bandasybandas/src/core/theme/app_spacing.dart';
-import 'package:bandasybandas/src/features/inventory_management/domain/models/desing_model.dart';
+import 'package:bandasybandas/src/features/customers/ui/pages/customer_management/cubit/customer_management_cubit.dart';
 import 'package:bandasybandas/src/features/inventory_management/domain/models/product_model.dart';
+import 'package:bandasybandas/src/features/inventory_management/domain/models/recipe_model.dart';
+import 'package:bandasybandas/src/features/inventory_management/ui/pages/items/cubit/items_page_cubit.dart';
 import 'package:bandasybandas/src/features/inventory_management/ui/pages/products/cubit/products_page_cubit.dart';
 import 'package:bandasybandas/src/features/inventory_management/ui/pages/products/view/create_product_dialog.dart';
+import 'package:bandasybandas/src/features/inventory_management/ui/pages/products/view/edit_product_dialog.dart';
 import 'package:bandasybandas/src/features/inventory_management/ui/pages/products/view/qr_display_dialog.dart';
+import 'package:bandasybandas/src/features/inventory_management/ui/pages/products/view/transfer_product_dialog.dart';
 import 'package:bandasybandas/src/features/inventory_management/ui/pages/recipes/cubit/recipe_page_cubit.dart';
 import 'package:bandasybandas/src/features/inventory_management/ui/pages/recipes/cubit/recipe_page_state.dart';
 import 'package:bandasybandas/src/shared/models/vm_popup_menu_item_data.dart';
 import 'package:bandasybandas/src/shared/molecules/mol_list_tile_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 /// Enum para definir las acciones del menú de un producto.
-enum ProductMenuAction { delete, archive, qr }
+enum ProductMenuAction { delete, transfer, qr }
 
 class ProductsView extends StatelessWidget {
   const ProductsView({required this.products, super.key});
@@ -28,9 +34,9 @@ class ProductsView extends StatelessWidget {
     // Define los items del menú que se mostrarán para cada producto.
     final menuItems = [
       const VmPopupMenuItemData<ProductMenuAction>(
-        value: ProductMenuAction.archive,
-        label: 'Enviar a Cliente',
-        icon: Icons.archive,
+        value: ProductMenuAction.transfer,
+        label: 'Trasladar a Cliente',
+        icon: Icons.local_shipping,
       ),
       const VmPopupMenuItemData<ProductMenuAction>(
         value: ProductMenuAction.qr,
@@ -60,28 +66,36 @@ class ProductsView extends StatelessWidget {
               ElevatedButton.icon(
                 onPressed: () => showDialog<void>(
                   context: context,
-                  builder: (dialogContext) {
-                    // Obtenemos la lista de recetas disponibles del estado de RecipesPageCubit.
-                    final recipesState = context.read<RecipesPageCubit>().state;
-                    final availableRecipes = recipesState is RecipesPageLoaded
-                        ? recipesState.recipes
-                        : <RecipeModel>[];
-
-                    return MultiBlocProvider(
-                      providers: [
-                        // Pasamos el cubit de productos para poder crear uno nuevo.
-                        BlocProvider.value(
-                          value: context.read<ProductsPageCubit>(),
-                        ),
-                      ],
-                      child: CreateProductDialog(
-                        availableRecipes: availableRecipes,
+                  builder: (dialogContext) => MultiBlocProvider(
+                    providers: [
+                      // Pasamos el cubit de productos para poder crear uno nuevo.
+                      BlocProvider.value(
+                        value: context.read<ProductsPageCubit>(),
                       ),
-                    );
-                  },
+                      // Proveemos el RecipesPageCubit para que el BlocBuilder funcione.
+                      BlocProvider.value(
+                        value: context.read<RecipesPageCubit>(),
+                      ),
+                      // Proveemos el ItemsCubit, ya que el diálogo lo necesita.
+                      BlocProvider.value(value: context.read<ItemsCubit>()),
+                    ],
+                    // Usamos un BlocBuilder para reaccionar a los cambios de estado
+                    // del RecipesPageCubit y pasar la lista actualizada al diálogo.
+                    child: BlocBuilder<RecipesPageCubit, RecipesPageState>(
+                      builder: (context, recipesState) {
+                        final availableRecipes =
+                            recipesState is RecipesPageLoaded
+                                ? recipesState.recipes
+                                : <RecipeModel>[];
+                        return CreateProductDialog(
+                          availableRecipes: availableRecipes,
+                        );
+                      },
+                    ),
+                  ),
                 ),
                 icon: const Icon(Icons.add),
-                label: const Text('Nuevo Producto'),
+                label: Text(l10n.new_product),
               ),
             ],
           ),
@@ -103,19 +117,79 @@ class ProductsView extends StatelessWidget {
               itemCount: products.length,
               itemBuilder: (context, index) {
                 final product = products[index];
-                return MolListtileItem<ProductMenuAction>(
-                  onEditTap: () {},
-                  onViewTap: () {},
+                return MolListTileItem<ProductMenuAction>(
+                  onEditTap: () {
+                    // Obtener las recetas disponibles
+                    final recipesState = context.read<RecipesPageCubit>().state;
+                    final availableRecipes = recipesState is RecipesPageLoaded
+                        ? recipesState.recipes
+                        : <RecipeModel>[];
+
+                    showDialog<void>(
+                      context: context,
+                      builder: (_) => BlocProvider.value(
+                        value: context.read<ProductsPageCubit>(),
+                        child: EditProductDialog(
+                          product: product,
+                          availableRecipes: availableRecipes,
+                        ),
+                      ),
+                    );
+                  },
+                  onViewTap: () => GoRouter.of(context).go(
+                    AppRoutes.productDetails.replaceFirst(':id', product.id),
+                  ),
                   menuItems: menuItems,
                   onMenuItemSelected: (action) {
                     // Lógica para manejar la acción seleccionada.
                     switch (action) {
                       case ProductMenuAction.delete:
-                        // TODO(Ronder): Implementar lógica de eliminación.
-                        break;
-                      case ProductMenuAction.archive:
-                        // TODO(Ronder): Implementar lógica de archivo.
-                        break;
+                        // Mostrar diálogo de confirmación
+                        showDialog<bool>(
+                          context: context,
+                          builder: (BuildContext dialogContext) => AlertDialog(
+                            title: Text(l10n.delete_product),
+                            content: Text(
+                              '¿Estás seguro de que deseas eliminar "${product.name}"? '
+                              'Esta acción marcará el producto como eliminado.',
+                            ),
+                            actions: [
+                              TextButton(
+                                onPressed: () =>
+                                    Navigator.of(dialogContext).pop(false),
+                                child: Text(l10n.cancel),
+                              ),
+                              ElevatedButton(
+                                onPressed: () {
+                                  Navigator.of(dialogContext).pop(true);
+                                  context
+                                      .read<ProductsPageCubit>()
+                                      .deleteExistingProduct(product.id);
+                                },
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: theme.colorScheme.error,
+                                  foregroundColor: theme.colorScheme.onError,
+                                ),
+                                child: Text(l10n.delete),
+                              ),
+                            ],
+                          ),
+                        );
+                      case ProductMenuAction.transfer:
+                        showDialog<void>(
+                          context: context,
+                          builder: (dialogContext) => MultiBlocProvider(
+                            providers: [
+                              BlocProvider.value(
+                                value: context.read<ProductsPageCubit>(),
+                              ),
+                              BlocProvider.value(
+                                value: context.read<CustomersManagementCubit>(),
+                              ),
+                            ],
+                            child: TransferProductDialog(product: product),
+                          ),
+                        );
                       case ProductMenuAction.qr:
                         showDialog<void>(
                           context: context,

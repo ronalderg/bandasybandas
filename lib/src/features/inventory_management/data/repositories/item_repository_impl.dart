@@ -41,4 +41,16 @@ class ItemRepositoryImpl implements ItemRepository {
       );
     }
   }
+
+  @override
+  Future<Either<Failure, void>> updateItem(ItemModel item) async {
+    try {
+      final result = await datasource.updateItem(item);
+      return Right(result);
+    } on FirebaseException catch (e) {
+      return Left(
+        FirestoreFailure(e.message ?? 'Error de Firestore desconocido'),
+      );
+    }
+  }
 }

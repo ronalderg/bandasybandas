@@ -2,8 +2,8 @@ import 'package:bandasybandas/src/shared/models/vm_popup_menu_item_data.dart';
 import 'package:bandasybandas/src/shared/molecules/mol_popup_menu.dart';
 import 'package:flutter/material.dart';
 
-class MolListtileItem<T> extends StatelessWidget {
-  const MolListtileItem({
+class MolListTileItem<T> extends StatelessWidget {
+  const MolListTileItem({
     required this.onEditTap,
     required this.onViewTap,
     required this.price,

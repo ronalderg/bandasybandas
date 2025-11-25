@@ -23,14 +23,14 @@ class RecipesPage extends StatelessWidget {
         BlocProvider(create: (_) => sl<ItemsCubit>()..loadItems()),
       ],
       child: TpAppScaffold(
-        pageTitle: l10n?.desings ?? '',
+        pageTitle: l10n?.designs ?? '',
         body: SafeArea(
           child: BlocBuilder<RecipesPageCubit, RecipesPageState>(
             builder: (context, state) {
               if (state is RecipesPageInitial || state is RecipesPageLoading) {
                 return const Center(child: CircularProgressIndicator());
               } else if (state is RecipesPageLoaded) {
-                return RecipesView(desings: state.recipes);
+                return RecipesView(designs: state.recipes);
               } else if (state is RecipesPageError) {
                 return Center(child: Text('Error: ${state.message}'));
               }

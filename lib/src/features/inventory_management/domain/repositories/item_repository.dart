@@ -14,4 +14,7 @@ abstract class ItemRepository {
 
   /// Agrega un nuevo item.
   Future<Either<Failure, void>> addItem(ItemModel item);
+
+  /// Actualiza un item existente.
+  Future<Either<Failure, void>> updateItem(ItemModel item);
 }

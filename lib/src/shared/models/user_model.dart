@@ -1,14 +1,34 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
+import 'package:ronalderg_util/ronalderg_util.dart';
 
-// TODO(username): hacer documentacion.
+/// Define los diferentes roles o tipos de usuario dentro de la aplicación.
+///
+/// Cada valor representa un conjunto de permisos y accesos específicos.
 enum UserType {
+  /// Usuario con perfil técnico, enfocado en tareas operativas.
   tecnico,
+
+  /// Usuario con perfil de asesor comercial para la industria.
   asesorIndustrial,
+
+  /// Usuario con perfil de Project Manager Industrial (PMI).
   pmi,
+
+  /// Usuario con rol de gerente del área comercial.
   gerenteComercial,
+
+  /// Usuario con rol de gerente general o de alto nivel.
   gerente,
+
+  /// Usuario cliente que administra usuarios y recursos de una empresa.
+  clienteAdministrador,
+
+  /// Usuario cliente con permisos limitados.
+  cliente,
+
+  /// Representa un usuario sin un tipo asignado o un estado inválido.
   none
 }
 
@@ -121,7 +141,7 @@ class AppUser extends Equatable {
   Map<String, dynamic> toJson() {
     return {
       keyEmail: email,
-      keyUserType: userType,
+      keyUserType: userType.toString().capitalize(),
       keyFirstName: firstName,
       keyLastName: lastName,
       keyDocumentId: documentId,
@@ -181,8 +201,36 @@ class AppUser extends Equatable {
         return UserType.gerenteComercial;
       case 'Gerente':
         return UserType.gerente;
+      case 'Cliente Administrador':
+        return UserType.clienteAdministrador;
+      case 'Cliente':
+        return UserType.cliente;
       default:
         return UserType.none;
+    }
+  }
+}
+
+/// Extensión para obtener un nombre legible del enum UserType.
+extension UserTypeExtension on UserType {
+  String toDisplayName() {
+    switch (this) {
+      case UserType.tecnico:
+        return 'Técnico';
+      case UserType.asesorIndustrial:
+        return 'Asesor Industrial';
+      case UserType.pmi:
+        return 'PMI';
+      case UserType.gerenteComercial:
+        return 'Gerente Comercial';
+      case UserType.gerente:
+        return 'Gerente';
+      case UserType.none:
+        return 'No especificado';
+      case UserType.clienteAdministrador:
+        return 'Cliente Administrador';
+      case UserType.cliente:
+        return 'Cliente';
     }
   }
 }

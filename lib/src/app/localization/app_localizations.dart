@@ -368,6 +368,12 @@ abstract class AppLocalizations {
   /// **'Crear Producto'**
   String get create_product;
 
+  /// No description provided for @new_product.
+  ///
+  /// In es, this message translates to:
+  /// **'Nuevo Producto'**
+  String get new_product;
+
   /// No description provided for @create_new_product.
   ///
   /// In es, this message translates to:
@@ -563,7 +569,7 @@ abstract class AppLocalizations {
   /// No description provided for @warehouse.
   ///
   /// In es, this message translates to:
-  /// **'Almacen'**
+  /// **'Almacén'**
   String get warehouse;
 
   /// No description provided for @warehouses.
@@ -601,6 +607,24 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'Crear Usuario'**
   String get create_user;
+
+  /// No description provided for @create_new_user.
+  ///
+  /// In es, this message translates to:
+  /// **'Crear nuevo usuario'**
+  String get create_new_user;
+
+  /// No description provided for @new_user.
+  ///
+  /// In es, this message translates to:
+  /// **'Nuevo Usuario'**
+  String get new_user;
+
+  /// No description provided for @there_are_no_users_registered.
+  ///
+  /// In es, this message translates to:
+  /// **'No hay usuarios registrados'**
+  String get there_are_no_users_registered;
 
   /// No description provided for @role.
   ///
@@ -641,13 +665,13 @@ abstract class AppLocalizations {
   /// No description provided for @sub_menu.
   ///
   /// In es, this message translates to:
-  /// **'Submenú'**
+  /// **'Submenu'**
   String get sub_menu;
 
   /// No description provided for @sub_menus.
   ///
   /// In es, this message translates to:
-  /// **'Submenús'**
+  /// **'Submenus'**
   String get sub_menus;
 
   /// No description provided for @action.
@@ -686,23 +710,41 @@ abstract class AppLocalizations {
   /// **'Item'**
   String get item;
 
-  /// No description provided for @desing.
+  /// No description provided for @edit_item.
+  ///
+  /// In es, this message translates to:
+  /// **'Editar Item'**
+  String get edit_item;
+
+  /// No description provided for @delete_item.
+  ///
+  /// In es, this message translates to:
+  /// **'Eliminar Item'**
+  String get delete_item;
+
+  /// No description provided for @are_you_sure_delete_item.
+  ///
+  /// In es, this message translates to:
+  /// **'¿Estás seguro de que quieres eliminar este item?'**
+  String get are_you_sure_delete_item;
+
+  /// No description provided for @design.
   ///
   /// In es, this message translates to:
   /// **'Diseño'**
-  String get desing;
+  String get design;
 
-  /// No description provided for @desings.
+  /// No description provided for @designs.
   ///
   /// In es, this message translates to:
   /// **'Diseños'**
-  String get desings;
+  String get designs;
 
-  /// No description provided for @search_desing.
+  /// No description provided for @search_design.
   ///
   /// In es, this message translates to:
   /// **'Buscar diseño'**
-  String get search_desing;
+  String get search_design;
 
   /// No description provided for @recipe.
   ///
@@ -956,10 +998,16 @@ abstract class AppLocalizations {
   /// **'Indicadores'**
   String get indicators;
 
-  /// Etiqueta para el elemento del menú que lleva a la lista de solicitudes de compra.
+  /// Etiqueta para el elemento del menú que lleva a la lista de solicitudes de pedidos.
   ///
   /// In es, this message translates to:
   /// **'Solicitudes de pedidos'**
+  String get orders_requests;
+
+  /// Etiqueta para el elemento del menú que lleva a la lista de solicitudes de compra.
+  ///
+  /// In es, this message translates to:
+  /// **'Solicitudes de compra'**
   String get purchase_requests;
 
   /// No description provided for @name.
@@ -1081,6 +1129,66 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'Referencia'**
   String get ref;
+
+  /// No description provided for @creation_date.
+  ///
+  /// In es, this message translates to:
+  /// **'Fecha de Creación'**
+  String get creation_date;
+
+  /// No description provided for @edit.
+  ///
+  /// In es, this message translates to:
+  /// **'Editar'**
+  String get edit;
+
+  /// No description provided for @delete.
+  ///
+  /// In es, this message translates to:
+  /// **'Eliminar'**
+  String get delete;
+
+  /// No description provided for @create.
+  ///
+  /// In es, this message translates to:
+  /// **'Crear'**
+  String get create;
+
+  /// No description provided for @generate_qr.
+  ///
+  /// In es, this message translates to:
+  /// **'Generar QR'**
+  String get generate_qr;
+
+  /// No description provided for @scan_qr.
+  ///
+  /// In es, this message translates to:
+  /// **'Escanear QR'**
+  String get scan_qr;
+
+  /// No description provided for @view_details.
+  ///
+  /// In es, this message translates to:
+  /// **'Ver Detalles'**
+  String get view_details;
+
+  /// No description provided for @edit_details.
+  ///
+  /// In es, this message translates to:
+  /// **'Editar Detalles'**
+  String get edit_details;
+
+  /// No description provided for @technical_visit.
+  ///
+  /// In es, this message translates to:
+  /// **'Visita técnica'**
+  String get technical_visit;
+
+  /// No description provided for @technical_visits.
+  ///
+  /// In es, this message translates to:
+  /// **'Visitas técnicas'**
+  String get technical_visits;
 }
 
 class _AppLocalizationsDelegate

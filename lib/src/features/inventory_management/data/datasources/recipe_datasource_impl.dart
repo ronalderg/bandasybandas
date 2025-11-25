@@ -2,7 +2,7 @@ import 'dart:typed_data';
 
 import 'package:bandasybandas/src/core/db_collections.dart';
 import 'package:bandasybandas/src/features/inventory_management/data/datasources/recipe_datasource.dart';
-import 'package:bandasybandas/src/features/inventory_management/domain/models/desing_model.dart';
+import 'package:bandasybandas/src/features/inventory_management/domain/models/recipe_model.dart';
 import 'package:bandasybandas/src/shared/models/entity_metadata.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';

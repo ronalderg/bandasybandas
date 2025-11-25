@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 /// Define `lightTheme` y `darkTheme` para asegurar una apariencia consistente
 /// en toda la aplicación, siguiendo las directrices de Material Design.
 class AppTheme {
-  // Constructor privado para evitar la instanciación.
+  // Constructor privado para evitar la creación de instancias.
   AppTheme._();
 
   /// Tema para el modo claro.
@@ -113,6 +113,43 @@ class AppTheme {
     textButtonTheme: TextButtonThemeData(
       style: TextButton.styleFrom(
         foregroundColor: AppColors.textColorInverse,
+        textStyle: AppTypography.darkTextTheme.labelLarge,
+      ),
+    ),
+    // Tema para menús emergentes (usado por DropdownButton)
+    popupMenuTheme: PopupMenuThemeData(
+      color: AppColors.surfaceDark, // Fondo del menú
+      textStyle: AppTypography.darkTextTheme.bodyMedium, // Estilo de texto
+      elevation: 4,
+    ),
+    progressIndicatorTheme: const ProgressIndicatorThemeData(
+      color: AppColors.white,
+    ),
+    dropdownMenuTheme: DropdownMenuThemeData(
+      menuStyle: const MenuStyle(
+        backgroundColor: WidgetStatePropertyAll(AppColors.backgroundDark),
+        surfaceTintColor: WidgetStatePropertyAll(Colors.transparent),
+      ),
+      textStyle: AppTypography.darkTextTheme.bodyMedium?.copyWith(
+        color: AppColors.textColorInverse,
+      ),
+      inputDecorationTheme: InputDecorationTheme(
+        filled: true,
+        fillColor: AppColors.surfaceDark,
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(AppSpacing.borderRadius),
+          borderSide: const BorderSide(color: AppColors.borderColor),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(AppSpacing.borderRadius),
+          borderSide: const BorderSide(color: AppColors.primary, width: 2),
+        ),
+        labelStyle: AppTypography.darkTextTheme.bodyMedium?.copyWith(
+          color: AppColors.textColorHint,
+        ),
+        hintStyle: AppTypography.darkTextTheme.bodyMedium?.copyWith(
+          color: AppColors.textColorHint,
+        ),
       ),
     ),
   );

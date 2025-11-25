@@ -8,10 +8,19 @@ import 'package:dartz/dartz.dart';
 /// actuando como la única puerta de entrada a la capa de datos desde el dominio.
 /// La capa de dominio solo depende de esta abstracción, no de su implementación.
 abstract class ProductRepository {
+  /// Obtiene un stream de un producto específico por su [id].
+  Future<Either<Failure, Stream<ProductModel?>>> getProductById(String id);
+
   /// Obtiene un stream de la lista de productos.
   /// Retorna un [Stream] que emite [Either] un [Failure] o una [List<ProductModel>].
   Stream<Either<Failure, List<ProductModel>>> getProducts();
 
   /// Agrega un nuevo producto.
   Future<Either<Failure, void>> addProduct(ProductModel product);
+
+  /// Actualiza un producto existente.
+  Future<Either<Failure, void>> updateProduct(ProductModel product);
+
+  /// Elimina un producto.
+  Future<Either<Failure, void>> deleteProduct(String id);
 }

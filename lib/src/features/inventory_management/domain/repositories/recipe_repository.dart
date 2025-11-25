@@ -1,7 +1,7 @@
 import 'dart:typed_data';
 
 import 'package:bandasybandas/src/core/error/failures.dart';
-import 'package:bandasybandas/src/features/inventory_management/domain/models/desing_model.dart';
+import 'package:bandasybandas/src/features/inventory_management/domain/models/recipe_model.dart';
 import 'package:dartz/dartz.dart';
 
 /// Interfaz para el repositorio de recetas (diseños).
@@ -13,13 +13,16 @@ abstract class RecipeRepository {
   /// Retorna un [Stream] que emite [Either] un [Failure] o una [List<ItemModel>].
   Stream<Either<Failure, List<RecipeModel>>> getRecipes();
 
-  /// Agrega un nuevo item.
+  /// Añade una nueva receta a la base de datos.
   Future<Either<Failure, void>> addRecipe(RecipeModel recipe);
 
-  /// Sube un archivo PDF y retorna su URL.
-  ///
-  /// [fileData] son los bytes del archivo.
-  /// [fileName] es el nombre que tendrá el archivo en el storage.
+  /// Actualiza una receta existente.
+  Future<Either<Failure, void>> updateRecipe(RecipeModel recipe);
+
+  /// Elimina una receta por su ID (soft delete).
+  Future<Either<Failure, void>> deleteRecipe(String id);
+
+  /// Sube un archivo PDF a Firebase Storage y devuelve su URL.
   Future<Either<Failure, String>> uploadPdf(
     Uint8List fileData,
     String fileName,

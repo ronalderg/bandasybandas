@@ -1,4 +1,4 @@
-import 'package:bandasybandas/src/features/inventory_management/domain/models/desing_model.dart';
+import 'package:bandasybandas/src/features/inventory_management/domain/models/recipe_model.dart';
 import 'package:flutter/foundation.dart';
 
 /// Interfaz abstracta para la fuente de datos de las recetas (diseños).

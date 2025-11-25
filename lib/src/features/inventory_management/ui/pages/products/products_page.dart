@@ -1,5 +1,6 @@
 import 'package:bandasybandas/src/app/injection_container.dart';
 import 'package:bandasybandas/src/app/localization/app_localizations.dart';
+import 'package:bandasybandas/src/features/customers/ui/pages/customer_management/cubit/customer_management_cubit.dart';
 import 'package:bandasybandas/src/features/inventory_management/ui/pages/items/cubit/items_page_cubit.dart';
 import 'package:bandasybandas/src/features/inventory_management/ui/pages/products/cubit/products_page_cubit.dart';
 import 'package:bandasybandas/src/features/inventory_management/ui/pages/products/cubit/products_page_state.dart';
@@ -22,6 +23,10 @@ class ProductsPage extends StatelessWidget {
         BlocProvider(create: (_) => sl<ProductsPageCubit>()..loadProducts()),
         // Proveemos el Cubit para las recetas, que será usado por el diálogo de creación.
         BlocProvider(create: (_) => sl<RecipesPageCubit>()..loadRecipes()),
+        // Proveemos el Cubit para los clientes, usado en el diálogo de transferencia.
+        BlocProvider(
+          create: (_) => sl<CustomersManagementCubit>()..loadCustomers(),
+        ),
         // Proveemos el Cubit para los items, por si se necesita en el futuro.
         BlocProvider(create: (_) => sl<ItemsCubit>()),
       ],

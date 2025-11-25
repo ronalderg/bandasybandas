@@ -1,20 +1,26 @@
 import 'package:bandasybandas/src/app/injection_container.dart';
+import 'package:bandasybandas/src/features/inventory_management/data/datasources/inventory_movement_datasource.dart';
+import 'package:bandasybandas/src/features/inventory_management/data/datasources/inventory_movement_datasource_impl.dart';
 import 'package:bandasybandas/src/features/inventory_management/data/datasources/item_datasource.dart';
 import 'package:bandasybandas/src/features/inventory_management/data/datasources/item_datasource_impl.dart';
 import 'package:bandasybandas/src/features/inventory_management/data/datasources/product_datasource.dart';
 import 'package:bandasybandas/src/features/inventory_management/data/datasources/product_datasource_impl.dart';
 import 'package:bandasybandas/src/features/inventory_management/data/datasources/recipe_datasource.dart';
 import 'package:bandasybandas/src/features/inventory_management/data/datasources/recipe_datasource_impl.dart';
+import 'package:bandasybandas/src/features/inventory_management/data/repositories/inventory_movement_repository_impl.dart';
 import 'package:bandasybandas/src/features/inventory_management/data/repositories/item_repository_impl.dart';
 import 'package:bandasybandas/src/features/inventory_management/data/repositories/product_repository_impl.dart';
 import 'package:bandasybandas/src/features/inventory_management/data/repositories/recipe_repository_impl.dart';
+import 'package:bandasybandas/src/features/inventory_management/domain/repositories/inventory_movement_repository.dart';
 import 'package:bandasybandas/src/features/inventory_management/domain/repositories/item_repository.dart';
 import 'package:bandasybandas/src/features/inventory_management/domain/repositories/product_repository.dart';
 import 'package:bandasybandas/src/features/inventory_management/domain/repositories/recipe_repository.dart';
+import 'package:bandasybandas/src/features/inventory_management/domain/usecases/inventory_movement_usecases.dart';
 import 'package:bandasybandas/src/features/inventory_management/domain/usecases/items_usecases.dart';
 import 'package:bandasybandas/src/features/inventory_management/domain/usecases/products_usecases.dart';
 import 'package:bandasybandas/src/features/inventory_management/domain/usecases/recipes_usecases.dart';
 import 'package:bandasybandas/src/features/inventory_management/ui/pages/items/cubit/items_page_cubit.dart';
+import 'package:bandasybandas/src/features/inventory_management/ui/pages/product_detail/cubit/product_detail_page_cubit.dart';
 import 'package:bandasybandas/src/features/inventory_management/ui/pages/products/cubit/products_page_cubit.dart';
 import 'package:bandasybandas/src/features/inventory_management/ui/pages/recipes/cubit/recipe_page_cubit.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -29,12 +35,19 @@ void initInventoryManagementInjections(FirebaseFirestore firestore) {
       () => ItemsCubit(
         getItems: sl(),
         addItemUseCase: sl(),
+        updateItemUseCase: sl(),
+        addInventoryMovement: sl(),
+        addCustomerProduct: sl(),
+        updateCustomerProduct: sl(),
+        getCustomerProducts: sl(),
       ),
     )
     ..registerFactory(
       () => RecipesPageCubit(
         getRecipes: sl(),
         addRecipe: sl(),
+        updateRecipe: sl(),
+        deleteRecipe: sl(),
         uploadPdfUseCase: sl(),
       ),
     )
@@ -42,22 +55,38 @@ void initInventoryManagementInjections(FirebaseFirestore firestore) {
       () => ProductsPageCubit(
         getProducts: sl(),
         addProduct: sl(),
+        updateProduct: sl(),
+        deleteProduct: sl(),
+        addCustomerProduct: sl(),
+        addInventoryMovement: sl(),
       ),
     )
+    ..registerFactory(
+      () => ProductDetailCubit(getProductById: sl()),
+    )
 
-    // ----- Use Cases (Domain Layer) ---
+    // ----------------------- Use Cases (Domain Layer) -----------------------
     // Items
     ..registerLazySingleton(() => GetItems(sl()))
     ..registerLazySingleton(() => AddItem(sl()))
+    ..registerLazySingleton(() => UpdateItem(sl()))
+    ..registerLazySingleton(() => AddInventoryMovement(sl()))
+
     // Recetas
     ..registerLazySingleton(() => GetRecipes(sl()))
     ..registerLazySingleton(() => AddRecipe(sl()))
+    ..registerLazySingleton(() => UpdateRecipe(sl()))
+    ..registerLazySingleton(() => DeleteRecipe(sl()))
     ..registerLazySingleton(() => UploadPdfUseCase(sl()))
+
     // Productos
+    ..registerLazySingleton(() => GetProductById(sl()))
     ..registerLazySingleton(() => GetProducts(sl()))
     ..registerLazySingleton(() => AddProduct(sl()))
+    ..registerLazySingleton(() => UpdateProduct(sl()))
+    ..registerLazySingleton(() => DeleteProduct(sl()))
 
-    // --- Repository (Data Layer) --- interfaz del dominio
+    // ----------- Repository (Data Layer) --- interfaz del dominio ------------
     // ItemRepository
     ..registerLazySingleton<ItemRepository>(
       () => ItemRepositoryImpl(sl<ItemDatasource>()),
@@ -70,8 +99,12 @@ void initInventoryManagementInjections(FirebaseFirestore firestore) {
     ..registerLazySingleton<ProductRepository>(
       () => ProductRepositoryImpl(sl<ProductDatasource>()),
     )
+    // InventoryMovementRepository
+    ..registerLazySingleton<InventoryMovementRepository>(
+      () => InventoryMovementRepositoryImpl(sl<InventoryMovementDatasource>()),
+    )
 
-    // --- Data Source (Data Layer) ---
+    // ------------------------ Data Source (Data Layer) -----------------------
     ..registerLazySingleton<ItemDatasource>(
       () => ItemDatasourceImpl(firestore),
     )
@@ -80,5 +113,8 @@ void initInventoryManagementInjections(FirebaseFirestore firestore) {
     )
     ..registerLazySingleton<ProductDatasource>(
       () => ProductDatasourceImpl(firestore),
+    )
+    ..registerLazySingleton<InventoryMovementDatasource>(
+      () => InventoryMovementDatasourceImpl(firestore),
     );
 }

@@ -1,4 +1,4 @@
-import 'package:bandasybandas/src/shared/models/user.dart';
+import 'package:bandasybandas/src/shared/models/user_model.dart';
 import 'package:equatable/equatable.dart';
 
 abstract class UsersPageState extends Equatable {

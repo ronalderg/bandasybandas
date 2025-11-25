@@ -20,7 +20,7 @@ class RecipeItem extends Equatable {
   /// ID del documento del Item en la colección de inventario.
   final String itemId;
 
-  /// Cantidad del item necesaria para esta receta (puede ser fraccional).
+  /// Cantidad del item necesaria para esta receta (puede ser double).
   final double quantity;
 
   /// Convierte la instancia a un mapa.

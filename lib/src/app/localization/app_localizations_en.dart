@@ -148,6 +148,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get create_product => 'Create Product';
 
   @override
+  String get new_product => 'New Product';
+
+  @override
   String get create_new_product => 'Create new product';
 
   @override
@@ -267,6 +270,15 @@ class AppLocalizationsEn extends AppLocalizations {
   String get create_user => 'Create User';
 
   @override
+  String get create_new_user => 'Create new user';
+
+  @override
+  String get new_user => 'New User';
+
+  @override
+  String get there_are_no_users_registered => 'There are no users registered';
+
+  @override
   String get role => 'Role';
 
   @override
@@ -309,13 +321,23 @@ class AppLocalizationsEn extends AppLocalizations {
   String get item => 'Item';
 
   @override
-  String get desing => 'Design';
+  String get edit_item => 'Editar Item';
 
   @override
-  String get desings => 'Designs';
+  String get delete_item => 'Eliminar Item';
 
   @override
-  String get search_desing => 'Search desing';
+  String get are_you_sure_delete_item =>
+      '¿Estás seguro de que quieres eliminar este item?';
+
+  @override
+  String get design => 'Design';
+
+  @override
+  String get designs => 'Designs';
+
+  @override
+  String get search_design => 'Search design';
 
   @override
   String get recipe => 'Recipe';
@@ -444,6 +466,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get indicators => 'Indicadores';
 
   @override
+  String get orders_requests => 'Orders requests';
+
+  @override
   String get purchase_requests => 'Purchase requests';
 
   @override
@@ -505,4 +530,34 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get ref => 'Reference';
+
+  @override
+  String get creation_date => 'Creation Date';
+
+  @override
+  String get edit => 'Edit';
+
+  @override
+  String get delete => 'Delete';
+
+  @override
+  String get create => 'Create';
+
+  @override
+  String get generate_qr => 'Generate QR';
+
+  @override
+  String get scan_qr => 'Scan QR';
+
+  @override
+  String get view_details => 'View Details';
+
+  @override
+  String get edit_details => 'Edit Details';
+
+  @override
+  String get technical_visit => 'Technical Visit';
+
+  @override
+  String get technical_visits => 'Technical Visits';
 }

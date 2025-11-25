@@ -2,7 +2,7 @@ import 'package:bandasybandas/src/app/bloc/auth/auth_bloc.dart';
 import 'package:bandasybandas/src/app/localization/app_localizations.dart';
 import 'package:bandasybandas/src/app/router/app_routes.dart';
 import 'package:bandasybandas/src/core/theme/app_spacing.dart';
-import 'package:bandasybandas/src/shared/models/user.dart';
+import 'package:bandasybandas/src/shared/models/user_model.dart';
 import 'package:bandasybandas/src/shared/models/vm_drawer_item_data.dart';
 import 'package:bandasybandas/src/shared/molecules/mol_drawer_expansion_tile.dart';
 import 'package:bandasybandas/src/shared/molecules/mol_drawer_header.dart';
@@ -47,7 +47,6 @@ class _OrgAppDrawerState extends State<OrgAppDrawer> {
     AppLocalizations l10n,
   ) {
     final userType = user.getTipoUsuario();
-
     // Items comunes para todos los usuarios autenticados
     final baseItems = <VmDrawerItemData>[
       VmDrawerItemData(
@@ -62,13 +61,24 @@ class _OrgAppDrawerState extends State<OrgAppDrawer> {
       case UserType.gerente:
         baseItems.addAll(getGerenteDrawerItems(l10n));
       case UserType.tecnico:
-        baseItems.addAll(getTecnicoDrawerItems(l10n));
-      // Añadir más casos para otros roles
+        baseItems.addAll(getTechnicalDrawerItems(l10n));
       case UserType.asesorIndustrial:
       case UserType.pmi:
       case UserType.gerenteComercial:
+      case UserType.clienteAdministrador:
+        baseItems.addAll(getClienteAdminDrawerItems(l10n));
+      case UserType.cliente:
+        baseItems.addAll(getClienteDrawerItems(l10n));
       case UserType.none:
-        break;
+        // Usuario sin tipo asignado - mostrar solo items base
+        debugPrint('⚠️ Usuario sin tipo asignado: ${user.email}');
+        baseItems.add(
+          VmDrawerItemData(
+            icon: Icons.warning,
+            label: 'Tipo de usuario no asignado',
+            route: '',
+          ),
+        );
     }
 
     return baseItems;
@@ -91,6 +101,8 @@ class _OrgAppDrawerState extends State<OrgAppDrawer> {
 
         return Drawer(
           elevation: widget.isPermanentlyDisplayed ? 1 : 16,
+          // Añadimos esta línea para eliminar las esquinas redondeadas.
+          shape: const RoundedRectangleBorder(),
           child: Column(
             children: [
               // Encabezado del Drawer
@@ -116,14 +128,18 @@ class _OrgAppDrawerState extends State<OrgAppDrawer> {
                         title: item.label,
                         onTap: () {}, // El onTap del padre no hace nada
                         children: item.children.map((child) {
-                          return MolDrawerItem(
-                            icon: child.icon,
-                            text: child.label,
-                            isColapsed: isCollapsed,
-                            onPressed: () => _onItemTapped(index, child.route!),
-                            // La selección podría necesitar una lógica más compleja
-                            // para resaltar el padre cuando un hijo está activo.
-                            //selected: false,
+                          return Padding(
+                            padding: const EdgeInsets.only(left: AppSpacing.md),
+                            child: MolDrawerItem(
+                              icon: child.icon,
+                              text: child.label,
+                              isColapsed: isCollapsed,
+                              onPressed: () =>
+                                  _onItemTapped(index, child.route!),
+                              // La selección podría necesitar una lógica más compleja
+                              // para resaltar el padre cuando un hijo está activo.
+                              //selected: false,
+                            ),
                           );
                         }).toList(),
                       );

@@ -1,7 +1,12 @@
+import 'package:bandasybandas/src/app/localization/app_localizations.dart';
 import 'package:bandasybandas/src/core/theme/app_spacing.dart';
-import 'package:bandasybandas/src/shared/models/user.dart';
+import 'package:bandasybandas/src/features/users/ui/pages/users/cubit/users_page_cubit.dart';
+import 'package:bandasybandas/src/features/users/ui/pages/users/view/create_user_dialog.dart';
+import 'package:bandasybandas/src/features/users/ui/pages/users/view/edit_user_dialog.dart';
+import 'package:bandasybandas/src/shared/models/user_model.dart';
 // Asume la ruta del modelo de usuario compartido. Ajústala si es necesario.
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class UsersView extends StatelessWidget {
   const UsersView({required this.users, super.key});
@@ -10,6 +15,7 @@ class UsersView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final l10n = AppLocalizations.of(context);
     return SingleChildScrollView(
       padding: const EdgeInsets.all(AppSpacing.md),
       child: Column(
@@ -20,15 +26,22 @@ class UsersView extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                'Usuarios',
+                l10n?.users ?? 'Usuarios',
                 style: theme.textTheme.headlineSmall,
               ),
               ElevatedButton.icon(
                 onPressed: () {
-                  // TODO(user): Implementar diálogo para crear usuario
+                  showDialog<void>(
+                    context: context,
+                    builder: (BuildContext dialogContext) {
+                      return CreateUserDialog(
+                        cubit: context.read<UsersPageCubit>(),
+                      );
+                    },
+                  );
                 },
                 icon: const Icon(Icons.add),
-                label: const Text('Nuevo Usuario'),
+                label: Text(l10n?.create_new_user ?? 'Nuevo Usuario'),
               ),
             ],
           ),
@@ -36,10 +49,10 @@ class UsersView extends StatelessWidget {
 
           // Mensaje si la lista está vacía
           if (users.isEmpty)
-            const Center(
+            Center(
               child: Padding(
-                padding: EdgeInsets.symmetric(vertical: AppSpacing.lg),
-                child: Text('No hay usuarios registrados.'),
+                padding: const EdgeInsets.symmetric(vertical: AppSpacing.lg),
+                child: Text('${l10n?.there_are_no_users_registered}.'),
               ),
             )
           else
@@ -58,7 +71,15 @@ class UsersView extends StatelessWidget {
                   trailing: IconButton(
                     icon: const Icon(Icons.edit),
                     onPressed: () {
-                      // TODO(user): Implementar edición de usuario
+                      showDialog<void>(
+                        context: context,
+                        builder: (_) {
+                          return EditUserDialog(
+                            user: user,
+                            cubit: context.read<UsersPageCubit>(),
+                          );
+                        },
+                      );
                     },
                   ),
                 );

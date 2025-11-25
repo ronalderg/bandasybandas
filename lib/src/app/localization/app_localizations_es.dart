@@ -150,6 +150,9 @@ class AppLocalizationsEs extends AppLocalizations {
   String get create_product => 'Crear Producto';
 
   @override
+  String get new_product => 'Nuevo Producto';
+
+  @override
   String get create_new_product => 'Crear nuevo producto';
 
   @override
@@ -248,7 +251,7 @@ class AppLocalizationsEs extends AppLocalizations {
   String get locations => 'Ubicaciones';
 
   @override
-  String get warehouse => 'Almacen';
+  String get warehouse => 'Almacén';
 
   @override
   String get warehouses => 'Almacenes';
@@ -269,6 +272,15 @@ class AppLocalizationsEs extends AppLocalizations {
   String get create_user => 'Crear Usuario';
 
   @override
+  String get create_new_user => 'Crear nuevo usuario';
+
+  @override
+  String get new_user => 'Nuevo Usuario';
+
+  @override
+  String get there_are_no_users_registered => 'No hay usuarios registrados';
+
+  @override
   String get role => 'Rol';
 
   @override
@@ -287,10 +299,10 @@ class AppLocalizationsEs extends AppLocalizations {
   String get menus => 'Menús';
 
   @override
-  String get sub_menu => 'Submenú';
+  String get sub_menu => 'Submenu';
 
   @override
-  String get sub_menus => 'Submenús';
+  String get sub_menus => 'Submenus';
 
   @override
   String get action => 'Acción';
@@ -311,13 +323,23 @@ class AppLocalizationsEs extends AppLocalizations {
   String get item => 'Item';
 
   @override
-  String get desing => 'Diseño';
+  String get edit_item => 'Editar Item';
 
   @override
-  String get desings => 'Diseños';
+  String get delete_item => 'Eliminar Item';
 
   @override
-  String get search_desing => 'Buscar diseño';
+  String get are_you_sure_delete_item =>
+      '¿Estás seguro de que quieres eliminar este item?';
+
+  @override
+  String get design => 'Diseño';
+
+  @override
+  String get designs => 'Diseños';
+
+  @override
+  String get search_design => 'Buscar diseño';
 
   @override
   String get recipe => 'Receta';
@@ -446,7 +468,10 @@ class AppLocalizationsEs extends AppLocalizations {
   String get indicators => 'Indicadores';
 
   @override
-  String get purchase_requests => 'Solicitudes de pedidos';
+  String get orders_requests => 'Solicitudes de pedidos';
+
+  @override
+  String get purchase_requests => 'Solicitudes de compra';
 
   @override
   String get name => 'Nombre';
@@ -507,4 +532,34 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get ref => 'Referencia';
+
+  @override
+  String get creation_date => 'Fecha de Creación';
+
+  @override
+  String get edit => 'Editar';
+
+  @override
+  String get delete => 'Eliminar';
+
+  @override
+  String get create => 'Crear';
+
+  @override
+  String get generate_qr => 'Generar QR';
+
+  @override
+  String get scan_qr => 'Escanear QR';
+
+  @override
+  String get view_details => 'Ver Detalles';
+
+  @override
+  String get edit_details => 'Editar Detalles';
+
+  @override
+  String get technical_visit => 'Visita técnica';
+
+  @override
+  String get technical_visits => 'Visitas técnicas';
 }
