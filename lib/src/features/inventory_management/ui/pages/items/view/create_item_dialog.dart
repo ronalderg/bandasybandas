@@ -1,6 +1,11 @@
+import 'package:bandasybandas/src/app/localization/app_localizations.dart';
 import 'package:bandasybandas/src/core/theme/app_spacing.dart';
+import 'package:bandasybandas/src/app/injection_container.dart';
 import 'package:bandasybandas/src/features/inventory_management/domain/models/item_model.dart';
+import 'package:bandasybandas/src/features/inventory_management/ui/pages/categories/cubit/categories_cubit.dart';
+import 'package:bandasybandas/src/features/inventory_management/ui/pages/categories/cubit/categories_state.dart';
 import 'package:bandasybandas/src/features/inventory_management/ui/pages/items/cubit/items_page_cubit.dart';
+import 'package:bandasybandas/src/shared/atoms/at_dropdown.dart';
 import 'package:bandasybandas/src/shared/atoms/at_textfield_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -21,6 +26,8 @@ class _CreateItemDialogState extends State<CreateItemDialog> {
   final _descriptionController = TextEditingController();
   final _quantityController = TextEditingController();
   final _observationsController = TextEditingController();
+
+  String? _selectedCategoryId;
 
   @override
   void dispose() {
@@ -45,6 +52,7 @@ class _CreateItemDialogState extends State<CreateItemDialog> {
         // El precio no se pide en este formulario, se usa un valor por defecto.
         price: 0,
         observations: _observationsController.text,
+        categoryId: _selectedCategoryId,
       );
 
       // 2. Se llama al método del Cubit para añadir el item.
@@ -58,65 +66,104 @@ class _CreateItemDialogState extends State<CreateItemDialog> {
 
   @override
   Widget build(BuildContext context) {
-    return AlertDialog(
-      title: const Text('Crear Nuevo Item'),
-      content: Form(
-        key: _formKey,
-        child: SingleChildScrollView(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              AtTextfieldText(
-                label: 'Nombre',
-                controller: _nameController,
-                validator: FormValidators.notEmpty(
-                  message: 'Por favor, ingrese un nombre.',
+    final l10n = AppLocalizations.of(context);
+
+    return BlocProvider(
+      create: (_) => sl<CategoriesCubit>()..loadCategories(),
+      child: AlertDialog(
+        title: const Text('Crear Nuevo Item'),
+        content: Form(
+          key: _formKey,
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                AtTextfieldText(
+                  label: 'Nombre',
+                  controller: _nameController,
+                  validator: FormValidators.notEmpty(
+                    message: 'Por favor, ingrese un nombre.',
+                  ),
                 ),
-              ),
-              AppSpacing.verticalGapSm,
-              AtTextfieldText(
-                label: 'SKU',
-                controller: _skuController,
-                validator: FormValidators.notEmpty(
-                  message: 'Por favor, ingrese un SKU.',
+                AppSpacing.verticalGapSm,
+                AtTextfieldText(
+                  label: 'SKU',
+                  controller: _skuController,
+                  validator: FormValidators.notEmpty(
+                    message: 'Por favor, ingrese un SKU.',
+                  ),
                 ),
-              ),
-              AppSpacing.verticalGapSm,
-              AtTextfieldText(
-                label: 'Descripción (Opcional)',
-                controller: _descriptionController,
-                maxLines: 3,
-              ),
-              AppSpacing.verticalGapSm,
-              AtTextfieldText(
-                label: 'Cantidad',
-                controller: _quantityController,
-                keyboardType:
-                    const TextInputType.numberWithOptions(decimal: true),
-                inputFormatters: [
-                  FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d{0,2}')),
-                ],
-                validator: FormValidators.notEmpty(
-                  message: 'Por favor, ingrese una cantidad.',
+                AppSpacing.verticalGapSm,
+                AtTextfieldText(
+                  label: 'Descripción (Opcional)',
+                  controller: _descriptionController,
+                  maxLines: 3,
                 ),
-              ),
-              AppSpacing.verticalGapSm,
-              AtTextfieldText(
-                label: 'Observaciones (Opcional)',
-                controller: _observationsController,
-                maxLines: 3,
-              ),
-            ],
+                AppSpacing.verticalGapSm,
+                AtTextfieldText(
+                  label: 'Cantidad',
+                  controller: _quantityController,
+                  keyboardType:
+                      const TextInputType.numberWithOptions(decimal: true),
+                  inputFormatters: [
+                    FilteringTextInputFormatter.allow(
+                        RegExp(r'^\d+\.?\d{0,2}')),
+                  ],
+                  validator: FormValidators.notEmpty(
+                    message: 'Por favor, ingrese una cantidad.',
+                  ),
+                ),
+                AppSpacing.verticalGapSm,
+                BlocBuilder<CategoriesCubit, CategoriesState>(
+                  builder: (context, state) {
+                    if (state is CategoriesLoaded) {
+                      return AtDropdown<String>(
+                        value: _selectedCategoryId,
+                        label: l10n?.category ?? 'Categoría',
+                        hintText:
+                            l10n?.select_category ?? 'Seleccione una categoría',
+                        items: [
+                          DropdownMenuItem<String>(
+                            value: null,
+                            child: Text(l10n?.no_category ?? 'Sin categoría'),
+                          ),
+                          ...state.categories.map((category) {
+                            return DropdownMenuItem<String>(
+                              value: category.id,
+                              child: Text(category.name),
+                            );
+                          }).toList(),
+                        ],
+                        onChanged: (value) {
+                          setState(() {
+                            _selectedCategoryId = value;
+                          });
+                        },
+                      );
+                    } else if (state is CategoriesLoading) {
+                      return const LinearProgressIndicator();
+                    }
+                    return const SizedBox.shrink();
+                  },
+                ),
+                AppSpacing.verticalGapSm,
+                AtTextfieldText(
+                  label: 'Observaciones (Opcional)',
+                  controller: _observationsController,
+                  maxLines: 3,
+                ),
+              ],
+            ),
           ),
         ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(),
+            child: const Text('Cancelar'),
+          ),
+          ElevatedButton(onPressed: _submit, child: const Text('Guardar')),
+        ],
       ),
-      actions: [
-        TextButton(
-          onPressed: () => Navigator.of(context).pop(),
-          child: const Text('Cancelar'),
-        ),
-        ElevatedButton(onPressed: _submit, child: const Text('Guardar')),
-      ],
     );
   }
 }

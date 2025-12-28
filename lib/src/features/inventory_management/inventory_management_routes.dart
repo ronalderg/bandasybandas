@@ -1,5 +1,6 @@
 import 'package:bandasybandas/src/app/router/app_routes.dart';
 import 'package:bandasybandas/src/app/router/app_transitions.dart';
+import 'package:bandasybandas/src/features/inventory_management/ui/pages/categories/categories_page.dart';
 import 'package:bandasybandas/src/features/inventory_management/ui/pages/items/items_page.dart';
 import 'package:bandasybandas/src/features/inventory_management/ui/pages/product_detail/product_detail_page.dart';
 import 'package:bandasybandas/src/features/inventory_management/ui/pages/products/products_page.dart';
@@ -29,6 +30,11 @@ class InventoryRoutes {
         final productId = state.pathParameters['id']!;
         return ProductDetailPage(productId: productId);
       },
+    ),
+
+    AppTransitions.fadeRoute(
+      path: AppRoutes.categories,
+      builder: (_, __) => const CategoriesPage(),
     ),
   ];
 }

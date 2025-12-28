@@ -14,9 +14,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 enum RecipeMenuAction { edit, delete }
 
 class RecipesView extends StatelessWidget {
-  const RecipesView({required this.designs, super.key});
+  const RecipesView({
+    required this.designs,
+    this.isReadOnly = false,
+    super.key,
+  });
 
   final List<RecipeModel> designs;
+  final bool isReadOnly;
 
   @override
   Widget build(BuildContext context) {
@@ -36,29 +41,32 @@ class RecipesView extends StatelessWidget {
                 l10n.designs,
                 style: theme.textTheme.headlineSmall,
               ),
-              ElevatedButton.icon(
-                onPressed: () {
-                  showDialog<void>(
-                    context: context,
-                    // Usamos el `context` del builder para asegurar que tenemos acceso
-                    // a los providers que están por encima del `SingleChildScrollView`.
-                    builder: (BuildContext dialogContext) {
-                      // Usamos MultiBlocProvider para proveer ambos Cubits al diálogo.
-                      return MultiBlocProvider(
-                        providers: [
-                          BlocProvider.value(
-                            value: context.read<RecipesPageCubit>(),
-                          ),
-                          BlocProvider.value(value: context.read<ItemsCubit>()),
-                        ],
-                        child: const CreateRecipeDialog(),
-                      );
-                    },
-                  );
-                },
-                icon: const Icon(Icons.add),
-                label: Text('Nuevo ${l10n.design}'),
-              ),
+              // Solo mostrar botón de crear si NO es modo de solo lectura
+              if (!isReadOnly)
+                ElevatedButton.icon(
+                  onPressed: () {
+                    showDialog<void>(
+                      context: context,
+                      // Usamos el `context` del builder para asegurar que tenemos acceso
+                      // a los providers que están por encima del `SingleChildScrollView`.
+                      builder: (BuildContext dialogContext) {
+                        // Usamos MultiBlocProvider para proveer ambos Cubits al diálogo.
+                        return MultiBlocProvider(
+                          providers: [
+                            BlocProvider.value(
+                              value: context.read<RecipesPageCubit>(),
+                            ),
+                            BlocProvider.value(
+                                value: context.read<ItemsCubit>()),
+                          ],
+                          child: const CreateRecipeDialog(),
+                        );
+                      },
+                    );
+                  },
+                  icon: const Icon(Icons.add),
+                  label: Text('Nuevo ${l10n.design}'),
+                ),
             ],
           ),
           AppSpacing.verticalGapLg,
@@ -81,22 +89,25 @@ class RecipesView extends StatelessWidget {
               itemBuilder: (context, index) {
                 final design = designs[index];
                 return MolListTileItem<RecipeMenuAction>(
-                  onEditTap: () {
-                    showDialog<void>(
-                      context: context,
-                      builder: (_) => MultiBlocProvider(
-                        providers: [
-                          BlocProvider.value(
-                            value: context.read<RecipesPageCubit>(),
-                          ),
-                          BlocProvider.value(
-                            value: context.read<ItemsCubit>(),
-                          ),
-                        ],
-                        child: EditRecipeDialog(recipe: design),
-                      ),
-                    );
-                  },
+                  // Solo mostrar botón de editar si NO es modo de solo lectura
+                  onEditTap: isReadOnly
+                      ? null
+                      : () {
+                          showDialog<void>(
+                            context: context,
+                            builder: (_) => MultiBlocProvider(
+                              providers: [
+                                BlocProvider.value(
+                                  value: context.read<RecipesPageCubit>(),
+                                ),
+                                BlocProvider.value(
+                                  value: context.read<ItemsCubit>(),
+                                ),
+                              ],
+                              child: EditRecipeDialog(recipe: design),
+                            ),
+                          );
+                        },
                   onViewTap: () {
                     showDialog<void>(
                       context: context,
@@ -117,18 +128,21 @@ class RecipesView extends StatelessWidget {
                   quantity: design.items.length.toDouble(),
                   subtitle: design.description ?? '',
                   title: design.name,
-                  menuItems: const [
-                    VmPopupMenuItemData(
-                      value: RecipeMenuAction.edit,
-                      label: 'Editar',
-                      icon: Icons.edit,
-                    ),
-                    VmPopupMenuItemData(
-                      value: RecipeMenuAction.delete,
-                      label: 'Eliminar',
-                      icon: Icons.delete_outline,
-                    ),
-                  ],
+                  // Solo mostrar menú de editar/eliminar si NO es modo de solo lectura
+                  menuItems: isReadOnly
+                      ? const <VmPopupMenuItemData<RecipeMenuAction>>[]
+                      : const [
+                          VmPopupMenuItemData(
+                            value: RecipeMenuAction.edit,
+                            label: 'Editar',
+                            icon: Icons.edit,
+                          ),
+                          VmPopupMenuItemData(
+                            value: RecipeMenuAction.delete,
+                            label: 'Eliminar',
+                            icon: Icons.delete_outline,
+                          ),
+                        ],
                   onMenuItemSelected: (action) {
                     switch (action) {
                       case RecipeMenuAction.edit:

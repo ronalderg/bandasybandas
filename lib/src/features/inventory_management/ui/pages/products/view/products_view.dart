@@ -22,9 +22,14 @@ import 'package:go_router/go_router.dart';
 enum ProductMenuAction { delete, transfer, qr }
 
 class ProductsView extends StatelessWidget {
-  const ProductsView({required this.products, super.key});
+  const ProductsView({
+    required this.products,
+    this.isReadOnly = false,
+    super.key,
+  });
 
   final List<ProductModel> products;
+  final bool isReadOnly;
 
   @override
   Widget build(BuildContext context) {
@@ -32,23 +37,32 @@ class ProductsView extends StatelessWidget {
     final l10n = AppLocalizations.of(context)!;
 
     // Define los items del menú que se mostrarán para cada producto.
-    final menuItems = [
-      const VmPopupMenuItemData<ProductMenuAction>(
-        value: ProductMenuAction.transfer,
-        label: 'Trasladar a Cliente',
-        icon: Icons.local_shipping,
-      ),
-      const VmPopupMenuItemData<ProductMenuAction>(
-        value: ProductMenuAction.qr,
-        label: 'Generar QR',
-        icon: Icons.qr_code,
-      ),
-      const VmPopupMenuItemData<ProductMenuAction>(
-        value: ProductMenuAction.delete,
-        label: 'Eliminar',
-        icon: Icons.delete_outline,
-      ),
-    ];
+    // En modo de solo lectura, solo mostrar QR
+    final menuItems = isReadOnly
+        ? [
+            const VmPopupMenuItemData<ProductMenuAction>(
+              value: ProductMenuAction.qr,
+              label: 'Generar QR',
+              icon: Icons.qr_code,
+            ),
+          ]
+        : [
+            const VmPopupMenuItemData<ProductMenuAction>(
+              value: ProductMenuAction.transfer,
+              label: 'Trasladar a Cliente',
+              icon: Icons.local_shipping,
+            ),
+            const VmPopupMenuItemData<ProductMenuAction>(
+              value: ProductMenuAction.qr,
+              label: 'Generar QR',
+              icon: Icons.qr_code,
+            ),
+            const VmPopupMenuItemData<ProductMenuAction>(
+              value: ProductMenuAction.delete,
+              label: 'Eliminar',
+              icon: Icons.delete_outline,
+            ),
+          ];
 
     return SingleChildScrollView(
       padding: const EdgeInsets.all(AppSpacing.md),
@@ -63,40 +77,42 @@ class ProductsView extends StatelessWidget {
                 l10n.products,
                 style: theme.textTheme.headlineSmall,
               ),
-              ElevatedButton.icon(
-                onPressed: () => showDialog<void>(
-                  context: context,
-                  builder: (dialogContext) => MultiBlocProvider(
-                    providers: [
-                      // Pasamos el cubit de productos para poder crear uno nuevo.
-                      BlocProvider.value(
-                        value: context.read<ProductsPageCubit>(),
+              // Solo mostrar botón de crear si NO es modo de solo lectura
+              if (!isReadOnly)
+                ElevatedButton.icon(
+                  onPressed: () => showDialog<void>(
+                    context: context,
+                    builder: (dialogContext) => MultiBlocProvider(
+                      providers: [
+                        // Pasamos el cubit de productos para poder crear uno nuevo.
+                        BlocProvider.value(
+                          value: context.read<ProductsPageCubit>(),
+                        ),
+                        // Proveemos el RecipesPageCubit para que el BlocBuilder funcione.
+                        BlocProvider.value(
+                          value: context.read<RecipesPageCubit>(),
+                        ),
+                        // Proveemos el ItemsCubit, ya que el diálogo lo necesita.
+                        BlocProvider.value(value: context.read<ItemsCubit>()),
+                      ],
+                      // Usamos un BlocBuilder para reaccionar a los cambios de estado
+                      // del RecipesPageCubit y pasar la lista actualizada al diálogo.
+                      child: BlocBuilder<RecipesPageCubit, RecipesPageState>(
+                        builder: (context, recipesState) {
+                          final availableRecipes =
+                              recipesState is RecipesPageLoaded
+                                  ? recipesState.recipes
+                                  : <RecipeModel>[];
+                          return CreateProductDialog(
+                            availableRecipes: availableRecipes,
+                          );
+                        },
                       ),
-                      // Proveemos el RecipesPageCubit para que el BlocBuilder funcione.
-                      BlocProvider.value(
-                        value: context.read<RecipesPageCubit>(),
-                      ),
-                      // Proveemos el ItemsCubit, ya que el diálogo lo necesita.
-                      BlocProvider.value(value: context.read<ItemsCubit>()),
-                    ],
-                    // Usamos un BlocBuilder para reaccionar a los cambios de estado
-                    // del RecipesPageCubit y pasar la lista actualizada al diálogo.
-                    child: BlocBuilder<RecipesPageCubit, RecipesPageState>(
-                      builder: (context, recipesState) {
-                        final availableRecipes =
-                            recipesState is RecipesPageLoaded
-                                ? recipesState.recipes
-                                : <RecipeModel>[];
-                        return CreateProductDialog(
-                          availableRecipes: availableRecipes,
-                        );
-                      },
                     ),
                   ),
+                  icon: const Icon(Icons.add),
+                  label: Text(l10n.new_product),
                 ),
-                icon: const Icon(Icons.add),
-                label: Text(l10n.new_product),
-              ),
             ],
           ),
           AppSpacing.verticalGapLg,
@@ -118,24 +134,29 @@ class ProductsView extends StatelessWidget {
               itemBuilder: (context, index) {
                 final product = products[index];
                 return MolListTileItem<ProductMenuAction>(
-                  onEditTap: () {
-                    // Obtener las recetas disponibles
-                    final recipesState = context.read<RecipesPageCubit>().state;
-                    final availableRecipes = recipesState is RecipesPageLoaded
-                        ? recipesState.recipes
-                        : <RecipeModel>[];
+                  // Solo mostrar botón de editar si NO es modo de solo lectura
+                  onEditTap: isReadOnly
+                      ? null
+                      : () {
+                          // Obtener las recetas disponibles
+                          final recipesState =
+                              context.read<RecipesPageCubit>().state;
+                          final availableRecipes =
+                              recipesState is RecipesPageLoaded
+                                  ? recipesState.recipes
+                                  : <RecipeModel>[];
 
-                    showDialog<void>(
-                      context: context,
-                      builder: (_) => BlocProvider.value(
-                        value: context.read<ProductsPageCubit>(),
-                        child: EditProductDialog(
-                          product: product,
-                          availableRecipes: availableRecipes,
-                        ),
-                      ),
-                    );
-                  },
+                          showDialog<void>(
+                            context: context,
+                            builder: (_) => BlocProvider.value(
+                              value: context.read<ProductsPageCubit>(),
+                              child: EditProductDialog(
+                                product: product,
+                                availableRecipes: availableRecipes,
+                              ),
+                            ),
+                          );
+                        },
                   onViewTap: () => GoRouter.of(context).go(
                     AppRoutes.productDetails.replaceFirst(':id', product.id),
                   ),

@@ -7,9 +7,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CustomersManagementView extends StatelessWidget {
-  const CustomersManagementView({required this.customers, super.key});
+  const CustomersManagementView({
+    required this.customers,
+    this.isReadOnly = false,
+    super.key,
+  });
 
   final List<CustomerModel> customers;
+  final bool isReadOnly;
 
   @override
   Widget build(BuildContext context) {
@@ -29,23 +34,25 @@ class CustomersManagementView extends StatelessWidget {
                 l10n?.customers ?? 'Clientes',
                 style: theme.textTheme.headlineSmall,
               ),
-              ElevatedButton.icon(
-                onPressed: () {
-                  showDialog<void>(
-                    context: context,
-                    builder: (BuildContext dialogContext) {
-                      // Pasamos la instancia del Cubit al diálogo para que
-                      // pueda llamar al método `addCustomer`.
-                      return BlocProvider.value(
-                        value: context.read<CustomersManagementCubit>(),
-                        child: const CreateCustomerDialog(),
-                      );
-                    },
-                  );
-                },
-                icon: const Icon(Icons.add),
-                label: Text(l10n?.create_new_customer ?? 'Nuevo Cliente'),
-              ),
+              // Solo mostrar botón de crear si NO es modo de solo lectura
+              if (!isReadOnly)
+                ElevatedButton.icon(
+                  onPressed: () {
+                    showDialog<void>(
+                      context: context,
+                      builder: (BuildContext dialogContext) {
+                        // Pasamos la instancia del Cubit al diálogo para que
+                        // pueda llamar al método `addCustomer`.
+                        return BlocProvider.value(
+                          value: context.read<CustomersManagementCubit>(),
+                          child: const CreateCustomerDialog(),
+                        );
+                      },
+                    );
+                  },
+                  icon: const Icon(Icons.add),
+                  label: Text(l10n?.create_new_customer ?? 'Nuevo Cliente'),
+                ),
             ],
           ),
           AppSpacing.verticalGapLg,

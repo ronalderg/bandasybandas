@@ -23,7 +23,8 @@ class AppRoutes {
   static const String items = '/items';
   static const String recipes = '/recipes';
   static const String products = '/products';
-  static const String productDetails = '/product/:id';
+  static const String productDetails = '/products/:id';
+  static const String categories = '/categories';
 
   // --- Rutas de Clientes (Features) ---
   static const String customerManagement = '/customers/management';

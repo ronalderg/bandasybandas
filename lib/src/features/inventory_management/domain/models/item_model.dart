@@ -16,6 +16,8 @@ class ItemModel extends Equatable with EntityMetadata {
     this.description,
     this.imageUrl,
     this.observations,
+    this.customerReferences,
+    this.categoryId,
     this.status = EntityStatus.active,
     this.createdAt,
     this.updatedAt,
@@ -52,6 +54,9 @@ class ItemModel extends Equatable with EntityMetadata {
       lastPurchaseOrderId: data[lastPurchaseOrderIdKey] as String?,
       supplierId: data[supplierIdKey] as String?,
       observations: data[observationsKey] as String?,
+      customerReferences: (data[customerReferencesKey] as Map<String, dynamic>?)
+          ?.map((key, value) => MapEntry(key, value.toString())),
+      categoryId: data[categoryIdKey] as String?,
     );
   }
 
@@ -65,6 +70,8 @@ class ItemModel extends Equatable with EntityMetadata {
   static const lastPurchaseOrderIdKey = 'lastPurchaseOrderId';
   static const supplierIdKey = 'supplierId';
   static const observationsKey = 'observations';
+  static const customerReferencesKey = 'customerReferences';
+  static const categoryIdKey = 'categoryId';
 
   static const lenghtKey = 'lenght';
   static const widthKey = 'width';
@@ -112,6 +119,14 @@ class ItemModel extends Equatable with EntityMetadata {
   /// Observaciones o notas adicionales sobre el item.
   final String? observations;
 
+  /// Referencias o códigos personalizados por cliente.
+  /// Map donde la clave es el ID del cliente y el valor es su referencia/código.
+  /// Ejemplo: {'customer-id-1': 'REF-ABC-123', 'customer-id-2': 'PROD-XYZ'}
+  final Map<String, String>? customerReferences;
+
+  /// ID de la categoría a la que pertenece el item.
+  final String? categoryId;
+
   /// Un item vacío que representa un item no existente o placeholder.
   static const ItemModel empty = ItemModel(
     id: '',
@@ -119,6 +134,7 @@ class ItemModel extends Equatable with EntityMetadata {
     sku: '',
     quantity: 0,
     price: 0,
+    categoryId: '',
   );
 
   /// Retorna `true` si el item es el item vacío.
@@ -141,6 +157,8 @@ class ItemModel extends Equatable with EntityMetadata {
       lastPurchaseOrderIdKey: lastPurchaseOrderId,
       supplierIdKey: supplierId,
       observationsKey: observations,
+      customerReferencesKey: customerReferences,
+      categoryIdKey: categoryId,
     };
   }
 
@@ -159,6 +177,8 @@ class ItemModel extends Equatable with EntityMetadata {
         lastPurchaseOrderId,
         supplierId,
         observations,
+        customerReferences,
+        categoryId,
       ];
 
   @override
@@ -178,6 +198,8 @@ class ItemModel extends Equatable with EntityMetadata {
     Timestamp? updatedAt,
     String? lastPurchaseOrderId,
     String? supplierId,
+    Map<String, String>? customerReferences,
+    String? categoryId,
   }) {
     return ItemModel(
       id: id ?? this.id,
@@ -193,6 +215,8 @@ class ItemModel extends Equatable with EntityMetadata {
       updatedAt: updatedAt ?? this.updatedAt,
       lastPurchaseOrderId: lastPurchaseOrderId ?? this.lastPurchaseOrderId,
       supplierId: supplierId ?? this.supplierId,
+      customerReferences: customerReferences ?? this.customerReferences,
+      categoryId: categoryId ?? this.categoryId,
     );
   }
 }

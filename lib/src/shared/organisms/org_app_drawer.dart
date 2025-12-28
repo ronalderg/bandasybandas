@@ -63,6 +63,7 @@ class _OrgAppDrawerState extends State<OrgAppDrawer> {
       case UserType.tecnico:
         baseItems.addAll(getTechnicalDrawerItems(l10n));
       case UserType.asesorIndustrial:
+        baseItems.addAll(getSalesAdvisorDrawerItems(l10n));
       case UserType.pmi:
       case UserType.gerenteComercial:
       case UserType.clienteAdministrador:

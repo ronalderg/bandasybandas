@@ -1,10 +1,10 @@
 import 'package:bandasybandas/src/app/injection_container.dart';
-import 'package:bandasybandas/src/core/theme/app_colors.dart';
 import 'package:bandasybandas/src/core/theme/app_spacing.dart';
 import 'package:bandasybandas/src/core/usecases/usecase.dart';
 import 'package:bandasybandas/src/features/customers/domain/models/customer_model.dart';
 import 'package:bandasybandas/src/features/customers/domain/usecases/customers_usecases.dart';
 import 'package:bandasybandas/src/features/users/ui/pages/users/cubit/users_page_cubit.dart';
+import 'package:bandasybandas/src/shared/atoms/at_dropdown.dart';
 import 'package:bandasybandas/src/shared/models/user_model.dart';
 import 'package:flutter/material.dart';
 
@@ -157,26 +157,23 @@ class _EditUserDialogState extends State<EditUserDialog> {
                 decoration: const InputDecoration(labelText: 'Sede/Sucursal'),
               ),
               AppSpacing.verticalGapMd,
-              DropdownButtonFormField<UserType>(
-                initialValue: _selectedUserType,
-                hint: const Text('Tipo de Usuario',
-                    style: TextStyle(color: Colors.grey)),
-                onChanged: (UserType? newValue) {
-                  print('nuevo valor es $newValue');
-                  setState(() {
-                    _selectedUserType = newValue;
-                  });
-                },
+              AtDropdown<UserType>(
+                value: _selectedUserType,
+                hintText: 'Tipo de Usuario',
                 items: _userTypes.map<DropdownMenuItem<UserType>>((type) {
                   return DropdownMenuItem<UserType>(
                     value: type,
                     child: Text(type.toDisplayName()),
                   );
                 }).toList(),
+                onChanged: (UserType? newValue) {
+                  print('nuevo valor es $newValue');
+                  setState(() {
+                    _selectedUserType = newValue;
+                  });
+                },
                 validator: (value) =>
                     value == null ? 'Selecciona un tipo de usuario' : null,
-                dropdownColor: AppColors.surfaceDark,
-                elevation: 10,
               ),
               AppSpacing.verticalGapMd,
               if (_customers.isNotEmpty) ...[

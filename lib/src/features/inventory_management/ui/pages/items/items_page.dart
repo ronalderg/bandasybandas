@@ -1,8 +1,10 @@
+import 'package:bandasybandas/src/app/bloc/auth/auth_bloc.dart';
 import 'package:bandasybandas/src/app/injection_container.dart';
 import 'package:bandasybandas/src/features/inventory_management/ui/pages/items/cubit/items_page_cubit.dart';
 import 'package:bandasybandas/src/features/inventory_management/ui/pages/items/cubit/items_page_state.dart';
 import 'package:bandasybandas/src/features/inventory_management/ui/pages/items/view/items_view.dart';
 import 'package:bandasybandas/src/features/inventory_management/ui/pages/products/cubit/products_page_cubit.dart';
+import 'package:bandasybandas/src/shared/models/user_model.dart';
 import 'package:bandasybandas/src/shared/templates/tp_app_scaffold.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -12,6 +14,12 @@ class ItemsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Obtener el usuario actual para determinar permisos
+    final user = context.select((AuthBloc bloc) => bloc.state.user);
+    final userType = user.getTipoUsuario();
+    // Sales Advisor tiene acceso de solo lectura
+    final isReadOnly = userType == UserType.asesorIndustrial;
+
     return MultiBlocProvider(
       providers: [
         BlocProvider(
@@ -32,7 +40,7 @@ class ItemsPage extends StatelessWidget {
               if (state is ItemsPageInitial || state is ItemsPageLoading) {
                 return const Center(child: CircularProgressIndicator());
               } else if (state is ItemsPageLoaded) {
-                return ItemsView(items: state.items);
+                return ItemsView(items: state.items, isReadOnly: isReadOnly);
               } else if (state is ItemsPageError) {
                 return Center(child: Text('Error: ${state.message}'));
               }

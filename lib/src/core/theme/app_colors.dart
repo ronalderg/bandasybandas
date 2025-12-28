@@ -56,4 +56,13 @@ class AppColors {
 
   static const Color blueBandas = Color(0xFF00388d);
   static const Color blueSky = Color(0xFF007aff);
+
+  // --- Colores Dashboard ---
+  static const Color dashboardBlue = Colors.blue;
+  static const Color dashboardGreen = Colors.green;
+  static const Color dashboardOrange = Colors.orange;
+  static const Color dashboardPurple = Colors.purple;
+  static const Color dashboardPink = Colors.pink;
+  static const Color dashboardTeal = Colors.teal;
+  static const Color dashboardRed = Colors.red;
 }

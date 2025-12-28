@@ -81,7 +81,7 @@ class AppConfig {
   static String get webBaseUrl {
     switch (appFlavor) {
       case AppFlavor.development:
-        return 'https://bandasybandassg.web.app/'; // URL web para desarrollo
+        return 'https://bandasybandassg.web.app/#'; // URL web para desarrollo
       case AppFlavor.staging:
         return 'https://stg.bandasybandas.com'; // URL web para staging/pruebas
       case AppFlavor.production:

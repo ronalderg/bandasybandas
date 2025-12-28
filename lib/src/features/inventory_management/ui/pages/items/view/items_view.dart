@@ -15,22 +15,30 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 enum ItemMenuAction { convertToProduct }
 
 class ItemsView extends StatelessWidget {
-  const ItemsView({required this.items, super.key});
+  const ItemsView({
+    required this.items,
+    this.isReadOnly = false,
+    super.key,
+  });
 
   final List<ItemModel> items;
+  final bool isReadOnly;
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
     // Define los items del menú que se mostrarán para cada ítem.
-    final menuItems = [
-      const VmPopupMenuItemData<ItemMenuAction>(
-        value: ItemMenuAction.convertToProduct,
-        label: 'Serializar',
-        icon: Icons.inventory_2_outlined,
-      ),
-    ];
+    // Solo mostrar "Serializar" si NO es modo de solo lectura
+    final menuItems = isReadOnly
+        ? <VmPopupMenuItemData<ItemMenuAction>>[]
+        : [
+            const VmPopupMenuItemData<ItemMenuAction>(
+              value: ItemMenuAction.convertToProduct,
+              label: 'Serializar',
+              icon: Icons.inventory_2_outlined,
+            ),
+          ];
     return SingleChildScrollView(
       padding: const EdgeInsets.all(AppSpacing.md),
       child: Column(
@@ -44,23 +52,25 @@ class ItemsView extends StatelessWidget {
                 'Ítems de venta',
                 style: theme.textTheme.headlineSmall,
               ),
-              ElevatedButton.icon(
-                onPressed: () {
-                  showDialog<void>(
-                    context: context,
-                    builder: (BuildContext dialogContext) {
-                      // Envolvemos el diálogo con BlocProvider.value para pasarle
-                      // la instancia existente de ItemsCubit.
-                      return BlocProvider.value(
-                        value: context.read<ItemsCubit>(),
-                        child: const CreateItemDialog(),
-                      );
-                    },
-                  );
-                },
-                icon: const Icon(Icons.add),
-                label: const Text('Nuevo Item'),
-              ),
+              // Solo mostrar botón de crear si NO es modo de solo lectura
+              if (!isReadOnly)
+                ElevatedButton.icon(
+                  onPressed: () {
+                    showDialog<void>(
+                      context: context,
+                      builder: (BuildContext dialogContext) {
+                        // Envolvemos el diálogo con BlocProvider.value para pasarle
+                        // la instancia existente de ItemsCubit.
+                        return BlocProvider.value(
+                          value: context.read<ItemsCubit>(),
+                          child: const CreateItemDialog(),
+                        );
+                      },
+                    );
+                  },
+                  icon: const Icon(Icons.add),
+                  label: const Text('Nuevo Item'),
+                ),
             ],
           ),
           AppSpacing.verticalGapLg,
@@ -84,16 +94,19 @@ class ItemsView extends StatelessWidget {
               itemBuilder: (context, index) {
                 final item = items[index];
                 return MolListTileItem(
-                  onEditTap: () {
-                    showDialog<void>(
-                      context: context,
-                      builder: (dialogContext) => BlocProvider.value(
-                        // Pasamos el cubit al diálogo de edición.
-                        value: context.read<ItemsCubit>(),
-                        child: EditItemDialog(item: item),
-                      ),
-                    );
-                  },
+                  // Solo mostrar botón de editar si NO es modo de solo lectura
+                  onEditTap: isReadOnly
+                      ? null
+                      : () {
+                          showDialog<void>(
+                            context: context,
+                            builder: (dialogContext) => BlocProvider.value(
+                              // Pasamos el cubit al diálogo de edición.
+                              value: context.read<ItemsCubit>(),
+                              child: EditItemDialog(item: item),
+                            ),
+                          );
+                        },
                   menuItems: menuItems,
                   onMenuItemSelected: (action) {
                     // Lógica para manejar la acción seleccionada.

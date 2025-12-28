@@ -167,6 +167,15 @@ class AppLocalizationsEn extends AppLocalizations {
   String get category => 'Category';
 
   @override
+  String get categories => 'Categories';
+
+  @override
+  String get select_category => 'Select Category';
+
+  @override
+  String get no_category => 'No Category';
+
+  @override
   String get supplier => 'Supplier';
 
   @override

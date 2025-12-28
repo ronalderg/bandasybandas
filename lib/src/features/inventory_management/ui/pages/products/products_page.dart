@@ -1,3 +1,4 @@
+import 'package:bandasybandas/src/app/bloc/auth/auth_bloc.dart';
 import 'package:bandasybandas/src/app/injection_container.dart';
 import 'package:bandasybandas/src/app/localization/app_localizations.dart';
 import 'package:bandasybandas/src/features/customers/ui/pages/customer_management/cubit/customer_management_cubit.dart';
@@ -6,6 +7,7 @@ import 'package:bandasybandas/src/features/inventory_management/ui/pages/product
 import 'package:bandasybandas/src/features/inventory_management/ui/pages/products/cubit/products_page_state.dart';
 import 'package:bandasybandas/src/features/inventory_management/ui/pages/products/view/products_view.dart';
 import 'package:bandasybandas/src/features/inventory_management/ui/pages/recipes/cubit/recipe_page_cubit.dart';
+import 'package:bandasybandas/src/shared/models/user_model.dart';
 import 'package:bandasybandas/src/shared/templates/tp_app_scaffold.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -16,6 +18,12 @@ class ProductsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
+    // Obtener el usuario actual para determinar permisos
+    final user = context.select((AuthBloc bloc) => bloc.state.user);
+    final userType = user.getTipoUsuario();
+    // Sales Advisor tiene acceso de solo lectura
+    final isReadOnly = userType == UserType.asesorIndustrial;
+
     // Usamos MultiBlocProvider para proveer ambos Cubits a esta página y sus hijos.
     return MultiBlocProvider(
       providers: [
@@ -39,7 +47,10 @@ class ProductsPage extends StatelessWidget {
                   state is ProductsPageLoading) {
                 return const Center(child: CircularProgressIndicator());
               } else if (state is ProductsPageLoaded) {
-                return ProductsView(products: state.products);
+                return ProductsView(
+                  products: state.products,
+                  isReadOnly: isReadOnly,
+                );
               } else if (state is ProductsPageError) {
                 return Center(child: Text('Error: ${state.message}'));
               }

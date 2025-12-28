@@ -62,6 +62,11 @@ List<VmDrawerItemData> getGerenteDrawerItems(AppLocalizations l10n) {
           label: l10n.machines,
           route: AppRoutes.products,
         ),
+        VmDrawerItemData(
+          icon: Icons.category,
+          label: 'Categorías',
+          route: AppRoutes.categories,
+        ),
       ],
     ),
     VmDrawerItemData(
@@ -87,8 +92,51 @@ List<VmDrawerItemData> getTechnicalDrawerItems(AppLocalizations l10n) {
   return [
     VmDrawerItemData(
       icon: Icons.build,
-      label: 'Órdenes de Trabajo',
+      label: l10n.technical_visits,
+      route: AppRoutes.technicalServices,
+    ),
+  ];
+}
+
+/// Items del drawer para el rol [UserType.asesorIndustrial] (Sales Advisor).
+/// Este rol tiene acceso de solo/// Drawer items for Sales Advisor role (Asesor Industrial).
+List<VmDrawerItemData> getSalesAdvisorDrawerItems(AppLocalizations l10n) {
+  return [
+    VmDrawerItemData(
+      icon: Icons.home,
+      label: l10n.home,
       route: AppRoutes.home,
+    ),
+    VmDrawerItemData(
+      icon: Icons.inventory,
+      label: 'Inventario',
+      children: [
+        VmDrawerItemData(
+          icon: Icons.shopping_cart,
+          label: 'Items',
+          route: AppRoutes.items,
+        ),
+        VmDrawerItemData(
+          icon: Icons.precision_manufacturing,
+          label: 'Máquinas',
+          route: AppRoutes.products,
+        ),
+        VmDrawerItemData(
+          icon: Icons.description,
+          label: 'Recetas',
+          route: AppRoutes.recipes,
+        ),
+        VmDrawerItemData(
+          icon: Icons.category,
+          label: 'Categorías',
+          route: AppRoutes.categories,
+        ),
+      ],
+    ),
+    VmDrawerItemData(
+      icon: Icons.people,
+      label: l10n.customers,
+      route: AppRoutes.customerManagement,
     ),
   ];
 }

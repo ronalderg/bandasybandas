@@ -4,6 +4,7 @@ import 'package:bandasybandas/src/core/usecases/usecase.dart';
 import 'package:bandasybandas/src/features/customers/domain/models/customer_model.dart';
 import 'package:bandasybandas/src/features/customers/domain/usecases/customers_usecases.dart';
 import 'package:bandasybandas/src/features/users/ui/pages/users/cubit/users_page_cubit.dart';
+import 'package:bandasybandas/src/shared/atoms/at_dropdown.dart';
 import 'package:bandasybandas/src/shared/models/user_model.dart';
 import 'package:flutter/material.dart';
 
@@ -167,17 +168,9 @@ class _CreateUserDialogState extends State<CreateUserDialog> {
                 decoration: const InputDecoration(labelText: 'Sede/Sucursal'),
               ),
               AppSpacing.verticalGapMd,
-              DropdownButtonFormField<UserType>(
-                initialValue: _selectedUserType,
-                hint: Text(
-                  'Tipo de Usuario',
-                  style: Theme.of(context).popupMenuTheme.textStyle,
-                ),
-                onChanged: (UserType? newValue) {
-                  setState(() {
-                    _selectedUserType = newValue;
-                  });
-                },
+              AtDropdown<UserType>(
+                value: _selectedUserType,
+                hintText: 'Tipo de Usuario',
                 items: _userTypes.map<DropdownMenuItem<UserType>>((type) {
                   return DropdownMenuItem<UserType>(
                     value: type,
@@ -185,10 +178,13 @@ class _CreateUserDialogState extends State<CreateUserDialog> {
                     child: Text(type.toDisplayName()),
                   );
                 }).toList(),
+                onChanged: (UserType? newValue) {
+                  setState(() {
+                    _selectedUserType = newValue;
+                  });
+                },
                 validator: (value) =>
                     value == null ? 'Selecciona un tipo de usuario' : null,
-                dropdownColor: Theme.of(context).popupMenuTheme.color,
-                style: Theme.of(context).popupMenuTheme.textStyle,
               ),
               AppSpacing.verticalGapMd,
               if (_customers.isNotEmpty) ...[

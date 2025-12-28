@@ -404,6 +404,24 @@ abstract class AppLocalizations {
   /// **'Categoría'**
   String get category;
 
+  /// No description provided for @categories.
+  ///
+  /// In es, this message translates to:
+  /// **'Categorías'**
+  String get categories;
+
+  /// No description provided for @select_category.
+  ///
+  /// In es, this message translates to:
+  /// **'Seleccionar Categoría'**
+  String get select_category;
+
+  /// No description provided for @no_category.
+  ///
+  /// In es, this message translates to:
+  /// **'Sin categoría'**
+  String get no_category;
+
   /// No description provided for @supplier.
   ///
   /// In es, this message translates to:

@@ -42,11 +42,13 @@ class AppRouter {
         // Si aún estamos verificando el estado de autenticación,
         // mostramos el splash/loading screen
         if (isCheckingAuth) {
-          if (location != AppRoutes.splash) {
-            debugPrint('Auth status unknown, showing splash screen');
-            return AppRoutes.splash;
+          // Si ya estamos en splash (con o sin parámetros), no redirigir
+          if (location.startsWith(AppRoutes.splash)) {
+            return null;
           }
-          return null; // Ya estamos en splash, no redirigir
+          // Si estamos en otra ruta, redirigir a splash guardando la ruta original
+          debugPrint('Auth status unknown, showing splash screen');
+          return '${AppRoutes.splash}?from=$location';
         }
 
         // Si el usuario no está autenticado y no va a una ruta pública,
@@ -58,10 +60,13 @@ class AppRouter {
             return '${AppRoutes.login}?from=$location';
           }
           // Si estamos en splash y no estamos autenticados (y ya no estamos verificando),
-          // debemos ir al login.
-          if (location == AppRoutes.splash) {
+          // debemos ir al login, preservando la ruta original si existe.
+          if (location.startsWith(AppRoutes.splash)) {
             debugPrint('Not authenticated and in splash, redirecting to login');
-            return AppRoutes.login;
+            final from = state.uri.queryParameters['from'];
+            return from != null
+                ? '${AppRoutes.login}?from=$from'
+                : AppRoutes.login;
           }
         }
 
